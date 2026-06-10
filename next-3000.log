@@ -1,0 +1,327 @@
+
+> biblion-web@0.1.0 dev
+> next dev -p 3000
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.56.1:3000
+
+ ✓ Starting...
+ ✓ Ready in 3.4s
+ ○ Compiling /modo-estudio ...
+ ✓ Compiled /modo-estudio in 11.2s (712 modules)
+ GET /modo-estudio 200 in 12019ms
+ GET /modo-estudio 200 in 164ms
+ GET /modo-estudio 200 in 401ms
+ ○ Compiling /identidad ...
+ ✓ Compiled /identidad in 1624ms (685 modules)
+ GET /identidad 200 in 2143ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1971ms (690 modules)
+ GET / 200 in 3182ms
+ GET /modo-estudio 200 in 149ms
+ ✓ Compiled in 752ms (682 modules)
+ ✓ Compiled in 1291ms (696 modules)
+ ✓ Compiled in 675ms (696 modules)
+ GET /modo-estudio 200 in 695ms
+ GET /modo-estudio 200 in 186ms
+ GET /modo-estudio 200 in 569ms
+ ✓ Compiled in 608ms (682 modules)
+ ✓ Compiled in 519ms (696 modules)
+ GET /modo-estudio 200 in 259ms
+ GET /modo-estudio 200 in 277ms
+ ✓ Compiled in 852ms (696 modules)
+ GET /modo-estudio 200 in 506ms
+ GET /modo-estudio 200 in 512ms
+ GET /modo-estudio 200 in 255ms
+ GET /modo-estudio 200 in 256ms
+ GET /modo-estudio 200 in 1138ms
+ ✓ Compiled in 571ms (435 modules)
+ GET /modo-estudio 200 in 338ms
+ GET /modo-estudio 200 in 436ms
+ ✓ Compiled in 847ms (696 modules)
+ GET /modo-estudio 200 in 369ms
+ GET /modo-estudio 200 in 376ms
+ ✓ Compiled in 1807ms (696 modules)
+ GET /modo-estudio 200 in 419ms
+ GET /modo-estudio 200 in 121ms
+ ✓ Compiled in 2.9s (696 modules)
+ GET /modo-estudio 200 in 1088ms
+ GET /modo-estudio 200 in 635ms
+ ✓ Compiled in 1710ms (696 modules)
+ GET /modo-estudio 200 in 731ms
+ GET /modo-estudio 200 in 201ms
+ GET /modo-estudio 200 in 571ms
+ GET /modo-estudio 200 in 476ms
+ ✓ Compiled in 1413ms (435 modules)
+ GET /modo-estudio 200 in 293ms
+ GET /modo-estudio 200 in 286ms
+ ✓ Compiled in 2.4s (686 modules)
+ ✓ Compiled in 1261ms (700 modules)
+ GET /modo-estudio 200 in 1166ms
+ GET /modo-estudio 200 in 146ms
+ ✓ Compiled in 1496ms (700 modules)
+ GET /modo-estudio 200 in 450ms
+ GET /modo-estudio 200 in 158ms
+ ✓ Compiled in 1135ms (700 modules)
+ GET /modo-estudio 200 in 658ms
+ GET /modo-estudio 200 in 151ms
+ ✓ Compiled in 581ms (700 modules)
+ GET /modo-estudio 200 in 287ms
+ GET /modo-estudio 200 in 279ms
+ ✓ Compiled in 971ms (700 modules)
+ GET /modo-estudio 200 in 368ms
+ GET /modo-estudio 200 in 392ms
+ ✓ Compiled in 927ms (700 modules)
+ GET /modo-estudio 200 in 372ms
+ GET /modo-estudio 200 in 364ms
+ GET /modo-estudio 200 in 403ms
+ GET /modo-estudio 200 in 350ms
+ GET /modo-estudio 200 in 533ms
+ ✓ Compiled in 1476ms (700 modules)
+ GET /modo-estudio 200 in 686ms
+ GET /modo-estudio 200 in 143ms
+ GET /modo-estudio 200 in 538ms
+ GET /modo-estudio 200 in 311ms
+ ✓ Compiled in 1339ms (686 modules)
+ ✓ Compiled in 765ms (700 modules)
+ GET /modo-estudio 200 in 555ms
+ GET /modo-estudio 200 in 525ms
+ ✓ Compiled in 444ms (700 modules)
+ GET /modo-estudio 200 in 383ms
+ GET /modo-estudio 200 in 387ms
+ ✓ Compiled in 438ms (686 modules)
+ ✓ Compiled in 774ms (700 modules)
+ GET /modo-estudio 200 in 241ms
+ GET /modo-estudio 200 in 243ms
+ GET /modo-estudio 200 in 435ms
+ GET /modo-estudio 200 in 170ms
+ GET /modo-estudio 200 in 233ms
+ ✓ Compiled in 458ms (437 modules)
+ GET /modo-estudio 200 in 281ms
+ GET /modo-estudio 200 in 286ms
+ ✓ Compiled in 1225ms (686 modules)
+ ✓ Compiled in 179ms (437 modules)
+ GET /modo-estudio 200 in 155ms
+ GET /modo-estudio 200 in 152ms
+ ✓ Compiled in 474ms (686 modules)
+ ✓ Compiled in 392ms (700 modules)
+ GET /modo-estudio 200 in 230ms
+ GET /modo-estudio 200 in 238ms
+ GET /modo-estudio 200 in 237ms
+ ✓ Compiled in 251ms (437 modules)
+ GET /modo-estudio 200 in 177ms
+ GET /modo-estudio 200 in 180ms
+ ✓ Compiled in 357ms (686 modules)
+ ✓ Compiled in 522ms (700 modules)
+ GET /modo-estudio 200 in 204ms
+ GET /modo-estudio 200 in 214ms
+ GET /modo-estudio 200 in 421ms
+ ✓ Compiled in 801ms (700 modules)
+ GET /modo-estudio 200 in 324ms
+ GET /modo-estudio 200 in 339ms
+ ✓ Compiled in 616ms (700 modules)
+ GET /modo-estudio 200 in 386ms
+ GET /modo-estudio 200 in 401ms
+ GET /modo-estudio 200 in 273ms
+ GET /modo-estudio 200 in 235ms
+ ○ Compiling /bibi ...
+ ✓ Compiled /bibi in 1797ms (690 modules)
+ GET /bibi 200 in 2284ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1211ms (691 modules)
+ GET /bibi 404 in 1258ms
+ GET /bibi 404 in 120ms
+ GET /modo-estudio 200 in 1298ms
+ GET /bibi 404 in 426ms
+ GET /modo-estudio 200 in 453ms
+ GET /modo-estudio 200 in 294ms
+ GET /modo-estudio 200 in 679ms
+ GET /modo-estudio 200 in 718ms
+ ✓ Compiled in 787ms (691 modules)
+ GET /modo-estudio 200 in 341ms
+ GET /modo-estudio 200 in 358ms
+ ✓ Compiled in 1667ms (700 modules)
+ GET /modo-estudio 200 in 547ms
+ GET /modo-estudio 200 in 574ms
+ ✓ Compiled in 840ms (700 modules)
+ GET /modo-estudio 200 in 566ms
+ GET /modo-estudio 200 in 576ms
+ ○ Compiling /bibi ...
+ ✓ Compiled /bibi in 1010ms (690 modules)
+ GET /bibi 200 in 1952ms
+ GET /modo-estudio 200 in 1249ms
+ GET /modo-estudio 200 in 1250ms
+ GET /bibi 200 in 365ms
+ GET /bibi 200 in 279ms
+ GET /bibi 200 in 159ms
+ ✓ Compiled in 329ms (441 modules)
+ ✓ Compiled in 159ms (441 modules)
+ GET /bibi 200 in 236ms
+ GET /bibi 200 in 246ms
+ ✓ Compiled in 683ms (704 modules)
+ GET /bibi 200 in 485ms
+ GET /bibi 200 in 508ms
+ GET /bibi 200 in 321ms
+ GET /bibi 200 in 127ms
+ ○ Compiling / ...
+ GET /bibi 200 in 524ms
+ GET / 200 in 1486ms
+ GET / 200 in 131ms
+ GET /bibi 200 in 363ms
+ GET / 200 in 395ms
+ GET /identidad 200 in 615ms
+ GET /bibi 200 in 387ms
+ GET /identidad 200 in 90ms
+ ✓ Compiled /funciones in 606ms (698 modules)
+ GET /funciones 200 in 1012ms
+ ○ Compiling /descargar ...
+ ✓ Compiled /descargar in 527ms (700 modules)
+ GET /descargar 200 in 728ms
+ GET /bibi 200 in 494ms
+ GET /bibi 200 in 169ms
+ GET /descargar 200 in 300ms
+ GET /bibi 200 in 218ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1732ms (701 modules)
+ GET /bibi 404 in 1714ms
+ GET /bibi 404 in 1732ms
+ GET /bibi 404 in 401ms
+ GET /bibi 404 in 471ms
+ GET /bibi 404 in 586ms
+ GET /bibi 404 in 150ms
+ ○ Compiling /bibi ...
+ ✓ Compiled /bibi in 818ms (703 modules)
+ GET /bibi 200 in 1069ms
+ GET /bibi 200 in 1084ms
+ GET /bibi 200 in 212ms
+ GET /bibi 200 in 214ms
+ GET /bibi 200 in 314ms
+ GET /bibi 200 in 317ms
+ GET /bibi 200 in 220ms
+ GET /bibi 200 in 230ms
+ GET /bibi 200 in 530ms
+ GET /bibi 200 in 206ms
+ GET /bibi 200 in 489ms
+ GET /bibi 200 in 506ms
+ GET /bibi 200 in 422ms
+ ○ Compiling /identidad ...
+ GET /identidad 200 in 3709ms
+ GET / 200 in 3528ms
+ GET /bibi 200 in 3561ms
+ GET / 200 in 1818ms
+ GET /bibi 200 in 327ms
+ GET /bibi 200 in 326ms
+ GET /bibi 200 in 158ms
+ GET /bibi 200 in 149ms
+ GET /bibi 200 in 151ms
+ GET /bibi 200 in 185ms
+ GET /bibi 200 in 191ms
+ GET /bibi 200 in 257ms
+ GET /bibi 200 in 173ms
+ GET /bibi 200 in 182ms
+ GET / 200 in 191ms
+ GET /bibi 200 in 147ms
+ GET /bibi 200 in 289ms
+ GET /bibi 200 in 298ms
+ GET /bibi 200 in 808ms
+ GET /bibi 200 in 821ms
+ GET /bibi 200 in 298ms
+ GET /bibi 200 in 252ms
+ GET /bibi 200 in 302ms
+ GET /bibi 200 in 405ms
+ GET /bibi 200 in 440ms
+ GET /bibi 200 in 619ms
+ GET /bibi 200 in 213ms
+ GET /bibi 200 in 524ms
+ GET /bibi 200 in 575ms
+ GET /bibi 200 in 311ms
+ GET /bibi 200 in 324ms
+ GET /bibi 200 in 247ms
+ GET /bibi 200 in 256ms
+ GET /bibi 200 in 405ms
+ GET /bibi 200 in 413ms
+ GET / 200 in 1097ms
+ GET /identidad 200 in 1700ms
+ GET /funciones 200 in 394ms
+ GET /bibi 200 in 1630ms
+ GET /bibi 200 in 1632ms
+ GET /modo-estudio 200 in 265ms
+ GET /bibi 200 in 218ms
+ GET / 200 in 527ms
+ GET /identidad 200 in 358ms
+ GET /funciones 200 in 237ms
+ GET /modo-estudio 200 in 175ms
+ GET /bibi 200 in 469ms
+ GET / 200 in 232ms
+ GET /identidad 200 in 302ms
+ GET /funciones 200 in 290ms
+ GET /modo-estudio 200 in 264ms
+ GET /bibi 200 in 317ms
+ GET / 200 in 291ms
+ GET /identidad 200 in 185ms
+ GET /funciones 200 in 250ms
+ GET /modo-estudio 200 in 257ms
+ GET /bibi 200 in 204ms
+ GET /bibi 200 in 401ms
+ GET / 200 in 207ms
+ GET /identidad 200 in 158ms
+ GET /funciones 200 in 250ms
+ GET /modo-estudio 200 in 88ms
+ GET /bibi 200 in 225ms
+ GET /descargar 200 in 173ms
+ GET / 200 in 243ms
+ GET /bibi 200 in 1536ms
+ ✓ Compiled /identidad in 1819ms (698 modules)
+ GET / 200 in 2159ms
+ GET /bibi 200 in 576ms
+ GET / 200 in 193ms
+ ✓ Compiled in 1478ms (448 modules)
+ GET / 200 in 536ms
+ GET /bibi 200 in 541ms
+ ✓ Compiled in 1848ms (715 modules)
+ GET /bibi 200 in 2054ms
+ GET / 200 in 2105ms
+ ✓ Compiled in 941ms (457 modules)
+ GET / 200 in 433ms
+ GET /descargar 200 in 657ms
+ GET /bibi 200 in 320ms
+ GET /descargar 200 in 395ms
+ GET /bibi 200 in 426ms
+ GET /descargar 200 in 631ms
+ GET /bibi 200 in 660ms
+ ✓ Compiled in 694ms (715 modules)
+ GET /descargar 200 in 382ms
+ GET /bibi 200 in 393ms
+ GET / 200 in 304ms
+ GET /descargar 200 in 418ms
+ ○ Compiling /api/waitlist ...
+ ✓ Compiled /api/waitlist in 1005ms (735 modules)
+ POST /api/waitlist 503 in 1371ms
+ GET /descargar 200 in 634ms
+ POST /api/waitlist 503 in 26ms
+ GET /descargar 200 in 207ms
+ ✓ Compiled in 1069ms (457 modules)
+ ✓ Compiled /api/waitlist in 423ms (476 modules)
+ POST /api/waitlist 503 in 650ms
+ GET /descargar 200 in 620ms
+ GET /descargar 200 in 626ms
+ GET /descargar 200 in 478ms
+ POST /api/waitlist 503 in 34ms
+ GET /descargar 200 in 980ms
+ POST /api/waitlist 503 in 74ms
+   Reload env: .env.local
+ ✓ Compiled in 3.3s (716 modules)
+ GET /descargar 200 in 549ms
+ ✓ Compiled /api/waitlist in 476ms (476 modules)
+ POST /api/waitlist 502 in 1558ms
+   Reload env: .env.local
+ ✓ Compiled in 1274ms (716 modules)
+ GET /descargar 200 in 496ms
+ ✓ Compiled /api/waitlist in 494ms (476 modules)
+ POST /api/waitlist 200 in 3021ms
+ GET / 200 in 456ms
+ GET /modo-estudio 200 in 207ms
+ GET /descargar 200 in 335ms
+ GET /identidad 200 in 162ms
+[?25h

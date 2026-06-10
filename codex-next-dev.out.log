@@ -1,0 +1,151 @@
+
+> biblion-web@0.1.0 dev
+> next dev -p 3000
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.56.1:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.5s
+ ○ Compiling / ...
+ ✓ Compiled / in 20.3s (712 modules)
+ GET / 200 in 22740ms
+ ○ Compiling /identidad ...
+ ✓ Compiled /identidad in 907ms (685 modules)
+ GET /identidad 200 in 1332ms
+ GET / 200 in 173ms
+ ✓ Compiled in 1257ms (682 modules)
+ GET / 200 in 488ms
+ ✓ Compiled in 1186ms (696 modules)
+ GET / 200 in 486ms
+ ✓ Compiled in 1062ms (696 modules)
+ GET / 200 in 456ms
+ GET /identidad 200 in 237ms
+ ✓ Compiled in 869ms (437 modules)
+ GET /identidad 200 in 489ms
+ ✓ Compiled in 1217ms (696 modules)
+ GET /identidad 200 in 326ms
+ GET /identidad 200 in 703ms
+ ✓ Compiled in 537ms (437 modules)
+ GET /identidad 200 in 211ms
+ ✓ Compiled in 170ms (437 modules)
+ GET /identidad 200 in 232ms
+ ✓ Compiled in 394ms (696 modules)
+ GET /identidad 200 in 101ms
+ ✓ Compiled in 567ms (696 modules)
+ GET /identidad 200 in 243ms
+ ✓ Compiled in 444ms (437 modules)
+ GET /identidad 200 in 213ms
+ ✓ Compiled in 1846ms (696 modules)
+ GET /identidad 200 in 194ms
+ GET / 200 in 180ms
+ GET /identidad 200 in 109ms
+ ✓ Compiled in 823ms (437 modules)
+ GET /identidad 200 in 307ms
+ ✓ Compiled in 508ms (696 modules)
+ GET /identidad 200 in 193ms
+ ✓ Compiled in 514ms (696 modules)
+ GET /identidad 200 in 315ms
+ ✓ Compiled in 832ms (437 modules)
+ GET /identidad 200 in 503ms
+ ✓ Compiled in 925ms (696 modules)
+ GET /identidad 200 in 213ms
+ ✓ Compiled in 410ms (437 modules)
+ GET /identidad 200 in 186ms
+ ✓ Compiled in 487ms (437 modules)
+ GET /identidad 200 in 225ms
+ ✓ Compiled in 779ms (696 modules)
+ GET /identidad 200 in 168ms
+ ✓ Compiled in 1334ms (696 modules)
+ GET /identidad 200 in 293ms
+ ✓ Compiled in 374ms (437 modules)
+ GET /identidad 200 in 263ms
+ ✓ Compiled in 718ms (696 modules)
+ GET /identidad 200 in 155ms
+ ✓ Compiled in 509ms (696 modules)
+ GET /identidad 200 in 189ms
+ GET / 200 in 232ms
+ ✓ Compiled in 745ms (696 modules)
+ GET / 200 in 257ms
+ GET /identidad 200 in 394ms
+ GET /identidad 200 in 916ms
+ ✓ Compiled in 797ms (696 modules)
+ GET /identidad 200 in 320ms
+ ✓ Compiled in 395ms (696 modules)
+ GET /identidad 200 in 193ms
+ ✓ Compiled in 1193ms (437 modules)
+ GET /identidad 200 in 342ms
+ ✓ Compiled in 1283ms (696 modules)
+ GET /identidad 200 in 270ms
+ GET / 200 in 279ms
+ ✓ Compiled in 582ms (696 modules)
+ GET / 200 in 407ms
+ GET /identidad 200 in 99ms
+ ✓ Compiled in 1085ms (696 modules)
+ GET /identidad 200 in 275ms
+ ○ Compiling /funciones ...
+ ✓ Compiled /funciones in 832ms (684 modules)
+ GET /funciones 200 in 1157ms
+ ○ Compiling /modo-estudio ...
+ ✓ Compiled /modo-estudio in 1115ms (686 modules)
+ GET /modo-estudio 200 in 1670ms
+ GET /identidad 200 in 232ms
+ GET /identidad 200 in 2074ms
+ ✓ Compiled in 856ms (441 modules)
+ GET /identidad 200 in 286ms
+ GET / 200 in 166ms
+ ✓ Compiled in 1136ms (700 modules)
+ GET /identidad 200 in 1340ms
+ GET /identidad 200 in 121ms
+ ✓ Compiled in 1021ms (700 modules)
+ GET /identidad 200 in 468ms
+ ✓ Compiled in 789ms (441 modules)
+ GET /identidad 200 in 220ms
+ ✓ Compiled in 1152ms (441 modules)
+ GET /identidad 200 in 310ms
+ ✓ Compiled in 1161ms (700 modules)
+ GET /identidad 200 in 223ms
+ GET /identidad 200 in 1629ms
+ GET / 200 in 223ms
+ GET /identidad 200 in 133ms
+ ✓ Compiled in 515ms (441 modules)
+ GET /identidad 200 in 216ms
+ ✓ Compiled in 721ms (700 modules)
+ GET /identidad 200 in 356ms
+ ✓ Compiled in 394ms (700 modules)
+ GET /identidad 200 in 100ms
+ GET /identidad 200 in 681ms
+ ✓ Compiled in 681ms (700 modules)
+ GET /identidad 200 in 170ms
+ GET /identidad 200 in 1807ms
+ GET /funciones 200 in 277ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 2.2s (689 modules)
+ GET /funciones 404 in 2077ms
+ GET /funciones 404 in 56ms
+ GET /funciones 404 in 212ms
+ ○ Compiling /funciones ...
+ ✓ Compiled /funciones in 873ms (691 modules)
+ GET /funciones 200 in 1073ms
+ GET /funciones 200 in 111ms
+ ✓ Compiled in 1553ms (700 modules)
+ GET /funciones 200 in 369ms
+ ✓ Compiled in 550ms (700 modules)
+ GET /funciones 200 in 201ms
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 6.4s (1033 modules)
+ GET /funciones 500 in 19652ms
+ GET /funciones 500 in 1141ms
+ GET /funciones 500 in 16187ms
+ GET /funciones 500 in 1106ms
+ GET /funciones 500 in 2147ms
+ GET /funciones 500 in 331ms
+ GET /funciones 500 in 1521ms
+ GET /funciones 500 in 340ms
+ GET /funciones 500 in 1895ms
+ GET /funciones 500 in 588ms
+ GET /funciones 500 in 1727ms
+ GET /funciones 500 in 354ms
+ GET /funciones 500 in 1031ms
+ GET /funciones 500 in 291ms
