@@ -129,14 +129,10 @@ export function FeaturesSection() {
         {/* Left Column */}
         <div className="feat-copy">
           <div>
-            <div className="feat-eyebrow">
-              <span className="feat-eyebrow-dot" />
-              Estudia la Biblia como nunca antes
-            </div>
             <h1 className="feat-title">
               Estudia la Biblia
               <br />
-              <span className="feat-gold-text">como nunca antes.</span>
+              <em className="feat-title-italic">como nunca antes.</em>
             </h1>
             <p className="feat-subtitle">
               Herramientas avanzadas diseñadas para profundizar, comprender y
