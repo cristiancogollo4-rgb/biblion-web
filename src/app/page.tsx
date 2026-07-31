@@ -5,8 +5,8 @@ import {
   Bot,
   FilePenLine,
   Search,
-  X,
-  Check,
+  Minus,
+  Star,
 } from "lucide-react";
 import {
   HomeHero,
@@ -99,7 +99,7 @@ export default function Home() {
         <div className="stitch-comparison-grid">
           <div className="stitch-comparison-card stitch-comparison-today">
             <div className="stitch-comparison-header">
-              <X size={20} />
+              <Minus size={20} />
               <h3>Cómo estudias hoy</h3>
             </div>
             <p className="stitch-comparison-subtitle">El camino largo</p>
@@ -114,7 +114,7 @@ export default function Home() {
           </div>
           <div className="stitch-comparison-card stitch-comparison-biblion">
             <div className="stitch-comparison-header">
-              <Check size={20} />
+              <Star size={20} />
               <h3>Cómo estudias con BIBLION</h3>
             </div>
             <p className="stitch-comparison-subtitle">El flujo continuo</p>
