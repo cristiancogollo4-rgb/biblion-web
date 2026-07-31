@@ -4632,6 +4632,19 @@ a {
   border-color: rgba(197,155,39,0.2);
 }
 
+.feat-theme-dark .feat-tablet {
+  box-shadow:
+    0 30px 70px -12px rgba(197,155,39,0.25),
+    0 0 0 1px rgba(197,155,39,0.15);
+}
+
+.feat-theme-dark .feat-phone {
+  box-shadow:
+    0 35px 70px -15px rgba(197,155,39,0.3),
+    0 10px 25px -5px rgba(197,155,39,0.15),
+    0 0 0 1px rgba(197,155,39,0.2);
+}
+
 .feat-theme-dark .feat-tablet-bar,
 .feat-theme-dark .feat-editor-header,
 .feat-theme-dark .feat-editor-toolbar,
