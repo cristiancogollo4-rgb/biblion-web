@@ -123,7 +123,7 @@ export function FeaturesSection() {
   };
 
   return (
-    <section className="feat-section" data-reveal>
+    <section className={`feat-section ${themeClass}`} data-reveal>
       <div className="feat-glow" />
       <div className="feat-container">
         {/* Left Column */}

@@ -39,13 +39,6 @@ const principles = [
   },
 ];
 
-const audiences = [
-  ["Lectores", "Personas que buscan una lectura tranquila, personalizable y continua."],
-  ["Estudiantes", "Quienes investigan palabras, temas, personajes, lugares y pasajes."],
-  ["Maestros y líderes", "Personas que preparan clases, estudios, devocionales o predicaciones."],
-  ["Comunidades", "Una visión futura para organizar y compartir recursos de estudio."],
-];
-
 const creators = [
   ["Cristian Felipe Cogollo Rodríguez", "Co-fundador y Lead Developer"],
   ["Luis Eduardo Jaimes Hernandez", "Co-fundador y Lead Developer"],
@@ -127,22 +120,6 @@ export default function IdentidadPage() {
             “La tecnología debe servir al texto, ayudando a comprenderlo y
             organizarlo sin competir por la atención del lector.”
           </blockquote>
-        </div>
-      </section>
-
-      <section className="stitch-section" data-reveal>
-        <SectionHeading
-          eyebrow="PARA QUIÉN DISEÑAMOS"
-          title="Desde una lectura cotidiana hasta una enseñanza completa."
-        />
-        <div className="stitch-audience-grid">
-          {audiences.map(([title, text], index) => (
-            <article key={title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
         </div>
       </section>
 

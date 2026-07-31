@@ -58,6 +58,13 @@ const biblionSteps = [
   "Creas tu bosquejo o devocional allí mismo con tus hallazgos.",
 ];
 
+const audiences = [
+  ["Lectores", "Personas que buscan una lectura tranquila, personalizable y continua."],
+  ["Estudiantes", "Quienes investigan palabras, temas, personajes, lugares y pasajes."],
+  ["Maestros y líderes", "Personas que preparan clases, estudios, devocionales o predicaciones."],
+  ["Comunidades", "Una visión futura para organizar y compartir recursos de estudio."],
+];
+
 export default function Home() {
   return (
     <main className="stitch-page">
@@ -131,6 +138,22 @@ export default function Home() {
         <div className="stitch-comparison-cta">
           <p>Simplifica tu estudio hoy mismo.</p>
           <WaitlistCta />
+        </div>
+      </section>
+
+      <section className="stitch-section" data-reveal>
+        <SectionHeading
+          eyebrow="PARA QUIÉN DISEÑAMOS"
+          title="Desde una lectura cotidiana hasta una enseñanza completa."
+        />
+        <div className="stitch-audience-grid">
+          {audiences.map(([title, text], index) => (
+            <article key={title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
