@@ -1,135 +1,182 @@
 import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  BookOpen,
+  Eye,
+  Feather,
+  LockKeyhole,
+  Smartphone,
+  Sparkles,
+} from "lucide-react";
 import {
   PageHero,
+  SectionHeading,
   SiteFooter,
-  brandPillars,
-  logoMeaning,
+  WaitlistCta,
 } from "@/components/site";
+
+const principles = [
+  {
+    icon: BookOpen,
+    title: "La Palabra en el centro",
+    text: "La tecnología sirve al texto y facilita una lectura organizada.",
+  },
+  {
+    icon: Smartphone,
+    title: "Estudio portátil",
+    text: "Lectura, búsqueda y creación permanecen disponibles en un mismo dispositivo.",
+  },
+  {
+    icon: Sparkles,
+    title: "Profundidad con claridad",
+    text: "Las herramientas ayudan a profundizar sin complicar la experiencia.",
+  },
+  {
+    icon: LockKeyhole,
+    title: "Responsabilidad",
+    text: "Privacidad, transparencia y límites claros acompañan cada función.",
+  },
+];
+
+const audiences = [
+  ["Lectores", "Personas que buscan una lectura tranquila, personalizable y continua."],
+  ["Estudiantes", "Quienes investigan palabras, temas, personajes, lugares y pasajes."],
+  ["Maestros y líderes", "Personas que preparan clases, estudios, devocionales o predicaciones."],
+  ["Comunidades", "Una visión futura para organizar y compartir recursos de estudio."],
+];
+
+const creators = [
+  ["Cristian Felipe Cogollo Rodríguez", "Co-fundador y Lead Developer"],
+  ["Luis Eduardo Jaimes Hernandez", "Co-fundador y Lead Developer"],
+  ["Anderson Geovanny Duarte Largo", "Co-fundador, Estrategia y Alianzas"],
+];
 
 export default function IdentidadPage() {
   return (
-    <main className="identity-page">
-      <div className="mission-vision-ambient identity-floating-background" aria-hidden="true">
-        <span>Palabra</span>
-        <span>Estudio</span>
-        <span>Enseñanza</span>
-        <span>Evangelio</span>
-        <span>Contexto</span>
-        <span>Discípulos</span>
-        <span>Predicación</span>
-        <span>Pergamino</span>
-        <span>Biblia</span>
-        <span>Comunidad</span>
-        <span>Verdad</span>
-        <span>Doctrina</span>
-        <span>Aplicación</span>
-        <Image src="/logos/biblion/logo-biblion-app-normal.png" width={88} height={88} alt="" />
-        <Image src="/logos/bibi/logo-bibi-normal.png" width={88} height={88} alt="" />
-      </div>
+    <main className="stitch-page">
       <PageHero
-        eyebrow="Identidad visual"
-        title="Conoce nuestro proposito e identidad"
-        text="Biblion es mucho mas que un ecosistema"
-        image="/identidad-hero-biblion.png"
-      />
+        eyebrow="IDENTIDAD"
+        title={<>La Biblia como <em>punto de partida.</em></>}
+        text="BIBLION es una aplicación de lectura y estudio bíblico creada para comprender, relacionar y organizar lo que descubres en las Escrituras."
+        image="/logos/biblion/logo-biblion-app-normal.png"
+        imageAlt="Símbolo de BIBLION"
+      >
+        <Link className="stitch-button stitch-button-primary" href="/funciones">
+          Explorar funciones <ArrowRight size={18} />
+        </Link>
+      </PageHero>
 
-      <section className="section identity-section">
-        <section className="mission-vision-panel">
-          <div className="section-heading">
-            <span>Nuestra misión y visión</span>
-            <h2>Una identidad construida para servir al estudio de la Palabra.</h2>
-          </div>
-          <div className="mission-vision-grid">
-            <article className="mission-card">
-              <span>MISIÓN</span>
-              <p>
-                Ayudar a cada creyente a ir más allá de la lectura,
-                proporcionando herramientas que faciliten el estudio, la
-                comprensión y la construcción de enseñanzas inspiradas en la
-                Palabra de Dios.
-              </p>
-            </article>
-            <article className="vision-card">
-              <span>VISIÓN</span>
-              <p>
-                Ser el pergamino digital donde una generación de creyentes
-                continúe escribiendo, aprendiendo y compartiendo el conocimiento
-                de las Escrituras para impactar al mundo con la verdad del
-                Evangelio.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <div className="logo-analysis">
-          <div className="logo-analysis-image">
-            <Image
-              src="/logos/biblion/logo-biblion-normal.png"
-              width={440}
-              height={320}
-              alt="Logotipo principal de Biblion"
-            />
-          </div>
-          <div className="logo-analysis-copy">
-            <span>Mas que un Logo</span>
-            <h3>Academico y espiritual sin perder claridad digital.</h3>
-            <p>
-              Biblion está inspirado en la palabra griega biblion, asociada a
-              pergamino, libro o rollo. La marca comunica una plataforma que
-              ayuda a seguir escribiendo, aprendiendo y compartiendo conocimiento
-              con fundamento en la Palabra.
-            </p>
-            <ul>
-              {logoMeaning.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
+      <section className="stitch-section stitch-origin-section" data-reveal>
+        <div className="stitch-origin-index">01</div>
+        <div>
+          <span className="stitch-eyebrow">NUESTRO ORIGEN</span>
+          <h2>Una herramienta local, rápida y libre de ruido innecesario.</h2>
         </div>
-
-        <section className="identity-conviction">
-          <span>Nuestra identidad nace de una convicción</span>
-          <h2>Biblion existe para ayudar a creyentes a leer, comprender, preparar y compartir la Palabra con profundidad.</h2>
+        <div>
           <p>
-            No buscamos que la tecnología sustituya el estudio personal, sino que
-            sirva como una herramienta clara, organizada y cercana para crecer en
-            la Escritura y transformar ese aprendizaje en enseñanza.
+            BIBLION comenzó con la necesidad de reunir lectura, búsqueda y creación
+            de enseñanzas en una sola herramienta portátil.
           </p>
-        </section>
-
-        <section className="identity-audience">
-          <div className="section-heading">
-            <span>Para quién existe</span>
-            <h2>Una herramienta para quienes quieren estudiar y enseñar mejor.</h2>
-          </div>
-          <div className="audience-grid">
-            <article>
-              <strong>Creyentes</strong>
-              <p>Personas que desean leer con más claridad y volver a la Palabra con constancia.</p>
-            </article>
-            <article>
-              <strong>Maestros y líderes</strong>
-              <p>Servidores que preparan clases, discipulado, devocionales y enseñanzas bíblicas.</p>
-            </article>
-            <article>
-              <strong>Comunidades</strong>
-              <p>Iglesias y grupos que buscan crecer juntos en comprensión, orden y aplicación.</p>
-            </article>
-          </div>
-        </section>
-
-        <section className="brand-declaration identity-close">
-          <div className="identity-card-heading">
-            <span>Lo que sostiene a Biblion</span>
-            <h3>Biblion une profundidad bíblica, organización e inteligencia al servicio de la Palabra.</h3>
-          </div>
-          <div className="brand-pillars" aria-label="Pilares de marca">
-            {brandPillars.map((pillar) => (
-              <span key={pillar}>{pillar}</span>
-            ))}
-          </div>
-        </section>
+          <p>
+            En lugar de agregar distracciones, el proyecto busca conservar el hilo:
+            leer un pasaje, comprenderlo, encontrar conexiones y organizar lo
+            aprendido.
+          </p>
+        </div>
       </section>
+
+      <section className="stitch-section" data-reveal>
+        <SectionHeading
+          align="center"
+          eyebrow="NUESTROS PRINCIPIOS"
+          title="Decisiones que sostienen cada pantalla."
+        />
+        <div className="stitch-principles-grid">
+          {principles.map((principle) => {
+            const Icon = principle.icon;
+            return (
+              <article key={principle.title}>
+                <Icon size={23} />
+                <h3>{principle.title}</h3>
+                <p>{principle.text}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="stitch-symbol-section" data-reveal>
+        <div className="stitch-symbol-visual">
+          <Image
+            alt="Logotipo original de BIBLION"
+            height={340}
+            src="/logos/biblion/logo-biblion-normal.png"
+            width={660}
+          />
+        </div>
+        <div>
+          <span className="stitch-eyebrow">EL NOMBRE Y EL SÍMBOLO</span>
+          <h2>Libro, lectura y conocimiento en una sola identidad.</h2>
+          <p>
+            El nombre BIBLION se relaciona con el libro y el rollo escrito. El azul
+            comunica profundidad y serenidad; el dorado señala luz, valor y
+            permanencia.
+          </p>
+          <blockquote>
+            “La tecnología debe servir al texto, ayudando a comprenderlo y
+            organizarlo sin competir por la atención del lector.”
+          </blockquote>
+        </div>
+      </section>
+
+      <section className="stitch-section" data-reveal>
+        <SectionHeading
+          eyebrow="PARA QUIÉN DISEÑAMOS"
+          title="Desde una lectura cotidiana hasta una enseñanza completa."
+        />
+        <div className="stitch-audience-grid">
+          {audiences.map(([title, text], index) => (
+            <article key={title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="stitch-section stitch-creators-section" data-reveal>
+        <SectionHeading
+          eyebrow="QUIÉNES CONSTRUYEN BIBLION"
+          title="Un proyecto con responsables visibles."
+          text="BIBLION es desarrollado por un equipo colombiano que combina producto, tecnología y estrategia."
+        />
+        <div className="stitch-creators-grid">
+          {creators.map(([name, role], index) => (
+            <article key={name}>
+              <div>{name.split(" ").slice(0, 2).map((part) => part[0]).join("")}</div>
+              <span>0{index + 1}</span>
+              <h3>{name}</h3>
+              <p>{role}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="stitch-development-note" data-reveal>
+        <Eye size={27} />
+        <div>
+          <strong>Un proyecto en desarrollo activo</strong>
+          <p>
+            Las funciones pueden evolucionar mientras realizamos pruebas,
+            corregimos errores y escuchamos a los primeros usuarios.
+          </p>
+        </div>
+        <Feather size={42} aria-hidden="true" />
+      </section>
+
+      <WaitlistCta />
       <SiteFooter />
     </main>
   );

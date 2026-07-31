@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { ThemeControl } from "@/components/theme-control";
 import { WaitlistTrigger } from "@/components/waitlist-dialog";
 
 type MobileNavProps = {
@@ -36,7 +38,28 @@ export function MobileNav({ items }: MobileNavProps) {
         <div className="mobile-nav-panel" role="dialog" aria-label="Menú principal">
           <div className="mobile-nav-panel-inner">
             <div className="mobile-nav-top">
-              <strong>Biblion</strong>
+              <Link
+                aria-label="BIBLION, ir al inicio"
+                className="mobile-brand"
+                href="/"
+                onClick={() => setOpen(false)}
+              >
+                <Image
+                  alt=""
+                  className="mobile-brand-color"
+                  height={48}
+                  src="/logos/biblion/logo-biblion-light-app.png"
+                  width={48}
+                />
+                <Image
+                  alt=""
+                  className="mobile-brand-inverse"
+                  height={48}
+                  src="/logos/biblion/logo-biblion-dark-app.png"
+                  width={48}
+                />
+                <span>BIBLION</span>
+              </Link>
               <button
                 aria-label="Cerrar menú"
                 className="mobile-nav-close"
@@ -63,8 +86,12 @@ export function MobileNav({ items }: MobileNavProps) {
                 </Link>
               ))}
             </nav>
+            <div className="mobile-theme-section">
+              <span>Tema de la página</span>
+              <ThemeControl expanded />
+            </div>
             <WaitlistTrigger className="mobile-nav-cta" source="mobile-menu">
-              Unirme a la espera
+              Acceso anticipado
             </WaitlistTrigger>
           </div>
         </div>

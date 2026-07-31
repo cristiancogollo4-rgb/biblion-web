@@ -1,124 +1,150 @@
 import Link from "next/link";
 import {
+  ArrowRight,
+  BookOpen,
+  Bot,
+  Construction,
+  FilePenLine,
+  LibraryBig,
+  Search,
+  Sparkles,
+} from "lucide-react";
+import {
   HomeHero,
-  BibiConversationMockups,
+  SectionHeading,
   SiteFooter,
-  StudyEditorMockup,
+  StatusPill,
   WaitlistCta,
-  brandElements,
-  FileText,
 } from "@/components/site";
+import { ThemeControl } from "@/components/theme-control";
 
-const overviewLinks = [
+const pathways = [
   {
-    href: "/identidad",
-    title: "Identidad",
-    text: "conoce nuestra identidad y proposito como app de estudio bíblico.",
+    href: "/funciones#lectura",
+    icon: BookOpen,
+    label: "Leer",
+    text: "Lee sin conexión, cambia de versión y conserva tus pasajes importantes.",
   },
   {
-    href: "/funciones",
-    title: "Funciones",
-    text: "Conoce las funciones principales de Biblion para lectura, estudio y preparación.",
+    href: "/funciones#descubrir",
+    icon: Search,
+    label: "Descubrir",
+    text: "Busca palabras, consulta el diccionario y sigue conexiones entre pasajes.",
   },
   {
     href: "/modo-estudio",
-    title: "Modo estudio",
-    text: "Prepara tus enseñanzas con lector y editor en una misma vista.",
+    icon: FilePenLine,
+    label: "Construir",
+    text: "Convierte tus hallazgos en estudios, bosquejos, clases o devocionales.",
   },
   {
     href: "/bibi",
-    title: "Bibi",
-    text: "Recibe apoyo bíblico contextual con Bibi, tu asistente de estudio inteligente.",
+    icon: Bot,
+    label: "Preguntar",
+    text: "Consulta personajes, lugares, palabras y textos sin perder el contexto.",
   },
 ];
 
-const essentialFeatures = [
+const futureItems = [
   {
-    icon: FileText,
-    title: "Lectura que se convierte en estudio",
-    text: "No solo lees la Biblia: puedes organizar ideas, citas, notas y reflexiones en un mismo flujo.",
+    icon: LibraryBig,
+    title: "Repositorio de enseñanzas",
+    status: "Planeado",
+    text: "Un espacio futuro para descubrir recursos creados dentro de BIBLION.",
   },
   {
-    icon: FileText,
-    title: "Preparada para ensenanzas",
-    text: "Biblion esta pensada para devocionales, clases, discipulado y sermones desde el primer momento.",
+    icon: Sparkles,
+    title: "Planes de estudio",
+    status: "En evaluación",
+    text: "Recorridos guiados para profundizar en temas y libros bíblicos.",
   },
   {
-    icon: FileText,
-    title: "Bibi acompana tu proceso",
-    text: "Recibe ayuda contextual para comprender pasajes, armar bosquejos y profundizar sin salir de la app.",
+    icon: Construction,
+    title: "Colecciones personales",
+    status: "Visión futura",
+    text: "Agrupaciones de pasajes, notas y enseñanzas elegidas por cada usuario.",
   },
 ];
 
 export default function Home() {
   return (
-    <main>
+    <main className="stitch-page">
       <HomeHero />
 
-      <section className="section">
-        <div className="section-heading">
-          <span>Vision general</span>
-          <h2>Lee la Biblia, estudia a fondo y traza tus sermones con Biblion.</h2>
-          <p>
-            conoce a profundidad todo lo que Biblion tiene para ofrecerte
-          </p>
-        </div>
-        <div className="overview-grid">
-          {overviewLinks.map((item) => (
-            <Link className="overview-card" href={item.href} key={item.href}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-              <span>Ver página</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="section home-summary study-highlight-section">
-        <div className="summary-copy">
-          <span>Modo estudio</span>
-          <h2>Del pasaje bíblico a una enseñanza organizada.</h2>
-          <p>
-            Biblion permite trabajar con lectura y editor en una misma vista:
-            citas por rango, notas, columnas, comparación de versiones y tu sermón estructurado en un solo lugar.
-          </p>
-        </div>
-        <div className="summary-mockups">
-          <StudyEditorMockup />
-        </div>
-      </section>
-
-      <section className="section home-summary bibi-home-section">
-        <div className="bibi-home-visual">
-          <BibiConversationMockups />
-        </div>
-        <div className="summary-copy bibi-home-copy">
-          <span>Conoce a Bibi</span>
-          <h2>Tu asistente biblico para estudiar, comprender y preparar mejor tu sermon.</h2>
-          <p>
-            Bibi puede ayudarte a explicar pasajes, encontrar ideas para tus
-            ensenanzas, sugerir bosquejos, aclarar palabras biblicas y proponer
-            aplicaciones sencillas siempre dentro del contexto de la Palabra.
-          </p>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="section-heading">
-          <h2 className="single-line-question">¿Por que Biblion y no otra app?</h2>
-        </div>
-        <div className="features-grid">
-          {essentialFeatures.map((feature) => {
-            const Icon = feature.icon;
+      <section className="stitch-section" data-reveal>
+        <SectionHeading
+          align="center"
+          eyebrow="DISEÑADO PARA LA PROFUNDIDAD"
+          title="Cuatro acciones. Un solo hilo de estudio."
+          text="Cada herramienta lleva naturalmente a la siguiente sin alejarte del pasaje que inició la búsqueda."
+        />
+        <div className="stitch-path-grid">
+          {pathways.map((item) => {
+            const Icon = item.icon;
             return (
-              <article className="feature-card" key={feature.title}>
-                <Icon size={22} />
-                <h3>{feature.title}</h3>
-                <p>{feature.text}</p>
+              <Link className="stitch-path-card" href={item.href} key={item.label}>
+                <div>
+                  <Icon size={25} />
+                  <ArrowRight size={18} />
+                </div>
+                <h3>{item.label}</h3>
+                <p>{item.text}</p>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="stitch-theme-section" data-reveal>
+        <div>
+          <span className="stitch-eyebrow">BIBLION SE ADAPTA A TU MOMENTO</span>
+          <h2>Tres atmósferas. La misma experiencia.</h2>
+          <p>
+            Cambia el tema de esta página y observa cómo la identidad se conserva
+            en Claro, Azul Rey Oscuro y Oscuro.
+          </p>
+          <ThemeControl expanded />
+        </div>
+        <div className="stitch-theme-books" aria-hidden="true">
+          <article className="is-light">
+            <span>CLARO</span>
+            <blockquote>“Lámpara es a mis pies tu palabra.”</blockquote>
+            <strong>Salmos 119:105</strong>
+          </article>
+          <article className="is-blue">
+            <span>AZUL REY OSCURO</span>
+            <blockquote>“La exposición de tus palabras alumbra.”</blockquote>
+            <strong>Salmos 119:130</strong>
+          </article>
+          <article className="is-dark">
+            <span>OSCURO</span>
+            <blockquote>“En tu luz veremos la luz.”</blockquote>
+            <strong>Salmos 36:9</strong>
+          </article>
+        </div>
+      </section>
+
+      <section className="stitch-section" id="futuro" data-reveal>
+        <SectionHeading
+          eyebrow="LO QUE ESTAMOS CONSTRUYENDO"
+          title="El futuro se presenta con claridad, no como una promesa inmediata."
+          text="Estas ideas no forman parte todavía de la versión de prueba y pueden evolucionar según la validación del producto."
+        />
+        <div className="stitch-future-grid">
+          {futureItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <article key={item.title}>
+                <div><Icon size={23} /><StatusPill tone="future">{item.status}</StatusPill></div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
               </article>
             );
           })}
         </div>
+        <Link className="stitch-text-link" href="/funciones#futuro">
+          Conocer las próximas funciones <ArrowRight size={18} />
+        </Link>
       </section>
 
       <WaitlistCta />

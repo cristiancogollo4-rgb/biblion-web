@@ -3,11 +3,8 @@ import { NextResponse } from "next/server";
 type WaitlistPayload = {
   fullName?: string;
   email?: string;
-  whatsapp?: string;
-  city?: string;
+  androidDevice?: string;
   role?: string;
-  community?: string;
-  reason?: string;
   consent?: boolean;
   source?: string;
 };
@@ -15,12 +12,7 @@ type WaitlistPayload = {
 export async function POST(request: Request) {
   try {
     const payload = (await request.json()) as WaitlistPayload;
-    const requiredFields = [
-      payload.fullName,
-      payload.email,
-      payload.role,
-      payload.reason,
-    ];
+    const requiredFields = [payload.fullName, payload.email];
 
     if (
       requiredFields.some((value) => !value || !String(value).trim()) ||
@@ -48,11 +40,8 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
       fullName: payload.fullName?.trim(),
       email: payload.email?.trim().toLowerCase(),
-      whatsapp: payload.whatsapp?.trim() ?? "",
-      city: payload.city?.trim() ?? "",
-      role: payload.role?.trim(),
-      community: payload.community?.trim() ?? "",
-      reason: payload.reason?.trim(),
+      androidDevice: payload.androidDevice?.trim() ?? "",
+      role: payload.role?.trim() ?? "",
       source: payload.source?.trim() ?? "unknown",
       userAgent: request.headers.get("user-agent") ?? "",
     };

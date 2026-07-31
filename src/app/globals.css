@@ -1,4 +1,5 @@
-﻿:root {
+﻿@layer legacy {
+:root {
   --blue: #103250;
   --blue-2: #20415c;
   --gold: #b49664;
@@ -7652,4 +7653,5 @@ main {
   .mission-vision-ambient span:nth-child(4) {
     right: 12px;
   }
+}
 }
