@@ -193,11 +193,11 @@ export function HomeHero() {
           <div className="hero-copy" data-reveal>
             <span className="stitch-eyebrow">VE MÁS ALLÁ DE LA LECTURA</span>
             <h1>
-              La Palabra, <em>abierta.</em>
+              Estudia la Biblia
               <br />
-              Tu estudio, en
+              a <em>profundidad.</em>
               <br />
-              movimiento.
+              <span className="hero-sub">Sin perder el hilo.</span>
             </h1>
             <p>
               Lee, busca, conecta pasajes y prepara enseñanzas con una experiencia
