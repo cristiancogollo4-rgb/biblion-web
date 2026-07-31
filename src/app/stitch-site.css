@@ -513,6 +513,20 @@ a {
   color: #f1f5f9;
 }
 
+.mock-theme-dark .tablet-chassis {
+  box-shadow:
+    0 0 0 1px rgba(197,155,39,0.15),
+    0 25px 50px -12px rgba(197,155,39,0.35),
+    0 40px 80px -15px rgba(197,155,39,0.15);
+}
+
+.mock-theme-dark .phone-chassis {
+  box-shadow:
+    0 0 0 1px rgba(197,155,39,0.2),
+    0 25px 50px -12px rgba(197,155,39,0.4),
+    0 40px 80px -15px rgba(197,155,39,0.2);
+}
+
 /* ── Phone Mockup ── */
 
 .hero-phone-wrapper {
