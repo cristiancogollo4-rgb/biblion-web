@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { ActiveNavLink } from "@/components/active-nav-link";
 import { MobileNav } from "@/components/mobile-nav";
-import { ProductTour } from "@/components/product-tour";
+import { HeroMockups } from "@/components/hero-mockups";
 import { ThemeControl } from "@/components/theme-control";
 import { WaitlistTrigger } from "@/components/waitlist-dialog";
 
@@ -188,38 +188,36 @@ export function HomeHero() {
     <>
       <SiteHeader />
       <section className="stitch-home-hero">
-        <div className="stitch-home-intro" data-reveal>
-          <span className="stitch-eyebrow">VE MÁS ALLÁ DE LA LECTURA</span>
-          <h1>
-            La Palabra, <em>abierta.</em>
-            <br />
-            Tu estudio, en movimiento.
-          </h1>
-          <p>
-            Lee, busca, conecta pasajes y prepara enseñanzas con una experiencia
-            diseñada para profundizar en la Biblia sin perder el hilo de lo que
-            estás estudiando.
-          </p>
-          <div className="stitch-hero-actions">
-            <WaitlistTrigger className="stitch-button stitch-button-primary" source="home-hero">
-              Solicitar acceso anticipado
-            </WaitlistTrigger>
-            <Link className="stitch-button stitch-button-ghost" href="/funciones">
-              Explorar BIBLION <ArrowRight size={18} />
-            </Link>
+        <div className="hero-grid">
+          {/* Left Column: Copy & CTAs */}
+          <div className="hero-copy" data-reveal>
+            <span className="stitch-eyebrow">VE MÁS ALLÁ DE LA LECTURA</span>
+            <h1>
+              La Palabra, <em>abierta.</em>
+              <br />
+              Tu estudio, en
+              <br />
+              movimiento.
+            </h1>
+            <p>
+              Lee, busca, conecta pasajes y prepara enseñanzas con una experiencia
+              diseñada para profundizar tu estudio en la Biblia sin perder el hilo
+              de lo que estás estudiando.
+            </p>
+            <div className="stitch-hero-actions">
+              <WaitlistTrigger className="stitch-button stitch-button-primary" source="home-hero">
+                Solicitar acceso anticipado
+              </WaitlistTrigger>
+              <Link className="stitch-button stitch-button-ghost" href="/funciones">
+                Explorar BIBLION <ArrowRight size={18} />
+              </Link>
+            </div>
           </div>
-        </div>
 
-        <div className="stitch-tour-stage">
-          <ProductTour initialPanel="home" />
-        </div>
-
-        <div className="stitch-proof-strip" aria-label="Capacidades principales">
-          <span><BookOpen size={18} /> Biblia disponible localmente</span>
-          <span><Search size={18} /> Más de 6.000 entradas</span>
-          <span><Sparkles size={18} /> Temas y referencias cruzadas</span>
-          <span><FileText size={18} /> Documentos paginados</span>
-          <span><Bot size={18} /> Hasta cinco conversaciones con Bibi</span>
+          {/* Right Column: Mockups */}
+          <div className="hero-mockups" data-reveal>
+            <HeroMockups />
+          </div>
         </div>
       </section>
     </>
