@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   Battery,
   BookOpen,
@@ -118,7 +119,20 @@ function TabletStatus() {
     <div className="mock-status-bar">
       <span>10:06 p.m.</span>
       <div className="mock-brand">
-        <span className="mock-brand-icon">B</span>
+        <Image
+          className="mock-brand-logo mock-brand-logo-light"
+          src="/logos/biblion/logo-biblion-light-app.png"
+          alt="Biblion"
+          width={20}
+          height={20}
+        />
+        <Image
+          className="mock-brand-logo mock-brand-logo-dark"
+          src="/logos/biblion/logo-biblion-blanco.png"
+          alt="Biblion"
+          width={20}
+          height={20}
+        />
         <span className="mock-brand-text">BIBLION</span>
       </div>
       <div className="mock-status-icons">
@@ -216,7 +230,20 @@ function PhoneStatus() {
 function PhoneHeader() {
   return (
     <div className="mock-phone-header">
-      <span className="mock-brand-icon">B</span>
+      <Image
+        className="mock-brand-logo mock-brand-logo-light"
+        src="/logos/biblion/logo-biblion-light-app.png"
+        alt="Biblion"
+        width={16}
+        height={16}
+      />
+      <Image
+        className="mock-brand-logo mock-brand-logo-dark"
+        src="/logos/biblion/logo-biblion-blanco.png"
+        alt="Biblion"
+        width={16}
+        height={16}
+      />
       <span className="mock-brand-text">BIBLION</span>
     </div>
   );

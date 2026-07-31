@@ -625,6 +625,37 @@ a {
   font-size: 14px;
 }
 
+.mock-brand-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.mock-phone-header .mock-brand-logo {
+  width: 16px;
+  height: 16px;
+}
+
+/* Light theme — show light logo, hide dark */
+.mock-theme-light .mock-brand-logo-light {
+  display: block;
+}
+
+.mock-theme-light .mock-brand-logo-dark {
+  display: none;
+}
+
+/* Blue and dark themes — show dark/white logo, hide light */
+.mock-theme-blue .mock-brand-logo-light,
+.mock-theme-dark .mock-brand-logo-light {
+  display: none;
+}
+
+.mock-theme-blue .mock-brand-logo-dark,
+.mock-theme-dark .mock-brand-logo-dark {
+  display: block;
+}
+
 .mock-brand-text {
   font-size: 11px;
   font-weight: 700;
@@ -1059,17 +1090,6 @@ a {
 
 .mock-theme-dark .phone-notch {
   background: #000000;
-}
-
-/* Light theme — logo B in blue */
-.mock-theme-light .mock-brand-icon {
-  color: #0c2340;
-}
-
-/* Blue and dark themes — logo B in white */
-.mock-theme-blue .mock-brand-icon,
-.mock-theme-dark .mock-brand-icon {
-  color: #ffffff;
 }
 
 /* ── Responsive Hero ── */
