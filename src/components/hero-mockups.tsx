@@ -128,7 +128,7 @@ function TabletStatus() {
         />
         <Image
           className="mock-brand-logo mock-brand-logo-dark"
-          src="/logos/biblion/logo-biblion-blanco.png"
+          src="/logos/biblion/logo-biblion-dark-app.png"
           alt="Biblion"
           width={20}
           height={20}
@@ -239,7 +239,7 @@ function PhoneHeader() {
       />
       <Image
         className="mock-brand-logo mock-brand-logo-dark"
-        src="/logos/biblion/logo-biblion-blanco.png"
+        src="/logos/biblion/logo-biblion-dark-app.png"
         alt="Biblion"
         width={16}
         height={16}
