@@ -389,9 +389,6 @@ a {
 }
 
 .hero-sub {
-  font-size: 0.6em;
-  font-weight: 400;
-  color: var(--site-muted);
 }
 
 .hero-copy p {
@@ -1064,7 +1061,16 @@ a {
   background: #000000;
 }
 
-/* Light theme — no overrides needed, already light by default */
+/* Light theme — logo B in blue */
+.mock-theme-light .mock-brand-icon {
+  color: #0c2340;
+}
+
+/* Blue and dark themes — logo B in white */
+.mock-theme-blue .mock-brand-icon,
+.mock-theme-dark .mock-brand-icon {
+  color: #ffffff;
+}
 
 /* ── Responsive Hero ── */
 

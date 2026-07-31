@@ -231,9 +231,9 @@ function PhoneContent() {
           <span>VERSÍCULO DEL DÍA</span>
         </div>
         <p className="mock-verse-text">
-          &ldquo;los hijos de Bacbuc, los hijos de Hacufa, los hijos de Harhur,&rdquo;
+          &ldquo;Jehová es mi pastor; nada me faltará.&rdquo;
         </p>
-        <span className="mock-verse-ref">Esdras 2:51</span>
+        <span className="mock-verse-ref">Salmo 23:1</span>
       </div>
 
       <div className="mock-card phone-card">
