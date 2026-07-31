@@ -4430,6 +4430,11 @@ a {
 
 /* ── Light Theme ── */
 
+.feat-theme-light .feat-item-icon {
+  background: #f3f4f6;
+  border-color: rgba(197,155,39,0.3);
+}
+
 .feat-theme-light .feat-tablet {
   border-color: #e5e7eb;
   box-shadow:
@@ -4536,6 +4541,11 @@ a {
 
 /* ── Blue Theme ── */
 
+.feat-theme-blue .feat-item-icon {
+  background: #0d1f3c;
+  border-color: rgba(197,155,39,0.25);
+}
+
 .feat-theme-blue .feat-tablet-bar,
 .feat-theme-blue .feat-editor-header,
 .feat-theme-blue .feat-editor-toolbar,
@@ -4616,6 +4626,11 @@ a {
 .feat-theme-blue .feat-bibi-input button:hover { background: #3d3332; }
 
 /* ── Dark Theme ── */
+
+.feat-theme-dark .feat-item-icon {
+  background: #141519;
+  border-color: rgba(197,155,39,0.2);
+}
 
 .feat-theme-dark .feat-tablet-bar,
 .feat-theme-dark .feat-editor-header,
