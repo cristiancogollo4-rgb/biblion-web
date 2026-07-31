@@ -1413,6 +1413,39 @@ a {
   transform: translateY(-5px);
 }
 
+.stitch-path-card::after,
+.stitch-audience-grid article::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    rgba(197, 155, 39, 0.06) 60%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.stitch-path-card:hover::after,
+.stitch-audience-grid article:hover::after {
+  opacity: 1;
+}
+
+.stitch-audience-grid article {
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.stitch-audience-grid article:hover {
+  border-color: var(--brand-gold);
+  box-shadow: 0 22px 48px rgba(8, 43, 79, 0.1);
+  transform: translateY(-5px);
+}
+
 .stitch-path-card > div,
 .stitch-function-top,
 .stitch-future-grid article > div {
