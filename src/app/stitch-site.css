@@ -1423,12 +1423,23 @@ a {
   transition: opacity 300ms ease;
   background: linear-gradient(
     135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.05) 35%,
+    rgba(197, 155, 39, 0.12) 55%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
+[data-theme="dark"] .stitch-path-card::after,
+[data-theme="dark"] .stitch-audience-grid article::after {
+  background: linear-gradient(
+    135deg,
     rgba(255, 255, 255, 0.08) 0%,
     rgba(255, 255, 255, 0.02) 40%,
     rgba(197, 155, 39, 0.06) 60%,
     rgba(255, 255, 255, 0.1) 100%
   );
-  pointer-events: none;
 }
 
 .stitch-path-card:hover::after,
