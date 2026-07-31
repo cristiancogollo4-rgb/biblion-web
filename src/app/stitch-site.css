@@ -3688,6 +3688,20 @@ a {
   max-width: 640px;
 }
 
+.feat-mockups-stage::after {
+  content: "";
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110%;
+  height: 60%;
+  background: radial-gradient(ellipse at center, rgba(197,155,39,0.35) 0%, rgba(197,155,39,0.12) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(30px);
+}
+
 /* ── Tablet ── */
 
 .feat-tablet {
