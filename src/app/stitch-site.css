@@ -515,16 +515,16 @@ a {
 
 .mock-theme-dark .tablet-chassis {
   box-shadow:
-    0 0 0 1px rgba(197,155,39,0.15),
-    0 25px 50px -12px rgba(197,155,39,0.35),
-    0 40px 80px -15px rgba(197,155,39,0.15);
+    0 0 30px 8px rgba(197,155,39,0.45),
+    0 0 80px 20px rgba(197,155,39,0.2),
+    0 0 0 1px rgba(197,155,39,0.25);
 }
 
 .mock-theme-dark .phone-chassis {
   box-shadow:
-    0 0 0 1px rgba(197,155,39,0.2),
-    0 25px 50px -12px rgba(197,155,39,0.4),
-    0 40px 80px -15px rgba(197,155,39,0.2);
+    0 0 30px 8px rgba(197,155,39,0.5),
+    0 0 80px 20px rgba(197,155,39,0.25),
+    0 0 0 1px rgba(197,155,39,0.3);
 }
 
 /* ── Phone Mockup ── */
@@ -4662,16 +4662,16 @@ a {
 
 .feat-theme-dark .feat-tablet {
   box-shadow:
-    0 20px 60px -10px rgba(197,155,39,0.4),
-    0 40px 80px -15px rgba(197,155,39,0.2),
-    0 0 0 1px rgba(197,155,39,0.2);
+    0 0 30px 8px rgba(197,155,39,0.5),
+    0 0 80px 20px rgba(197,155,39,0.25),
+    0 0 0 1px rgba(197,155,39,0.3);
 }
 
 .feat-theme-dark .feat-phone {
   box-shadow:
-    0 25px 60px -10px rgba(197,155,39,0.5),
-    0 50px 100px -20px rgba(197,155,39,0.25),
-    0 0 0 1px rgba(197,155,39,0.25);
+    0 0 30px 8px rgba(197,155,39,0.6),
+    0 0 80px 20px rgba(197,155,39,0.3),
+    0 0 0 1px rgba(197,155,39,0.35);
 }
 
 .feat-theme-dark .feat-tablet-bar,
