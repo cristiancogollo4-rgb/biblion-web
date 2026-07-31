@@ -3,17 +3,15 @@ import {
   ArrowRight,
   BookOpen,
   Bot,
-  Construction,
   FilePenLine,
-  LibraryBig,
   Search,
-  Sparkles,
+  X,
+  Check,
 } from "lucide-react";
 import {
   HomeHero,
   SectionHeading,
   SiteFooter,
-  StatusPill,
   WaitlistCta,
 } from "@/components/site";
 import { FeaturesSection } from "@/components/features-section";
@@ -45,25 +43,19 @@ const pathways = [
   },
 ];
 
-const futureItems = [
-  {
-    icon: LibraryBig,
-    title: "Repositorio de enseñanzas",
-    status: "Planeado",
-    text: "Un espacio futuro para descubrir recursos creados dentro de BIBLION.",
-  },
-  {
-    icon: Sparkles,
-    title: "Planes de estudio",
-    status: "En evaluación",
-    text: "Recorridos guiados para profundizar en temas y libros bíblicos.",
-  },
-  {
-    icon: Construction,
-    title: "Colecciones personales",
-    status: "Visión futura",
-    text: "Agrupaciones de pasajes, notas y enseñanzas elegidas por cada usuario.",
-  },
+const todaySteps = [
+  "Abres una app para leer un pasaje clave.",
+  "Encuentras una palabra difícil y cierras la app para buscarla en Google.",
+  "Abres otra app o un navegador para ver un mapa o un comentario.",
+  "Cierras todo y abres tu bloc de notas o Notion para apuntar tus ideas.",
+];
+
+const biblionSteps = [
+  "Lees el pasaje con total concentración.",
+  "Pulsas una palabra y el diccionario aparece en una ventana flotante.",
+  "Preguntas a Bibi sobre el contexto histórico sin salir del versículo.",
+  "Sientes una conexión y sigues la referencia cruzada en el mismo hilo.",
+  "Creas tu bosquejo o devocional allí mismo con tus hallazgos.",
 ];
 
 export default function Home() {
@@ -97,27 +89,49 @@ export default function Home() {
 
       <FeaturesSection />
 
-      <section className="stitch-section" id="futuro" data-reveal>
+      <section className="stitch-section stitch-comparison" id="comparar" data-reveal>
         <SectionHeading
-          eyebrow="LO QUE ESTAMOS CONSTRUYENDO"
-          title="El futuro se presenta con claridad, no como una promesa inmediata."
-          text="Estas ideas no forman parte todavía de la versión de prueba y pueden evolucionar según la validación del producto."
+          align="center"
+          eyebrow="DEJA DE SALTAR ENTRE APLICACIONES"
+          title="Empieza a conectar con la Palabra."
+          text="BIBLION elimina la fricción de tu estudio bíblico. Compara cómo estudias hoy vs. cómo podrías hacerlo."
         />
-        <div className="stitch-future-grid">
-          {futureItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <article key={item.title}>
-                <div><Icon size={23} /><StatusPill tone="future">{item.status}</StatusPill></div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            );
-          })}
+        <div className="stitch-comparison-grid">
+          <div className="stitch-comparison-card stitch-comparison-today">
+            <div className="stitch-comparison-header">
+              <X size={20} />
+              <h3>Cómo estudias hoy</h3>
+            </div>
+            <p className="stitch-comparison-subtitle">El camino largo</p>
+            <ul>
+              {todaySteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ul>
+            <p className="stitch-comparison-result">
+              Fatiga visual, distracción y pérdida del hilo espiritual.
+            </p>
+          </div>
+          <div className="stitch-comparison-card stitch-comparison-biblion">
+            <div className="stitch-comparison-header">
+              <Check size={20} />
+              <h3>Cómo estudias con BIBLION</h3>
+            </div>
+            <p className="stitch-comparison-subtitle">El flujo continuo</p>
+            <ul>
+              {biblionSteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ul>
+            <p className="stitch-comparison-result">
+              Profundidad, claridad y un estudio enfocado de principio a fin.
+            </p>
+          </div>
         </div>
-        <Link className="stitch-text-link" href="/funciones#futuro">
-          Conocer las próximas funciones <ArrowRight size={18} />
-        </Link>
+        <div className="stitch-comparison-cta">
+          <p>Simplifica tu estudio hoy mismo.</p>
+          <WaitlistCta />
+        </div>
       </section>
 
       <WaitlistCta />
