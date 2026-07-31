@@ -461,22 +461,38 @@ a {
 }
 
 .tablet-screen {
-  background: #f8faf8;
-  color: #0c2340;
   border-radius: 17px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 380px;
   position: relative;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* ── Mock Themes ── */
+
+.mock-theme-light {
+  background-color: #f8faf8;
+  color: #0c2340;
+}
+
+.mock-theme-blue {
+  background-color: #071e3d;
+  color: #ffffff;
+}
+
+.mock-theme-dark {
+  background-color: #08090c;
+  color: #f1f5f9;
 }
 
 /* ── Phone Mockup ── */
 
 .hero-phone-wrapper {
   position: absolute;
-  bottom: -24px;
-  right: -16px;
+  top: 10px;
+  right: -20px;
   z-index: 30;
   width: 175px;
 }
@@ -533,14 +549,13 @@ a {
 }
 
 .phone-screen {
-  background: #f8faf8;
-  color: #0c2340;
   border-radius: 22px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 340px;
   position: relative;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 /* ── Glass Glare ── */
@@ -936,6 +951,92 @@ a {
   animation: pulseGlow 4s infinite ease-in-out;
 }
 
+/* ── Mock Theme Overrides ── */
+
+/* Blue theme (default) */
+.mock-theme-blue .mock-verse-card {
+  background: linear-gradient(180deg, rgba(12,35,64,0.6) 0%, rgba(12,35,64,0.92) 100%),
+              url("https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=1000") center/cover;
+  border-color: rgba(197,155,39,0.25);
+}
+
+.mock-theme-blue .mock-card {
+  background: #0a1a35;
+  border-color: rgba(197,155,39,0.15);
+}
+
+.mock-theme-blue .mock-card-label {
+  color: #ffffff;
+}
+
+.mock-theme-blue .mock-card-info strong {
+  color: #ffffff;
+}
+
+.mock-theme-blue .mock-card-info span {
+  color: #8aa3c4;
+}
+
+.mock-theme-blue .mock-card-info p {
+  color: #8aa3c4;
+}
+
+.mock-theme-blue .mock-verse-text {
+  color: #e2e8f0;
+}
+
+.mock-theme-blue .mock-bottom-nav {
+  background: #061428;
+  border-color: rgba(197,155,39,0.15);
+}
+
+.mock-theme-blue .phone-notch {
+  background: #000000;
+}
+
+/* Dark theme */
+.mock-theme-dark .mock-verse-card {
+  background: linear-gradient(180deg, rgba(20,20,25,0.6) 0%, rgba(20,20,25,0.92) 100%),
+              url("https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=1000") center/cover;
+  border-color: rgba(197,155,39,0.2);
+}
+
+.mock-theme-dark .mock-card {
+  background: #141519;
+  border-color: rgba(197,155,39,0.12);
+}
+
+.mock-theme-dark .mock-card-label {
+  color: #e2e8f0;
+}
+
+.mock-theme-dark .mock-card-info strong {
+  color: #f1f5f9;
+}
+
+.mock-theme-dark .mock-card-info span {
+  color: #7a8599;
+}
+
+.mock-theme-dark .mock-card-info p {
+  color: #7a8599;
+}
+
+.mock-theme-dark .mock-verse-text {
+  color: #e2e8f0;
+}
+
+.mock-theme-dark .mock-bottom-nav {
+  background: #0a0b0e;
+  border-color: rgba(197,155,39,0.12);
+}
+
+.mock-theme-dark .phone-notch {
+  background: #000000;
+}
+
+/* Light theme — no overrides needed, already light by default */
+
 /* ── Responsive Hero ── */
 
 @media (max-width: 1024px) {
@@ -983,8 +1084,8 @@ a {
 
   .hero-phone-wrapper {
     width: 140px;
-    bottom: -16px;
-    right: -8px;
+    top: 8px;
+    right: -10px;
   }
 
   .phone-screen {

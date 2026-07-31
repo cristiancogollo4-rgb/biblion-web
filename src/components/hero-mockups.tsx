@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   Battery,
   BookOpen,
@@ -13,8 +12,34 @@ import {
   ArrowRight,
   WifiOff,
 } from "lucide-react";
+import { useEffect, useState } from "react";
+
+type MockTheme = "light" | "blue" | "dark";
 
 export function HeroMockups() {
+  const [mockTheme, setMockTheme] = useState<MockTheme>("blue");
+
+  useEffect(() => {
+    const syncTheme = () => {
+      const current = document.documentElement.dataset.theme;
+      if (current === "light" || current === "blue" || current === "dark") {
+        setMockTheme(current);
+      }
+    };
+
+    syncTheme();
+
+    const observer = new MutationObserver(syncTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const themeClass = `mock-theme-${mockTheme}`;
+
   return (
     <div className="hero-mockups-stage">
       {/* Constellation Background */}
@@ -58,7 +83,7 @@ export function HeroMockups() {
             <div className="tablet-camera">
               <span /><span />
             </div>
-            <div className="tablet-screen">
+            <div className={`tablet-screen ${themeClass}`}>
               <TabletStatus />
               <TabletContent />
               <TabletNav />
@@ -67,13 +92,13 @@ export function HeroMockups() {
         </div>
       </div>
 
-      {/* Phone Mockup */}
+      {/* Phone Mockup - positioned top-right */}
       <div className="hero-phone-wrapper">
         <div className="phone-chassis">
           <div className="phone-inner">
             <div className="glass-glare" />
             <div className="phone-notch" />
-            <div className="phone-screen">
+            <div className={`phone-screen ${themeClass}`}>
               <PhoneStatus />
               <PhoneHeader />
               <PhoneContent />
