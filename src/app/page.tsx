@@ -143,8 +143,8 @@ export default function Home() {
 
       <section className="stitch-section" data-reveal>
         <SectionHeading
-          eyebrow="PARA QUIÉN DISEÑAMOS"
-          title="Desde una lectura cotidiana hasta una enseñanza completa."
+          eyebrow="¿PARA QUIÉN ES BIBLION?"
+          title="Personas que desean estudiar la Biblia"
         />
         <div className="stitch-audience-grid">
           {audiences.map(([title, text], index) => (
@@ -157,7 +157,6 @@ export default function Home() {
         </div>
       </section>
 
-      <WaitlistCta />
       <SiteFooter />
     </main>
   );
