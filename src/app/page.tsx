@@ -16,7 +16,7 @@ import {
   StatusPill,
   WaitlistCta,
 } from "@/components/site";
-import { ThemeControl } from "@/components/theme-control";
+import { FeaturesSection } from "@/components/features-section";
 
 const pathways = [
   {
@@ -95,34 +95,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="stitch-theme-section" data-reveal>
-        <div>
-          <span className="stitch-eyebrow">BIBLION SE ADAPTA A TU MOMENTO</span>
-          <h2>Tres atmósferas. La misma experiencia.</h2>
-          <p>
-            Cambia el tema de esta página y observa cómo la identidad se conserva
-            en Claro, Azul Rey Oscuro y Oscuro.
-          </p>
-          <ThemeControl expanded />
-        </div>
-        <div className="stitch-theme-books" aria-hidden="true">
-          <article className="is-light">
-            <span>CLARO</span>
-            <blockquote>“Lámpara es a mis pies tu palabra.”</blockquote>
-            <strong>Salmos 119:105</strong>
-          </article>
-          <article className="is-blue">
-            <span>AZUL REY OSCURO</span>
-            <blockquote>“La exposición de tus palabras alumbra.”</blockquote>
-            <strong>Salmos 119:130</strong>
-          </article>
-          <article className="is-dark">
-            <span>OSCURO</span>
-            <blockquote>“En tu luz veremos la luz.”</blockquote>
-            <strong>Salmos 36:9</strong>
-          </article>
-        </div>
-      </section>
+      <FeaturesSection />
 
       <section className="stitch-section" id="futuro" data-reveal>
         <SectionHeading
