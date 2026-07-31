@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BookOpen,
   Sparkles,
@@ -68,13 +68,37 @@ const bibiResponses: Record<string, string> = {
     "Un pacto es una alianza solemne y compromiso fiel establecido por Dios con su pueblo en las Escrituras.",
 };
 
+type MockTheme = "light" | "blue" | "dark";
+
 export function FeaturesSection() {
+  const [mockTheme, setMockTheme] = useState<MockTheme>("blue");
   const [chatMessages, setChatMessages] = useState<
     { role: "user" | "bibi"; text: string }[]
   >([]);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    const syncTheme = () => {
+      const current = document.documentElement.dataset.theme;
+      if (current === "light" || current === "blue" || current === "dark") {
+        setMockTheme(current);
+      }
+    };
+
+    syncTheme();
+
+    const observer = new MutationObserver(syncTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const themeClass = `feat-theme-${mockTheme}`;
 
   const sendQuery = (query: string) => {
     setShowSuggestions(false);
@@ -141,7 +165,7 @@ export function FeaturesSection() {
         <div className="feat-mockups">
           <div className="feat-mockups-stage">
             {/* Tablet — Study Editor */}
-            <div className="feat-tablet">
+            <div className={`feat-tablet ${themeClass}`}>
               {/* Status Bar */}
               <div className="feat-tablet-bar">
                 <div className="feat-tablet-bar-left">
@@ -264,7 +288,7 @@ export function FeaturesSection() {
             </div>
 
             {/* Phone — Bibi Chat */}
-            <div className="feat-phone">
+            <div className={`feat-phone ${themeClass}`}>
               <div className="feat-phone-notch" />
 
               {/* Phone Status Bar */}
