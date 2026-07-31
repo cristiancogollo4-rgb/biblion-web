@@ -8,6 +8,7 @@ import {
   ArrowLeft,
   ChevronDown,
   Undo2,
+  Redo2,
   Plus,
   X,
   Play,
@@ -15,9 +16,22 @@ import {
   Italic,
   Underline,
   AlignLeft,
+  AlignCenter,
+  AlignRight,
   List,
   ListOrdered,
   Highlighter,
+  Columns2,
+  Save,
+  Wifi,
+  Signal,
+  BatteryMedium,
+  Instagram,
+  MessageCircle,
+ Facebook,
+  MoreVertical,
+  Ellipsis,
+  PenSquare,
 } from "lucide-react";
 
 const features = [
@@ -60,12 +74,15 @@ export function FeaturesSection() {
   >([]);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [inputValue, setInputValue] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
 
   const sendQuery = (query: string) => {
     setShowSuggestions(false);
     setChatMessages((prev) => [...prev, { role: "user", text: query }]);
+    setIsTyping(true);
 
     setTimeout(() => {
+      setIsTyping(false);
       const answer =
         bibiResponses[query] ||
         "He analizado tu pasaje bíblico para ayudarte en tu estudio.";
@@ -83,28 +100,33 @@ export function FeaturesSection() {
 
   return (
     <section className="feat-section" data-reveal>
+      <div className="feat-glow" />
       <div className="feat-container">
         {/* Left Column */}
         <div className="feat-copy">
-          <div className="feat-eyebrow">
-            <span className="feat-eyebrow-dot" />
-            Estudia la Biblia como nunca antes
+          <div>
+            <div className="feat-eyebrow">
+              <span className="feat-eyebrow-dot" />
+              Estudia la Biblia como nunca antes
+            </div>
+            <h1 className="feat-title">
+              Estudia la Biblia
+              <br />
+              <span className="feat-gold-text">como nunca antes.</span>
+            </h1>
+            <p className="feat-subtitle">
+              Herramientas avanzadas diseñadas para profundizar, comprender y
+              estructurar tu enseñanza desde un solo lugar.
+            </p>
           </div>
-          <h2 className="feat-title">
-            Herramientas avanzadas para{" "}
-            <em>profundizar, comprender y enseñar</em> desde un solo lugar.
-          </h2>
-          <p className="feat-subtitle">
-            Diseñadas para quienes quieren ir más allá de la lectura.
-          </p>
 
           <div className="feat-list">
             {features.map((f) => (
               <div className="feat-item" key={f.title}>
                 <div className="feat-item-icon">
-                  {f.icon === "diagram" && <BookOpen size={18} />}
-                  {f.icon === "wand" && <Wand2 size={18} />}
-                  {f.icon === "book" && <Sparkles size={18} />}
+                  {f.icon === "diagram" && <BookOpen size={17} />}
+                  {f.icon === "wand" && <Wand2 size={17} />}
+                  {f.icon === "book" && <Sparkles size={17} />}
                 </div>
                 <div>
                   <h3 className="feat-item-title">{f.title}</h3>
@@ -120,47 +142,77 @@ export function FeaturesSection() {
           <div className="feat-mockups-stage">
             {/* Tablet — Study Editor */}
             <div className="feat-tablet">
+              {/* Status Bar */}
               <div className="feat-tablet-bar">
-                <span>3:09 a.m.</span>
+                <div className="feat-tablet-bar-left">
+                  <span className="feat-tablet-time">3:09 a.m.</span>
+                  <span className="feat-tablet-app-icon"><Instagram size={9} /></span>
+                  <span className="feat-tablet-app-icon"><MessageCircle size={9} /></span>
+                  <span className="feat-tablet-app-icon"><Facebook size={9} /></span>
+                </div>
                 <div className="feat-tablet-camera" />
-                <div className="feat-tablet-status">
-                  <span>76%</span>
+                <div className="feat-tablet-bar-right">
+                  <Wifi size={9} />
+                  <Signal size={9} />
+                  <div className="feat-tablet-battery">
+                    <span>76</span>
+                    <BatteryMedium size={9} />
+                  </div>
                 </div>
               </div>
 
+              {/* Editor Header */}
               <div className="feat-editor-header">
-                <button>
-                  <X size={14} />
-                </button>
-                <span>Documento sin título</span>
+                <button className="feat-editor-btn"><X size={14} /></button>
+                <div className="feat-editor-title">
+                  <span>Documento sin título</span>
+                  <Ellipsis size={10} />
+                </div>
                 <div className="feat-editor-actions">
-                  <Undo2 size={12} />
-                  <Plus size={12} />
+                  <span className="feat-editor-unsaved">Cambios sin guardar</span>
+                  <button className="feat-editor-btn"><Undo2 size={12} /></button>
+                  <button className="feat-editor-btn"><Redo2 size={12} /></button>
+                  <button className="feat-editor-btn feat-editor-cols"><Columns2 size={12} /></button>
+                  <button className="feat-editor-btn"><Save size={12} /></button>
                 </div>
               </div>
 
+              {/* Toolbar */}
               <div className="feat-editor-toolbar">
                 <div className="feat-toolbar-group">
-                  <button><Bold size={12} /></button>
-                  <button><Italic size={12} /></button>
-                  <button><Underline size={12} /></button>
-                  <button><Highlighter size={12} /></button>
+                  <button className="feat-toolbar-btn"><Bold size={12} /></button>
+                  <button className="feat-toolbar-btn"><Italic size={12} /></button>
+                  <button className="feat-toolbar-btn"><Underline size={12} /></button>
+                  <button className="feat-toolbar-btn"><span className="feat-toolbar-letter">A</span></button>
+                  <button className="feat-toolbar-btn"><Highlighter size={11} /></button>
                 </div>
                 <div className="feat-toolbar-divider" />
                 <div className="feat-toolbar-group">
-                  <button><List size={12} /></button>
-                  <button><ListOrdered size={12} /></button>
+                  <button className="feat-toolbar-btn"><List size={11} /></button>
+                  <button className="feat-toolbar-btn"><ListOrdered size={11} /></button>
                 </div>
                 <div className="feat-toolbar-divider" />
                 <div className="feat-toolbar-group">
-                  <button className="feat-toolbar-active"><AlignLeft size={12} /></button>
+                  <button className="feat-toolbar-btn feat-toolbar-active"><AlignLeft size={11} /></button>
+                  <button className="feat-toolbar-btn"><AlignCenter size={11} /></button>
+                  <button className="feat-toolbar-btn"><AlignRight size={11} /></button>
                 </div>
+                <div className="feat-toolbar-divider" />
+                <div className="feat-zoom-control">
+                  <span>-</span>
+                  <span className="feat-zoom-value">16</span>
+                  <ChevronDown size={8} />
+                  <span>+</span>
+                  <span className="feat-zoom-pct">100%</span>
+                </div>
+                <button className="feat-toolbar-btn feat-toolbar-palette"><AlignLeft size={11} /></button>
               </div>
 
+              {/* Canvas */}
               <div className="feat-editor-canvas">
                 <div className="feat-editor-doc">
                   <div className="feat-doc-header">
-                    <span>
+                    <span className="feat-doc-title">
                       <BookOpen size={12} /> Predicación: &ldquo;Luz en la Oscuridad&rdquo;
                     </span>
                     <span className="feat-doc-badge">Modo Estudio</span>
@@ -175,12 +227,20 @@ export function FeaturesSection() {
                     <span className="feat-doc-note-label">NOTAS DE ESTUDIO</span>
                     El término &ldquo;Verbo&rdquo; conecta con la eternidad de
                     Cristo...
+                    <span className="feat-typing-cursor" />
                   </div>
+                </div>
+
+                <div className="feat-doc-footer">
+                  <span>240 palabras · 4 versículos</span>
+                  <button className="feat-doc-write-btn">
+                    <PenSquare size={9} /> Escribir nota
+                  </button>
                 </div>
 
                 {/* Floating Bibi Badge */}
                 <div className="feat-bibi-badge">
-                  <svg viewBox="0 0 100 100" className="feat-bibi-icon">
+                  <svg viewBox="0 0 100 100" className="feat-bibi-svg">
                     <path
                       d="M50 15 C30 15 15 30 15 50 C15 65 25 78 40 83 L40 90 L50 85 C50 85 85 85 85 50 C85 30 70 15 50 15 Z"
                       fill="none"
@@ -206,19 +266,35 @@ export function FeaturesSection() {
             {/* Phone — Bibi Chat */}
             <div className="feat-phone">
               <div className="feat-phone-notch" />
+
+              {/* Phone Status Bar */}
               <div className="feat-phone-status">
                 <span>3:03</span>
-                <span>69%</span>
+                <div className="feat-phone-status-icons">
+                  <span className="feat-phone-app-icon"><Instagram size={8} /></span>
+                  <span className="feat-phone-app-icon"><MessageCircle size={8} /></span>
+                  <span className="feat-phone-app-icon"><Facebook size={8} /></span>
+                </div>
+                <div className="feat-phone-battery">
+                  <Wifi size={8} />
+                  <span>69%</span>
+                </div>
               </div>
 
+              {/* Scripture Header */}
               <div className="feat-phone-header">
-                <ArrowLeft size={12} />
-                <span>
-                  Genesis 1 <ChevronDown size={10} />
-                </span>
-                <span className="feat-phone-version">RV1960</span>
+                <ArrowLeft size={10} />
+                <div className="feat-phone-chapter">
+                  <strong>Genesis 1</strong>
+                  <ChevronDown size={8} />
+                </div>
+                <div className="feat-phone-version">
+                  <span className="feat-phone-rv">RV1960</span>
+                  <MoreVertical size={10} />
+                </div>
               </div>
 
+              {/* Content */}
               <div className="feat-phone-content">
                 <div className="feat-phone-scripture">
                   <h4>La creación</h4>
@@ -230,8 +306,8 @@ export function FeaturesSection() {
 
                 <div className="feat-bibi-chat">
                   <div className="feat-bibi-chat-header">
-                    <div className="feat-bibi-chat-avatar">
-                      <svg viewBox="0 0 100 100" className="feat-bibi-icon-sm">
+                    <div className="feat-bibi-avatar">
+                      <svg viewBox="0 0 100 100" className="feat-bibi-avatar-svg">
                         <path
                           d="M50 15 C30 15 15 30 15 50 C15 65 25 78 40 83 L40 90 L50 85 C50 85 85 85 85 50 C85 30 70 15 50 15 Z"
                           fill="none"
@@ -249,14 +325,14 @@ export function FeaturesSection() {
                         />
                       </svg>
                     </div>
-                    <div>
+                    <div className="feat-bibi-info">
                       <strong>Bibi</strong>
                       <small>Asistente bíblico</small>
                     </div>
-                    <div className="feat-bibi-chat-actions">
-                      <Undo2 size={10} />
-                      <Plus size={10} />
-                      <X size={10} />
+                    <div className="feat-bibi-header-actions">
+                      <button><Undo2 size={10} /></button>
+                      <button><Plus size={10} /></button>
+                      <button><X size={10} /></button>
                     </div>
                   </div>
 
@@ -271,14 +347,10 @@ export function FeaturesSection() {
                         <button onClick={() => sendQuery("¿Quién fue Moisés?")}>
                           ¿Quién fue Moisés?
                         </button>
-                        <button
-                          onClick={() => sendQuery("¿Dónde queda Jerusalén?")}
-                        >
+                        <button onClick={() => sendQuery("¿Dónde queda Jerusalén?")}>
                           ¿Dónde queda Jerusalén?
                         </button>
-                        <button
-                          onClick={() => sendQuery("¿Qué significa pacto?")}
-                        >
+                        <button onClick={() => sendQuery("¿Qué significa pacto?")}>
                           ¿Qué significa pacto?
                         </button>
                       </div>
@@ -295,12 +367,19 @@ export function FeaturesSection() {
                       >
                         {msg.role === "bibi" && (
                           <span className="feat-bibi-msg-label">
-                            <Sparkles size={8} /> Bibi
+                            <Sparkles size={7} /> Bibi
                           </span>
                         )}
                         {msg.text}
                       </div>
                     ))}
+
+                    {isTyping && (
+                      <div className="feat-bibi-typing">
+                        <Sparkles size={8} className="feat-bibi-typing-spin" />
+                        <span>Bibi respondiendo...</span>
+                      </div>
+                    )}
                   </div>
 
                   <form className="feat-bibi-input" onSubmit={handleSubmit}>
@@ -311,10 +390,15 @@ export function FeaturesSection() {
                       onChange={(e) => setInputValue(e.target.value)}
                     />
                     <button type="submit">
-                      <Play size={10} />
+                      <Play size={8} />
                     </button>
                   </form>
                 </div>
+              </div>
+
+              {/* Footer */}
+              <div className="feat-phone-footer">
+                Biblion v2.4 · Modo Sincronizado
               </div>
             </div>
           </div>
