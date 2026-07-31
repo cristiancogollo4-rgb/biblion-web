@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 import { ArrowRight, CheckCircle2, X } from "lucide-react";
 
 type WaitlistTriggerProps = {
@@ -210,44 +211,47 @@ export function WaitlistTrigger({
         {children}
       </button>
 
-      {open ? (
-        <div
-          className="waitlist-modal-backdrop"
-          onMouseDown={(event) => {
-            if (event.currentTarget === event.target) setOpen(false);
-          }}
-          role="presentation"
-        >
-          <section
-            aria-labelledby={titleId}
-            aria-modal="true"
-            className="waitlist-modal"
-            role="dialog"
-          >
-            <button
-              aria-label="Cerrar formulario"
-              autoFocus
-              className="waitlist-modal-close"
-              onClick={() => {
-                setOpen(false);
-                firstControlRef.current?.focus();
+      {open
+        ? createPortal(
+            <div
+              className="waitlist-modal-backdrop"
+              onMouseDown={(event) => {
+                if (event.currentTarget === event.target) setOpen(false);
               }}
-              type="button"
+              role="presentation"
             >
-              <X size={21} />
-            </button>
-            <div className="waitlist-modal-copy">
-              <span>ACCESO ANTICIPADO</span>
-              <h2 id={titleId}>Sé parte de las primeras pruebas.</h2>
-              <p>
-                El registro no instala la aplicación ni garantiza una invitación
-                inmediata. Abriremos el acceso progresivamente para Android.
-              </p>
-            </div>
-            <WaitlistForm source={source} compact />
-          </section>
-        </div>
-      ) : null}
+              <section
+                aria-labelledby={titleId}
+                aria-modal="true"
+                className="waitlist-modal"
+                role="dialog"
+              >
+                <button
+                  aria-label="Cerrar formulario"
+                  autoFocus
+                  className="waitlist-modal-close"
+                  onClick={() => {
+                    setOpen(false);
+                    firstControlRef.current?.focus();
+                  }}
+                  type="button"
+                >
+                  <X size={21} />
+                </button>
+                <div className="waitlist-modal-copy">
+                  <span>ACCESO ANTICIPADO</span>
+                  <h2 id={titleId}>Sé parte de las primeras pruebas.</h2>
+                  <p>
+                    El registro no instala la aplicación ni garantiza una invitación
+                    inmediata. Abriremos el acceso progresivamente para Android.
+                  </p>
+                </div>
+                <WaitlistForm source={source} compact />
+              </section>
+            </div>,
+            document.body
+          )
+        : null}
     </>
   );
 }
