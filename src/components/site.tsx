@@ -83,7 +83,7 @@ export function SiteFooter() {
             <Image
               alt=""
               height={58}
-              src="/logos/biblion/logo-biblion-dark-app.png"
+              src="/logos/biblion/logo-biblion-blanco.png"
               width={58}
             />
             <span>BIBLION</span>
