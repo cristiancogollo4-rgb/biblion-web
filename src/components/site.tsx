@@ -257,7 +257,7 @@ export function WaitlistCta() {
   return (
     <section className="stitch-final-cta" data-reveal>
       <div className="stitch-final-cta-copy">
-        <span className="stitch-eyebrow">DESARROLLO ACTIVO PARA ANDROID</span>
+        <span className="stitch-eyebrow">ÚNETE AL LANZAMIENTO</span>
         <h2>Sé de los primeros en probar BIBLION.</h2>
         <p>
           Acceso anticipado para Android. Ayúdanos a afinar la lectura,
