@@ -256,17 +256,34 @@ export function StatusPill({
 export function WaitlistCta() {
   return (
     <section className="stitch-final-cta" data-reveal>
-      <div>
+      <div className="stitch-final-cta-copy">
         <span className="stitch-eyebrow">DESARROLLO ACTIVO PARA ANDROID</span>
         <h2>Sé parte de las primeras pruebas de BIBLION.</h2>
         <p>
           Únete a la lista de acceso anticipado y ayúdanos a evaluar la lectura,
           el estudio y Bibi antes del lanzamiento general.
         </p>
+        <WaitlistTrigger className="stitch-button stitch-button-gold" source="footer-cta">
+          Quiero participar
+        </WaitlistTrigger>
       </div>
-      <WaitlistTrigger className="stitch-button stitch-button-gold" source="footer-cta">
-        Quiero participar
-      </WaitlistTrigger>
+      <div className="stitch-final-cta-phone" aria-hidden="true">
+        <div className="stitch-cta-phone-screen">
+          <div className="stitch-cta-phone-bar">
+            <span>3:09</span>
+            <span>BIBLION</span>
+          </div>
+          <div className="stitch-cta-phone-verse">
+            <small>JUAN 3:16</small>
+            <p>De tal manera amó Dios al mundo…</p>
+          </div>
+          <div className="stitch-cta-phone-chips">
+            <span>Palabra clave</span>
+            <span>Contexto histórico</span>
+            <span>Referencia cruzada</span>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

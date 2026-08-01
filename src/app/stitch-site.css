@@ -1646,19 +1646,39 @@ a {
 }
 
 .stitch-final-cta {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 36px;
+  gap: 48px;
   width: min(1220px, calc(100% - 36px));
   margin: clamp(86px, 11vw, 160px) auto 0;
   padding: clamp(36px, 6vw, 68px);
   border-radius: 34px;
+  overflow: hidden;
   background:
-    radial-gradient(circle at 90% 20%, rgba(191, 169, 129, 0.24), transparent 24rem),
-    var(--brand-blue-nav);
+    radial-gradient(circle at 85% 18%, rgba(191, 169, 129, 0.3), transparent 22rem),
+    radial-gradient(circle at 10% 90%, rgba(191, 169, 129, 0.14), transparent 18rem),
+    linear-gradient(135deg, #0a2c52 0%, #082b4f 55%, #0a3359 100%);
   color: #ffffff;
   box-shadow: 0 28px 78px rgba(8, 43, 79, 0.28);
+}
+
+.stitch-final-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+}
+
+.stitch-final-cta-copy {
+  position: relative;
+  z-index: 1;
+  flex: 1;
 }
 
 .stitch-final-cta h2 {
@@ -1672,10 +1692,95 @@ a {
 
 .stitch-final-cta p {
   max-width: 700px;
-  margin: 0;
+  margin: 0 0 28px;
   color: rgba(255, 255, 255, 0.72);
   font-family: var(--font-scripture), Georgia, serif;
   line-height: 1.65;
+}
+
+/* Phone mockup */
+
+.stitch-final-cta-phone {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: 260px;
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 44px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.stitch-final-cta-phone::after {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  background: radial-gradient(circle at center, rgba(191, 169, 129, 0.22), transparent 65%);
+  filter: blur(20px);
+  z-index: -1;
+}
+
+.stitch-cta-phone-screen {
+  display: grid;
+  gap: 14px;
+  padding: 20px 18px 22px;
+  border-radius: 34px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    rgba(8, 43, 79, 0.7);
+  background-size: 28px 28px, 28px 28px, auto;
+}
+
+.stitch-cta-phone-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.stitch-cta-phone-bar span:last-child {
+  color: var(--brand-gold-soft);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.stitch-cta-phone-verse {
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.stitch-cta-phone-verse small {
+  color: var(--brand-gold-soft);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.stitch-cta-phone-verse p {
+  margin: 8px 0 0;
+  font-family: var(--font-scripture), Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.stitch-cta-phone-chips {
+  display: grid;
+  gap: 7px;
+}
+
+.stitch-cta-phone-chips span {
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.72rem;
 }
 
 .stitch-footer {
@@ -3450,6 +3555,10 @@ a {
 
   .stitch-final-cta .stitch-button {
     width: 100%;
+  }
+
+  .stitch-final-cta-phone {
+    margin: 6px auto 0;
   }
 
   .stitch-footer {
