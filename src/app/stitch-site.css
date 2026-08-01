@@ -1694,32 +1694,31 @@ a {
   padding: clamp(36px, 6vw, 68px);
 }
 
+.stitch-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .stitch-footer-wordmark {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
   color: var(--footer-text, #ffffff);
   text-decoration: none;
 }
 
 .stitch-footer-wordmark img {
-  width: 50px;
-  height: 50px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
-}
-
-.stitch-footer-wordmark > span {
-  font-family: var(--font-scripture), Georgia, serif;
-  font-size: 1.42rem;
-  font-weight: 760;
-  letter-spacing: 0.055em;
 }
 
 .stitch-footer-brand p {
   display: grid;
   gap: 6px;
-  margin: 24px 0 0;
+  margin: 14px 0 0;
   color: var(--footer-muted, rgba(255, 255, 255, 0.72));
   font-family: var(--font-scripture), Georgia, serif;
 }
