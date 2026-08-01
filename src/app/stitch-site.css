@@ -1709,8 +1709,8 @@ a {
 }
 
 .stitch-footer-wordmark img {
-  width: 64px;
-  height: 64px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
 }
@@ -1725,7 +1725,7 @@ a {
 
 .stitch-footer-brand strong {
   color: var(--footer-text, #ffffff);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
 }
 
 .stitch-footer-links {

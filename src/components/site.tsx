@@ -82,9 +82,9 @@ export function SiteFooter() {
           <Link className="stitch-footer-wordmark" href="/" aria-label="BIBLION, ir al inicio">
             <Image
               alt=""
-              height={64}
+              height={120}
               src="/logos/biblion/logo-biblion-blanco.png"
-              width={64}
+              width={120}
             />
           </Link>
           <p>
