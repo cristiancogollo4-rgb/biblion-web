@@ -20,6 +20,10 @@
   --footer-muted: rgba(255, 255, 255, 0.72);
   --footer-link: rgba(255, 255, 255, 0.74);
   --footer-line: rgba(255, 255, 255, 0.12);
+  --cta-bg: linear-gradient(135deg, #0a2c52 0%, #082b4f 55%, #0a3359 100%);
+  --cta-text: #ffffff;
+  --cta-muted: rgba(255, 255, 255, 0.72);
+  --cta-grid: rgba(255, 255, 255, 0.04);
   --blue: var(--brand-blue);
   --gold: var(--brand-gold);
   --white: #ffffff;
@@ -44,6 +48,10 @@
   --footer-muted: rgba(247, 241, 227, 0.6);
   --footer-link: rgba(247, 241, 227, 0.7);
   --footer-line: rgba(247, 241, 227, 0.12);
+  --cta-bg: linear-gradient(135deg, #092a4d 0%, #061e35 55%, #0a2f57 100%);
+  --cta-text: #f7f1e3;
+  --cta-muted: rgba(247, 241, 227, 0.72);
+  --cta-grid: rgba(247, 241, 227, 0.05);
   --blue: #f7f1e3;
   --gold: #bfa981;
   --white: #0b2a4a;
@@ -67,6 +75,10 @@
   --footer-muted: rgba(245, 232, 199, 0.6);
   --footer-link: rgba(245, 232, 199, 0.7);
   --footer-line: rgba(245, 232, 199, 0.12);
+  --cta-bg: linear-gradient(135deg, #0d0d0d 0%, #050505 55%, #111111 100%);
+  --cta-text: #f5e8c7;
+  --cta-muted: rgba(245, 232, 199, 0.72);
+  --cta-grid: rgba(245, 232, 199, 0.05);
   --blue: #f5e8c7;
   --gold: #bfa981;
   --white: #0a0a0a;
@@ -1659,8 +1671,8 @@ a {
   background:
     radial-gradient(circle at 85% 18%, rgba(191, 169, 129, 0.3), transparent 22rem),
     radial-gradient(circle at 10% 90%, rgba(191, 169, 129, 0.14), transparent 18rem),
-    linear-gradient(135deg, #0a2c52 0%, #082b4f 55%, #0a3359 100%);
-  color: #ffffff;
+    var(--cta-bg);
+  color: var(--cta-text, #ffffff);
   box-shadow: 0 28px 78px rgba(8, 43, 79, 0.28);
 }
 
@@ -1669,8 +1681,8 @@ a {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(var(--cta-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cta-grid) 1px, transparent 1px);
   background-size: 44px 44px;
   pointer-events: none;
 }
@@ -1684,7 +1696,7 @@ a {
 .stitch-final-cta h2 {
   max-width: 760px;
   margin: 12px 0;
-  color: #ffffff;
+  color: var(--cta-text, #ffffff);
   font-size: clamp(2.2rem, 4.5vw, 4.2rem);
   letter-spacing: -0.045em;
   line-height: 1;
@@ -1693,7 +1705,7 @@ a {
 .stitch-final-cta p {
   max-width: 700px;
   margin: 0 0 28px;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--cta-muted, rgba(255, 255, 255, 0.72));
   font-family: var(--font-scripture), Georgia, serif;
   line-height: 1.65;
 }
@@ -1729,7 +1741,7 @@ a {
   background:
     linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    rgba(8, 43, 79, 0.7);
+    var(--cta-bg);
   background-size: 28px 28px, 28px 28px, auto;
 }
 
@@ -1738,7 +1750,7 @@ a {
   align-items: center;
   justify-content: space-between;
   font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--cta-muted, rgba(255, 255, 255, 0.6));
 }
 
 .stitch-cta-phone-bar span:last-child {
