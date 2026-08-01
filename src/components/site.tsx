@@ -258,10 +258,11 @@ export function WaitlistCta() {
     <section className="stitch-final-cta" data-reveal>
       <div className="stitch-final-cta-copy">
         <span className="stitch-eyebrow">DESARROLLO ACTIVO PARA ANDROID</span>
-        <h2>Sé parte de las primeras pruebas de BIBLION.</h2>
+        <h2>Sé de los primeros en probar BIBLION.</h2>
         <p>
-          Únete a la lista de acceso anticipado y ayúdanos a evaluar la lectura,
-          el estudio y Bibi antes del lanzamiento general.
+          Acceso anticipado para Android. Ayúdanos a afinar la lectura,
+          el estudio y Bibi, y recibe información antes que nadie sobre cada
+          nueva etapa de pruebas.
         </p>
         <WaitlistTrigger className="stitch-button stitch-button-gold" source="footer-cta">
           Quiero participar
