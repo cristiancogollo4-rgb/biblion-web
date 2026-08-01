@@ -142,7 +142,7 @@ export default function Home() {
 
       <section className="stitch-section" data-reveal>
         <SectionHeading
-          eyebrow="PARA QUIÉN DISEÑAMOS"
+          eyebrow="¿PARA QUIÉN ESTÁ PENSADO?"
           title="Desde una lectura cotidiana hasta una enseñanza completa."
         />
         <div className="stitch-audience-grid">
