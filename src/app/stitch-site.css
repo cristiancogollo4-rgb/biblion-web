@@ -1710,89 +1710,58 @@ a {
   line-height: 1.65;
 }
 
-/* Phone mockup */
+/* Feature cards */
 
-.stitch-final-cta-phone {
+.stitch-final-cta-features {
   position: relative;
   z-index: 1;
+  display: grid;
+  gap: 12px;
   flex: none;
-  width: 260px;
-  padding: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.16);
-  border-radius: 44px;
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  width: 300px;
 }
 
-.stitch-final-cta-phone::after {
+.stitch-final-cta-features::after {
   content: "";
   position: absolute;
-  inset: -18px;
-  background: radial-gradient(circle at center, rgba(191, 169, 129, 0.22), transparent 65%);
+  inset: -24px;
+  background: radial-gradient(circle at center, rgba(191, 169, 129, 0.2), transparent 65%);
   filter: blur(20px);
   z-index: -1;
 }
 
-.stitch-cta-phone-screen {
-  display: grid;
-  gap: 14px;
-  padding: 20px 18px 22px;
-  border-radius: 34px;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    var(--cta-bg);
-  background-size: 28px 28px, 28px 28px, auto;
-}
-
-.stitch-cta-phone-bar {
+.stitch-cta-feature {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 0.72rem;
-  color: var(--cta-muted, rgba(255, 255, 255, 0.6));
-}
-
-.stitch-cta-phone-bar span:last-child {
-  color: var(--brand-gold-soft);
-  font-weight: 800;
-  letter-spacing: 0.06em;
-}
-
-.stitch-cta-phone-verse {
-  padding: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(8px);
 }
 
-.stitch-cta-phone-verse small {
+.stitch-cta-feature svg {
+  flex: none;
+  width: 24px;
+  height: 24px;
   color: var(--brand-gold-soft);
-  font-size: 0.66rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
 }
 
-.stitch-cta-phone-verse p {
-  margin: 8px 0 0;
-  font-family: var(--font-scripture), Georgia, serif;
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.stitch-cta-phone-chips {
+.stitch-cta-feature span {
   display: grid;
-  gap: 7px;
+  gap: 2px;
 }
 
-.stitch-cta-phone-chips span {
-  padding: 7px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.72rem;
+.stitch-cta-feature strong {
+  color: var(--cta-text, #ffffff);
+  font-size: 0.95rem;
+}
+
+.stitch-cta-feature small {
+  color: var(--cta-muted, rgba(255, 255, 255, 0.66));
+  font-family: var(--font-scripture), Georgia, serif;
+  font-size: 0.8rem;
 }
 
 .stitch-footer {
@@ -3569,7 +3538,9 @@ a {
     width: 100%;
   }
 
-  .stitch-final-cta-phone {
+  .stitch-final-cta-features {
+    width: 100%;
+    max-width: 340px;
     margin: 6px auto 0;
   }
 

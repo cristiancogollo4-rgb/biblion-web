@@ -268,21 +268,27 @@ export function WaitlistCta() {
           Quiero participar
         </WaitlistTrigger>
       </div>
-      <div className="stitch-final-cta-phone" aria-hidden="true">
-        <div className="stitch-cta-phone-screen">
-          <div className="stitch-cta-phone-bar">
-            <span>3:09</span>
-            <span>BIBLION</span>
-          </div>
-          <div className="stitch-cta-phone-verse">
-            <small>JUAN 3:16</small>
-            <p>De tal manera amó Dios al mundo…</p>
-          </div>
-          <div className="stitch-cta-phone-chips">
-            <span>Palabra clave</span>
-            <span>Contexto histórico</span>
-            <span>Referencia cruzada</span>
-          </div>
+      <div className="stitch-final-cta-features" aria-hidden="true">
+        <div className="stitch-cta-feature">
+          <BookOpen size={22} />
+          <span>
+            <strong>Lectura</strong>
+            <small>Sin conexión, varias versiones.</small>
+          </span>
+        </div>
+        <div className="stitch-cta-feature">
+          <Search size={22} />
+          <span>
+            <strong>Estudio</strong>
+            <small>Diccionario y referencias cruzadas.</small>
+          </span>
+        </div>
+        <div className="stitch-cta-feature">
+          <Bot size={22} />
+          <span>
+            <strong>Bibi</strong>
+            <small>Contexto histórico y respuestas.</small>
+          </span>
         </div>
       </div>
     </section>
