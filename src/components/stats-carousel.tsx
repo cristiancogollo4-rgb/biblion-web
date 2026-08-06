@@ -47,7 +47,7 @@ const statCards = [
     value: "Bibi",
     label: "Asistente bíblica contextual",
     description: "Lee contigo y responde preguntas basándose en el pasaje estudiado.",
-    image: "/logos/bibi/logo-bibi-normal.png",
+    image: "/bibi-logo.png",
   },
 ] as const;
 
@@ -199,13 +199,24 @@ export function StatsCarousel() {
                 tabIndex={position === 0 ? 0 : -1}
                 type="button"
               >
-                <span className="stitch-stats-icon" aria-hidden="true">
-                  {Icon ? <Icon size={24} strokeWidth={1.7} /> : null}
-                  {"image" in card ? (
-                    <Image alt="" height={32} src={card.image} width={32} />
-                  ) : null}
-                </span>
-                <span className="stitch-stats-value">{card.value}</span>
+                {card.id === "bibi" ? (
+                  <span className="stitch-stats-bibi-mark" aria-hidden="true">
+                    <Image
+                      alt=""
+                      className="stitch-stats-bibi-mark-image"
+                      height={72}
+                      src={card.image}
+                      width={72}
+                    />
+                  </span>
+                ) : (
+                  <>
+                    <span className="stitch-stats-icon" aria-hidden="true">
+                      {Icon ? <Icon size={24} strokeWidth={1.7} /> : null}
+                    </span>
+                    <span className="stitch-stats-value">{card.value}</span>
+                  </>
+                )}
                 <span className="stitch-stats-label">{card.label}</span>
                 <span className="stitch-stats-description">{card.description}</span>
               </button>
