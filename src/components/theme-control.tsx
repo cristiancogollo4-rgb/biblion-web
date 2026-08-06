@@ -6,16 +6,22 @@ import { useEffect, useState } from "react";
 export type BiblionWebTheme = "light" | "blue" | "dark";
 
 const themes = [
-  { id: "light" as const, label: "Claro", icon: Sun },
-  { id: "blue" as const, label: "Azul Rey Oscuro", icon: Palette },
-  { id: "dark" as const, label: "Oscuro", icon: Moon },
+  { id: "light" as const, label: "Claro", shortLabel: "Claro", icon: Sun },
+  { id: "blue" as const, label: "Azul Rey Oscuro", shortLabel: "Azul", icon: Palette },
+  { id: "dark" as const, label: "Oscuro", shortLabel: "Oscuro", icon: Moon },
 ];
 
 type ThemeControlProps = {
+  compactLabels?: boolean;
   expanded?: boolean;
+  onThemeChange?: (theme: BiblionWebTheme) => void;
 };
 
-export function ThemeControl({ expanded = false }: ThemeControlProps) {
+export function ThemeControl({
+  compactLabels = false,
+  expanded = false,
+  onThemeChange,
+}: ThemeControlProps) {
   const [theme, setTheme] = useState<BiblionWebTheme>("blue");
 
   useEffect(() => {
@@ -29,11 +35,20 @@ export function ThemeControl({ expanded = false }: ThemeControlProps) {
     document.documentElement.dataset.theme = nextTheme;
     localStorage.setItem("biblion-web-theme", nextTheme);
     setTheme(nextTheme);
+    onThemeChange?.(nextTheme);
   };
+
+  const className = [
+    "theme-control",
+    expanded ? "theme-control-expanded" : "",
+    compactLabels ? "theme-control-compact-labels" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div
-      className={expanded ? "theme-control theme-control-expanded" : "theme-control"}
+      className={className}
       aria-label="Tema de la página"
       role="group"
     >
@@ -52,7 +67,7 @@ export function ThemeControl({ expanded = false }: ThemeControlProps) {
             type="button"
           >
             <Icon aria-hidden="true" size={expanded ? 19 : 16} />
-            <span>{item.label}</span>
+            <span>{compactLabels ? item.shortLabel : item.label}</span>
           </button>
         );
       })}

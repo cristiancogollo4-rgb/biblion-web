@@ -9,11 +9,20 @@ export function MotionLayer() {
   useEffect(() => {
     const root = document.documentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const candidates = Array.from(
+    const matches = Array.from(
       document.querySelectorAll<HTMLElement>(
         "[data-reveal], main > section:not(:first-child), .section-heading, article"
       )
-    ).slice(0, 100);
+    );
+    const candidates = matches
+      .filter(
+        (element) =>
+          !matches.some(
+            (possibleParent) =>
+              possibleParent !== element && possibleParent.contains(element)
+          )
+      )
+      .slice(0, 100);
 
     root.classList.add("motion-ready");
     document.body.classList.remove("page-enter");

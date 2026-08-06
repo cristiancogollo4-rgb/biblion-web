@@ -2897,10 +2897,10 @@ main {
 
 .motion-ready .reveal-item {
   opacity: 0;
-  transform: translateY(34px);
+  transform: translateY(24px);
   transition:
-    opacity 680ms cubic-bezier(0.2, 0.75, 0.25, 1) var(--reveal-delay, 0ms),
-    transform 680ms cubic-bezier(0.2, 0.75, 0.25, 1) var(--reveal-delay, 0ms);
+    opacity 520ms cubic-bezier(0.2, 0.75, 0.25, 1) var(--reveal-delay, 0ms),
+    transform 520ms cubic-bezier(0.2, 0.75, 0.25, 1) var(--reveal-delay, 0ms);
 }
 
 .motion-ready .reveal-item.is-visible {
@@ -2909,12 +2909,12 @@ main {
 }
 
 .page-enter main {
-  animation: page-enter 420ms ease both;
+  animation: page-enter 420ms ease;
 }
 
 @keyframes page-enter {
   from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: none; }
 }
 
 @keyframes tour-panel-enter {

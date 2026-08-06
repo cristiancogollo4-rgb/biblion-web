@@ -15,6 +15,7 @@ import {
   WaitlistCta,
 } from "@/components/site";
 import { FeaturesSection } from "@/components/features-section";
+import { StatsCarousel } from "@/components/stats-carousel";
 
 const pathways = [
   {
@@ -69,6 +70,8 @@ export default function Home() {
   return (
     <main className="stitch-page">
       <HomeHero />
+
+      <StatsCarousel />
 
       <section className="stitch-section" data-reveal>
         <SectionHeading

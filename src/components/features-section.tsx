@@ -129,11 +129,11 @@ export function FeaturesSection() {
         {/* Left Column */}
         <div className="feat-copy">
           <div>
-            <h1 className="feat-title">
+            <h2 className="feat-title">
               Estudia la Biblia
               <br />
               <em className="feat-title-italic">como nunca antes.</em>
-            </h1>
+            </h2>
             <p className="feat-subtitle">
               Herramientas avanzadas diseñadas para profundizar, comprender y
               estructurar tu enseñanza desde un solo lugar.
@@ -183,39 +183,39 @@ export function FeaturesSection() {
 
               {/* Editor Header */}
               <div className="feat-editor-header">
-                <button className="feat-editor-btn"><X size={14} /></button>
+                <span aria-hidden="true" className="feat-editor-btn"><X size={14} /></span>
                 <div className="feat-editor-title">
                   <span>Documento sin título</span>
                   <Ellipsis size={10} />
                 </div>
                 <div className="feat-editor-actions">
                   <span className="feat-editor-unsaved">Cambios sin guardar</span>
-                  <button className="feat-editor-btn"><Undo2 size={12} /></button>
-                  <button className="feat-editor-btn"><Redo2 size={12} /></button>
-                  <button className="feat-editor-btn feat-editor-cols"><Columns2 size={12} /></button>
-                  <button className="feat-editor-btn"><Save size={12} /></button>
+                  <span aria-hidden="true" className="feat-editor-btn"><Undo2 size={12} /></span>
+                  <span aria-hidden="true" className="feat-editor-btn"><Redo2 size={12} /></span>
+                  <span aria-hidden="true" className="feat-editor-btn feat-editor-cols"><Columns2 size={12} /></span>
+                  <span aria-hidden="true" className="feat-editor-btn"><Save size={12} /></span>
                 </div>
               </div>
 
               {/* Toolbar */}
               <div className="feat-editor-toolbar">
                 <div className="feat-toolbar-group">
-                  <button className="feat-toolbar-btn"><Bold size={12} /></button>
-                  <button className="feat-toolbar-btn"><Italic size={12} /></button>
-                  <button className="feat-toolbar-btn"><Underline size={12} /></button>
-                  <button className="feat-toolbar-btn"><span className="feat-toolbar-letter">A</span></button>
-                  <button className="feat-toolbar-btn"><Highlighter size={11} /></button>
+                  <span aria-hidden="true" className="feat-toolbar-btn"><Bold size={12} /></span>
+                  <span aria-hidden="true" className="feat-toolbar-btn"><Italic size={12} /></span>
+                  <span aria-hidden="true" className="feat-toolbar-btn"><Underline size={12} /></span>
+                  <span aria-hidden="true" className="feat-toolbar-btn"><span className="feat-toolbar-letter">A</span></span>
+                  <span aria-hidden="true" className="feat-toolbar-btn"><Highlighter size={11} /></span>
                 </div>
                 <div className="feat-toolbar-divider" />
                 <div className="feat-toolbar-group">
-                  <button className="feat-toolbar-btn"><List size={11} /></button>
-                  <button className="feat-toolbar-btn"><ListOrdered size={11} /></button>
+                  <span aria-hidden="true" className="feat-toolbar-btn"><List size={11} /></span>
+                  <span aria-hidden="true" className="feat-toolbar-btn"><ListOrdered size={11} /></span>
                 </div>
                 <div className="feat-toolbar-divider" />
                 <div className="feat-toolbar-group">
-                  <button className="feat-toolbar-btn feat-toolbar-active"><AlignLeft size={11} /></button>
-                  <button className="feat-toolbar-btn"><AlignCenter size={11} /></button>
-                  <button className="feat-toolbar-btn"><AlignRight size={11} /></button>
+                  <span aria-hidden="true" className="feat-toolbar-btn feat-toolbar-active"><AlignLeft size={11} /></span>
+                  <span aria-hidden="true" className="feat-toolbar-btn"><AlignCenter size={11} /></span>
+                  <span aria-hidden="true" className="feat-toolbar-btn"><AlignRight size={11} /></span>
                 </div>
                 <div className="feat-toolbar-divider" />
                 <div className="feat-zoom-control">
@@ -225,7 +225,7 @@ export function FeaturesSection() {
                   <span>+</span>
                   <span className="feat-zoom-pct">100%</span>
                 </div>
-                <button className="feat-toolbar-btn feat-toolbar-palette"><AlignLeft size={11} /></button>
+                <span aria-hidden="true" className="feat-toolbar-btn feat-toolbar-palette"><AlignLeft size={11} /></span>
               </div>
 
               {/* Canvas */}
@@ -253,9 +253,9 @@ export function FeaturesSection() {
 
                 <div className="feat-doc-footer">
                   <span>240 palabras · 4 versículos</span>
-                  <button className="feat-doc-write-btn">
+                  <span aria-hidden="true" className="feat-doc-write-btn">
                     <PenSquare size={9} /> Escribir nota
-                  </button>
+                  </span>
                 </div>
 
                 {/* Floating Bibi Badge */}
@@ -350,9 +350,9 @@ export function FeaturesSection() {
                       <small>Asistente bíblico</small>
                     </div>
                     <div className="feat-bibi-header-actions">
-                      <button><Undo2 size={10} /></button>
-                      <button><Plus size={10} /></button>
-                      <button><X size={10} /></button>
+                      <span aria-hidden="true"><Undo2 size={10} /></span>
+                      <span aria-hidden="true"><Plus size={10} /></span>
+                      <span aria-hidden="true"><X size={10} /></span>
                     </div>
                   </div>
 
@@ -364,13 +364,13 @@ export function FeaturesSection() {
 
                     {showSuggestions && (
                       <div className="feat-bibi-suggestions">
-                        <button onClick={() => sendQuery("¿Quién fue Moisés?")}>
+                        <button type="button" onClick={() => sendQuery("¿Quién fue Moisés?")}>
                           ¿Quién fue Moisés?
                         </button>
-                        <button onClick={() => sendQuery("¿Dónde queda Jerusalén?")}>
+                        <button type="button" onClick={() => sendQuery("¿Dónde queda Jerusalén?")}>
                           ¿Dónde queda Jerusalén?
                         </button>
-                        <button onClick={() => sendQuery("¿Qué significa pacto?")}>
+                        <button type="button" onClick={() => sendQuery("¿Qué significa pacto?")}>
                           ¿Qué significa pacto?
                         </button>
                       </div>
@@ -405,11 +405,12 @@ export function FeaturesSection() {
                   <form className="feat-bibi-input" onSubmit={handleSubmit}>
                     <input
                       type="text"
+                      aria-label="Escribe una pregunta bíblica para Bibi"
                       placeholder="Pregunta a Bibi..."
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                     />
-                    <button type="submit">
+                    <button aria-label="Enviar pregunta a Bibi" type="submit">
                       <Play size={8} />
                     </button>
                   </form>
@@ -418,7 +419,7 @@ export function FeaturesSection() {
 
               {/* Footer */}
               <div className="feat-phone-footer">
-                Biblion v2.4 · Modo Sincronizado
+                BIBLION · Demostración de estudio
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
-import { ArrowRight, CheckCircle2, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronDown, X } from "lucide-react";
 
 type WaitlistTriggerProps = {
   children: ReactNode;
@@ -42,6 +42,7 @@ export function WaitlistForm({
   const [form, setForm] = useState(initialForm);
   const [state, setState] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
+  const [showOptional, setShowOptional] = useState(false);
 
   const updateField = (
     field: keyof typeof initialForm,
@@ -119,29 +120,46 @@ export function WaitlistForm({
           value={form.email}
         />
       </label>
-      <label>
-        Dispositivo o versión de Android
-        <input
-          name="androidDevice"
-          onChange={(event) => updateField("androidDevice", event.target.value)}
-          placeholder="Opcional"
-          value={form.androidDevice}
-        />
-      </label>
-      <label>
-        Uso principal
-        <select
-          name="role"
-          onChange={(event) => updateField("role", event.target.value)}
-          value={form.role}
-        >
-          <option value="">Opcional</option>
-          <option value="lectura-devocional">Lectura devocional</option>
-          <option value="estudio-profundo">Estudio profundo</option>
-          <option value="ensenanza">Enseñanza o predicación</option>
-          <option value="otro">Otro</option>
-        </select>
-      </label>
+      <button
+        aria-expanded={showOptional}
+        className="waitlist-optional-toggle waitlist-field-wide"
+        onClick={() => setShowOptional((current) => !current)}
+        type="button"
+      >
+        Añadir información opcional
+        <ChevronDown aria-hidden="true" size={17} />
+      </button>
+      <div
+        className={
+          showOptional
+            ? "waitlist-optional-fields is-visible"
+            : "waitlist-optional-fields"
+        }
+      >
+        <label>
+          Dispositivo o versión de Android
+          <input
+            name="androidDevice"
+            onChange={(event) => updateField("androidDevice", event.target.value)}
+            placeholder="Opcional"
+            value={form.androidDevice}
+          />
+        </label>
+        <label>
+          Uso principal
+          <select
+            name="role"
+            onChange={(event) => updateField("role", event.target.value)}
+            value={form.role}
+          >
+            <option value="">Opcional</option>
+            <option value="lectura-devocional">Lectura devocional</option>
+            <option value="estudio-profundo">Estudio profundo</option>
+            <option value="ensenanza">Enseñanza o predicación</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+      </div>
       <label className="waitlist-consent waitlist-field-wide">
         <input
           checked={form.consent}
