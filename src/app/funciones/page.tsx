@@ -13,9 +13,8 @@ import {
   Search,
   Sparkles,
   UserRound,
-  Wifi,
-  WifiOff,
 } from "lucide-react";
+import { PassageLayers } from "@/components/passage-layers";
 import { ProductTour } from "@/components/product-tour";
 import {
   PageHero,
@@ -24,13 +23,6 @@ import {
   StatusPill,
   WaitlistCta,
 } from "@/components/site";
-
-const actions = [
-  { href: "#lectura", icon: BookOpen, title: "Leer", text: "Navega, personaliza y continúa desde el último capítulo." },
-  { href: "#descubrir", icon: Search, title: "Descubrir", text: "Encuentra palabras, conceptos y conexiones bíblicas." },
-  { href: "#bibi", icon: Bot, title: "Preguntar", text: "Conversa con Bibi sin perder el contexto del pasaje." },
-  { href: "#estudio", icon: FilePenLine, title: "Construir", text: "Organiza tus hallazgos como una enseñanza." },
-];
 
 const functionGroups = [
   {
@@ -170,24 +162,6 @@ const experienceFoundations = [
   },
 ];
 
-const accessModes = [
-  {
-    icon: WifiOff,
-    title: "Sin conexión",
-    text: "Lectura, búsqueda, diccionario, temas, resaltados y borradores viven en el dispositivo.",
-  },
-  {
-    icon: Wifi,
-    title: "Con conexión",
-    text: "Bibi utiliza internet únicamente cuando la consulta necesita mayor profundidad.",
-  },
-  {
-    icon: UserRound,
-    title: "Con una cuenta",
-    text: "El perfil y la sincronización permiten conservar datos compatibles entre sesiones.",
-  },
-];
-
 const future = [
   ["Repositorio de enseñanzas", "Planeado", "Descubrir recursos creados dentro de BIBLION."],
   ["Planes de estudio", "En evaluación", "Recorridos guiados por temas o libros."],
@@ -204,26 +178,14 @@ export default function FuncionesPage() {
         text="BIBLION reúne lectura, búsqueda, descubrimiento, asistencia bíblica y creación de enseñanzas en una sola experiencia."
       />
 
-      <section className="stitch-section stitch-action-overview" data-reveal>
-        {actions.map((action) => {
-          const ActionIcon = action.icon;
-          return (
-            <Link className="stitch-action-card" href={action.href} key={action.title}>
-              <ActionIcon size={24} />
-              <h2>{action.title}</h2>
-              <p>{action.text}</p>
-              <span>Explorar <ArrowRight aria-hidden="true" size={16} /></span>
-            </Link>
-          );
-        })}
-      </section>
+      <PassageLayers />
 
       <section className="stitch-section stitch-product-tour-section" data-reveal>
         <SectionHeading
           align="center"
           eyebrow="RECORRIDO INTERACTIVO"
-          title="Explora la interfaz de BIBLION App."
-          text="Recorre Home, Biblia, Buscar, Estudio y Perfil. En Biblia y Estudio también puedes abrir a Bibi como una asistente contextual."
+          title="Recorre BIBLION App tal como funciona hoy."
+          text="Explora mockups interactivos construidos sobre el flujo real en tablet: desde el inicio y la selección de libros hasta la lectura, la búsqueda, las enseñanzas, el editor y el perfil."
         />
         <ProductTour initialPanel="home" />
       </section>
@@ -285,27 +247,6 @@ export default function FuncionesPage() {
                 <span>{foundation.requirement}</span>
                 <h4>{foundation.title}</h4>
                 <p>{foundation.text}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="stitch-section functions-access-section" data-reveal>
-        <SectionHeading
-          align="center"
-          eyebrow="LOCAL PRIMERO"
-          title="Sabes cuándo necesitas conexión."
-          text="BIBLION App mantiene la experiencia principal en el dispositivo y conecta únicamente las capacidades que lo requieren."
-        />
-        <div className="functions-access-grid">
-          {accessModes.map((mode) => {
-            const AccessIcon = mode.icon;
-            return (
-              <article key={mode.title}>
-                <AccessIcon aria-hidden="true" size={23} />
-                <h3>{mode.title}</h3>
-                <p>{mode.text}</p>
               </article>
             );
           })}
