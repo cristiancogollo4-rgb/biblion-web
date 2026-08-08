@@ -5,12 +5,16 @@ import {
   BookOpen,
   Bot,
   Cloud,
+  Compass,
   FileDown,
   FilePenLine,
   Highlighter,
+  Palette,
   Search,
-  Settings2,
   Sparkles,
+  UserRound,
+  Wifi,
+  WifiOff,
 } from "lucide-react";
 import { ProductTour } from "@/components/product-tour";
 import {
@@ -22,94 +26,165 @@ import {
 } from "@/components/site";
 
 const actions = [
-  [BookOpen, "Leer", "Navega, personaliza y continúa desde el último capítulo."],
-  [Search, "Descubrir", "Encuentra palabras, conceptos y conexiones bíblicas."],
-  [Bot, "Preguntar", "Conversa con Bibi usando el contexto disponible."],
-  [FilePenLine, "Construir", "Organiza tus hallazgos como una enseñanza."],
+  { href: "#lectura", icon: BookOpen, title: "Leer", text: "Navega, personaliza y continúa desde el último capítulo." },
+  { href: "#descubrir", icon: Search, title: "Descubrir", text: "Encuentra palabras, conceptos y conexiones bíblicas." },
+  { href: "#bibi", icon: Bot, title: "Preguntar", text: "Conversa con Bibi sin perder el contexto del pasaje." },
+  { href: "#estudio", icon: FilePenLine, title: "Construir", text: "Organiza tus hallazgos como una enseñanza." },
 ];
 
-const functions = [
+const functionGroups = [
   {
     id: "lectura",
     icon: BookOpen,
-    title: "Lectura bíblica",
-    tone: "local" as const,
-    status: "Funciona sin conexión",
-    text: "Biblioteca por testamento, libro y capítulo con navegación por gestos.",
-    details: ["Versiones instaladas", "Tamaño de texto", "Capítulo visible", "Continuar lectura"],
-  },
-  {
-    icon: Highlighter,
-    title: "Resaltados y pasajes",
-    tone: "beta" as const,
-    status: "Incluido en la beta",
-    text: "Cuatro colores de resaltado, guardado, copiado y compartido con referencia.",
-    details: ["Referencia y versión", "Formato para compartir", "Persistencia local"],
+    action: "LEER",
+    title: "La lectura continúa donde la dejaste.",
+    text: "Una experiencia bíblica local, personalizable y preparada para acompañar el ritmo de cada persona.",
+    features: [
+      {
+        icon: BookOpen,
+        title: "Lectura bíblica",
+        text: "Navega por testamento, libro y capítulo, cambia de versión y avanza con gestos.",
+        requirement: "Sin conexión",
+      },
+      {
+        icon: Compass,
+        title: "Inicio y continuidad",
+        text: "Recibe un versículo diario y regresa directamente al último capítulo consultado.",
+        requirement: "Sin conexión",
+      },
+      {
+        icon: Highlighter,
+        title: "Resaltados y pasajes",
+        text: "Usa cuatro colores, guarda pasajes y comparte el texto con referencia y versión.",
+        requirement: "Guardado local",
+      },
+    ],
   },
   {
     id: "descubrir",
     icon: Search,
-    title: "Búsqueda en tiempo real",
-    tone: "local" as const,
-    status: "Funciona sin conexión",
-    text: "Busca palabras o frases y filtra por toda la Biblia, testamento o libro.",
-    details: ["Filtros combinables", "Historial reciente", "Acceso directo al capítulo"],
+    action: "DESCUBRIR",
+    title: "Encuentra relaciones que amplían el pasaje.",
+    text: "Búsqueda, contexto y conexiones trabajan juntos sin convertir el estudio en una colección de pantallas aisladas.",
+    features: [
+      {
+        icon: Search,
+        title: "Búsqueda en tiempo real",
+        text: "Busca palabras o frases y filtra por toda la Biblia, testamento o libro.",
+        requirement: "Sin conexión",
+      },
+      {
+        icon: BookMarked,
+        title: "Diccionario bíblico",
+        text: "Consulta más de 6.000 entradas organizadas en ocho categorías.",
+        requirement: "Sin conexión",
+      },
+      {
+        icon: Sparkles,
+        title: "Temas y conexiones",
+        text: "Explora temas canónicos y sigue referencias relacionadas entre pasajes.",
+        requirement: "Sin conexión",
+      },
+    ],
   },
   {
-    icon: BookMarked,
-    title: "Diccionario bíblico",
-    tone: "local" as const,
-    status: "Funciona sin conexión",
-    text: "Más de 6.000 entradas sobre personas, lugares, conceptos, objetos y eventos.",
-    details: ["Ocho categorías", "Alias", "Fechas y ubicaciones disponibles"],
-  },
-  {
-    icon: Sparkles,
-    title: "Temas y conexiones",
-    tone: "beta" as const,
-    status: "Incluido en la beta",
-    text: "Explora temas canónicos y sigue referencias relacionadas entre pasajes.",
-    details: ["Categorías", "Relaciones temáticas", "Referencias cruzadas"],
-  },
-  {
+    id: "bibi",
     icon: Bot,
-    title: "Bibi",
-    tone: "online" as const,
-    status: "Local + conexión",
-    text: "Respuestas locales para consultas básicas y profundización en línea.",
-    details: ["Contexto del lector", "Cinco conversaciones", "Sugerencias relacionadas"],
+    action: "PREGUNTAR",
+    title: "Bibi conversa dentro del contexto.",
+    text: "La asistente aparece sobre la lectura o el editor para responder sin sacar al usuario de lo que está estudiando.",
+    features: [
+      {
+        icon: Bot,
+        title: "Respuestas bíblicas",
+        text: "Resuelve consultas básicas con recursos locales y usa conexión al profundizar.",
+        requirement: "Local + conexión",
+      },
+      {
+        icon: BookOpen,
+        title: "Contexto del lector",
+        text: "Puede recibir el pasaje actual o una referencia seleccionada desde otra parte de la aplicación.",
+        requirement: "Contextual",
+      },
+      {
+        icon: BookMarked,
+        title: "Historial de conversaciones",
+        text: "Permite crear, retomar o eliminar hasta cinco conversaciones independientes.",
+        requirement: "Guardado local",
+      },
+    ],
   },
   {
+    id: "estudio",
     icon: FilePenLine,
-    title: "Modo Estudio",
-    tone: "beta" as const,
-    status: "Incluido en la beta",
-    text: "Editor paginado para construir enseñanzas con seis tipos de bloque.",
-    details: ["Borradores locales", "Etiquetas", "Zoom y deshacer/rehacer"],
+    action: "CONSTRUIR",
+    title: "Convierte el estudio en una enseñanza.",
+    text: "Un espacio de escritura paginado para organizar ideas, citar pasajes y conservar una estructura reutilizable.",
+    features: [
+      {
+        icon: FilePenLine,
+        title: "Editor paginado",
+        text: "Construye documentos con seis tipos de bloque, formato de texto, zoom y deshacer o rehacer.",
+        requirement: "Sin conexión",
+      },
+      {
+        icon: BookMarked,
+        title: "Borradores y organización",
+        text: "Guarda borradores localmente y clasifica las enseñanzas terminadas mediante etiquetas.",
+        requirement: "Guardado local",
+      },
+      {
+        icon: FileDown,
+        title: "Compartir enseñanzas",
+        text: "Exporta como PDF o conserva la estructura mediante archivos .bib importables.",
+        requirement: "Sin conexión",
+      },
+    ],
+  },
+];
+
+const experienceFoundations = [
+  {
+    icon: Palette,
+    title: "Tres temas",
+    text: "Claro, Azul Rey Oscuro y Oscuro, con preferencias de lectura coherentes.",
+    requirement: "En el dispositivo",
   },
   {
-    icon: FileDown,
-    title: "Compartir enseñanzas",
-    tone: "beta" as const,
-    status: "Incluido en la beta",
-    text: "Comparte como PDF o conserva la estructura mediante el formato .bib.",
-    details: ["Exportar PDF", "Exportar .bib", "Importar .bib"],
-  },
-  {
-    icon: Settings2,
-    title: "Personalización",
-    tone: "beta" as const,
-    status: "Incluido en la beta",
-    text: "Tema Claro, Azul Rey Oscuro y Oscuro, además de preferencias de lectura.",
-    details: ["Tema", "Versión predeterminada", "Tamaño de lectura"],
+    icon: UserRound,
+    title: "Perfil personal",
+    text: "Identidad, preferencias y acceso mediante una cuenta de usuario.",
+    requirement: "Requiere cuenta",
   },
   {
     icon: Cloud,
-    title: "Cuenta y sincronización",
-    tone: "online" as const,
-    status: "Requiere cuenta",
-    text: "Sincroniza funciones compatibles al iniciar sesión; los borradores siguen locales.",
-    details: ["Perfil", "Preferencias", "Enseñanzas finalizadas"],
+    title: "Sincronización selectiva",
+    text: "Sincroniza datos compatibles; los borradores permanecen locales hasta publicarse.",
+    requirement: "Cuenta + conexión",
+  },
+  {
+    icon: Compass,
+    title: "Tutorial guiado",
+    text: "Presenta lectura, resaltados, versiones y Bibi en sus posiciones reales.",
+    requirement: "Primera instalación",
+  },
+];
+
+const accessModes = [
+  {
+    icon: WifiOff,
+    title: "Sin conexión",
+    text: "Lectura, búsqueda, diccionario, temas, resaltados y borradores viven en el dispositivo.",
+  },
+  {
+    icon: Wifi,
+    title: "Con conexión",
+    text: "Bibi utiliza internet únicamente cuando la consulta necesita mayor profundidad.",
+  },
+  {
+    icon: UserRound,
+    title: "Con una cuenta",
+    text: "El perfil y la sincronización permiten conservar datos compatibles entre sesiones.",
   },
 ];
 
@@ -130,14 +205,15 @@ export default function FuncionesPage() {
       />
 
       <section className="stitch-section stitch-action-overview" data-reveal>
-        {actions.map(([Icon, title, text]) => {
-          const ActionIcon = Icon as typeof BookOpen;
+        {actions.map((action) => {
+          const ActionIcon = action.icon;
           return (
-            <article key={String(title)}>
+            <Link className="stitch-action-card" href={action.href} key={action.title}>
               <ActionIcon size={24} />
-              <h2>{String(title)}</h2>
-              <p>{String(text)}</p>
-            </article>
+              <h2>{action.title}</h2>
+              <p>{action.text}</p>
+              <span>Explorar <ArrowRight aria-hidden="true" size={16} /></span>
+            </Link>
           );
         })}
       </section>
@@ -146,32 +222,90 @@ export default function FuncionesPage() {
         <SectionHeading
           align="center"
           eyebrow="RECORRIDO INTERACTIVO"
-          title="No imagines el flujo. Recorre sus pantallas."
-          text="Cambia entre Home, Biblia, Buscar, Estudio y Bibi para conocer la experiencia que estamos preparando para Android."
+          title="Explora la interfaz de BIBLION App."
+          text="Recorre Home, Biblia, Buscar, Estudio y Perfil. En Biblia y Estudio también puedes abrir a Bibi como una asistente contextual."
         />
-        <ProductTour initialPanel="reader" />
+        <ProductTour initialPanel="home" />
       </section>
 
-      <section className="stitch-section" data-reveal>
+      <section className="stitch-section functions-capabilities" data-reveal>
         <SectionHeading
-          eyebrow="HERRAMIENTAS DE LA VERSIÓN DE PRUEBA"
-          title="Qué funciona, dónde vive y cuándo necesita conexión."
-          text="Los estados describen el comportamiento real de cada capacidad; no representan disponibilidad pública en Google Play."
+          eyebrow="CAPACIDADES DE LA VERSIÓN DE PRUEBA"
+          title="Cuatro momentos, una sola experiencia."
+          text="Cada capacidad está ubicada en el momento donde realmente ayuda: leer, descubrir, preguntar o construir."
         />
-        <div className="stitch-functions-grid">
-          {functions.map((item) => {
-            const Icon = item.icon;
+        <p className="functions-swipe-hint">
+          Desliza para recorrer los cuatro momentos <ArrowRight aria-hidden="true" size={16} />
+        </p>
+        <div className="functions-group-grid">
+          {functionGroups.map((group) => {
+            const GroupIcon = group.icon;
             return (
-              <article id={item.id} key={item.title}>
-                <div className="stitch-function-top">
-                  <Icon size={24} />
-                  <StatusPill tone={item.tone}>{item.status}</StatusPill>
+              <article className="functions-group-card" id={group.id} key={group.id}>
+                <header>
+                  <span className="functions-group-icon"><GroupIcon aria-hidden="true" size={25} /></span>
+                  <div>
+                    <span>{group.action}</span>
+                    <StatusPill tone="beta">Disponible en pruebas</StatusPill>
+                  </div>
+                  <h3>{group.title}</h3>
+                  <p>{group.text}</p>
+                </header>
+                <div className="functions-group-list">
+                  {group.features.map((feature) => {
+                    const FeatureIcon = feature.icon;
+                    return (
+                      <div className="functions-feature-row" key={feature.title}>
+                        <FeatureIcon aria-hidden="true" size={19} />
+                        <div>
+                          <strong>{feature.title}</strong>
+                          <p>{feature.text}</p>
+                        </div>
+                        <span>{feature.requirement}</span>
+                      </div>
+                    );
+                  })}
                 </div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-                <ul>
-                  {item.details.map((detail) => <li key={detail}>{detail}</li>)}
-                </ul>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="functions-foundations-heading">
+          <span className="stitch-eyebrow">EN TODA LA EXPERIENCIA</span>
+          <h3>Tu Biblia, tus preferencias y tus datos.</h3>
+          <p>Estas capacidades acompañan transversalmente la lectura, la búsqueda y el estudio.</p>
+        </div>
+        <div className="functions-foundations-grid">
+          {experienceFoundations.map((foundation) => {
+            const FoundationIcon = foundation.icon;
+            return (
+              <article key={foundation.title}>
+                <FoundationIcon aria-hidden="true" size={22} />
+                <span>{foundation.requirement}</span>
+                <h4>{foundation.title}</h4>
+                <p>{foundation.text}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="stitch-section functions-access-section" data-reveal>
+        <SectionHeading
+          align="center"
+          eyebrow="LOCAL PRIMERO"
+          title="Sabes cuándo necesitas conexión."
+          text="BIBLION App mantiene la experiencia principal en el dispositivo y conecta únicamente las capacidades que lo requieren."
+        />
+        <div className="functions-access-grid">
+          {accessModes.map((mode) => {
+            const AccessIcon = mode.icon;
+            return (
+              <article key={mode.title}>
+                <AccessIcon aria-hidden="true" size={23} />
+                <h3>{mode.title}</h3>
+                <p>{mode.text}</p>
               </article>
             );
           })}
@@ -180,11 +314,11 @@ export default function FuncionesPage() {
 
       <section className="stitch-future-roadmap" id="futuro" data-reveal>
         <div>
-          <span className="stitch-eyebrow">FUNCIONES FUTURAS</span>
-          <h2>Una visión abierta, sin fechas inventadas.</h2>
+          <span className="stitch-eyebrow">FUTURO DE BIBLION APP</span>
+          <h2>Lo siguiente se decidirá con quienes la prueben.</h2>
           <p>
-            Estas ideas no forman parte de la beta actual y pueden cambiar según
-            la validación técnica, de contenido y de uso.
+            Estas ideas pertenecen al futuro de la aplicación, no a otros productos del ecosistema,
+            y pueden cambiar según la validación técnica, de contenido y de uso.
           </p>
           <Link className="stitch-text-link" href="/descargar">
             Participar en las pruebas <ArrowRight size={18} />

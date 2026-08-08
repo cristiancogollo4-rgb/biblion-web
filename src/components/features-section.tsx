@@ -419,7 +419,7 @@ export function FeaturesSection() {
 
               {/* Footer */}
               <div className="feat-phone-footer">
-                BIBLION · Demostración de estudio
+                BIBLION App · Demostración de estudio
               </div>
             </div>
           </div>

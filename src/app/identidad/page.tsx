@@ -18,31 +18,47 @@ import {
 } from "@/components/site";
 
 const symbolMeanings = [
-  ["Libro abierto", "Palabra y aprendizaje"],
-  ["Pluma dorada", "Escritura y creación"],
-  ["Letras antiguas", "Contexto histórico"],
-  ["Azul profundo", "Confianza y profundidad"],
-  ["Dorado", "Luz y permanencia"],
+  ["Libro abierto", "La Palabra como punto de partida"],
+  ["Pluma en movimiento", "Estudio que se convierte en creación"],
+  ["B central", "Unidad entre marca, productos y experiencias"],
+  ["Letras antiguas", "Historia y contexto para comprender"],
+  ["Luz dorada", "Claridad, propósito y permanencia"],
 ];
 
-const creators = [
+type TeamMember = {
+  initials: string;
+  name: string;
+  role: string;
+  area: string;
+  focus: string;
+  image?: string;
+  isFounder?: boolean;
+};
+
+const teamMembers: TeamMember[] = [
   {
     initials: "CF",
     name: "Cristian Felipe Cogollo Rodríguez",
     role: "Co-fundador y Lead Developer",
-    focus: "Producto, experiencia Android y arquitectura de BIBLION.",
+    area: "Producto y tecnología",
+    focus: "Producto, experiencia digital y arquitectura del ecosistema BIBLION.",
+    isFounder: true,
   },
   {
     initials: "LE",
     name: "Luis Eduardo Jaimes Hernandez",
     role: "Co-fundador y Lead Developer",
-    focus: "Desarrollo, datos bíblicos y evolución técnica del producto.",
+    area: "Datos e infraestructura",
+    focus: "Tecnología, datos bíblicos e infraestructura para los productos del ecosistema.",
+    isFounder: true,
   },
   {
     initials: "AG",
     name: "Anderson Geovanny Duarte Largo",
     role: "Co-fundador, Estrategia y Alianzas",
-    focus: "Estrategia, crecimiento y relaciones para llevar BIBLION a más personas.",
+    area: "Estrategia y crecimiento",
+    focus: "Estrategia, crecimiento y alianzas para llevar el ecosistema a más personas.",
+    isFounder: true,
   },
 ];
 
@@ -64,6 +80,37 @@ function BiblionMark({ className = "" }: { className?: string }) {
         priority
         src="/logos/biblion/logo-biblion-dark-app.png"
         width={420}
+      />
+    </span>
+  );
+}
+
+function BiblionFullLogo() {
+  return (
+    <span className="identity-ecosystem-logo" aria-hidden="true">
+      <Image
+        alt=""
+        className="identity-ecosystem-logo-image identity-ecosystem-logo-light"
+        height={1254}
+        sizes="136px"
+        src="/logos/biblion/logo-biblion-normal.png"
+        width={1254}
+      />
+      <Image
+        alt=""
+        className="identity-ecosystem-logo-image identity-ecosystem-logo-blue"
+        height={1254}
+        sizes="136px"
+        src="/logos/biblion/logo-biblion-blue.jpeg"
+        width={1254}
+      />
+      <Image
+        alt=""
+        className="identity-ecosystem-logo-image identity-ecosystem-logo-dark"
+        height={1254}
+        sizes="136px"
+        src="/logos/biblion/logo-biblion-dark.jpeg"
+        width={1254}
       />
     </span>
   );
@@ -95,27 +142,28 @@ export default function IdentidadPage() {
 
       <section className="identity-hero">
         <div className="identity-hero-copy" data-reveal>
-          <span className="stitch-eyebrow">IDENTIDAD</span>
+          <span className="stitch-eyebrow">ECOSISTEMA BIBLION</span>
           <h1>
             La Biblia como <em>punto de partida.</em>
           </h1>
           <p>
-            BIBLION reúne lectura, descubrimiento y creación para ayudarte a
-            comprender, relacionar y organizar lo que encuentras en las Escrituras.
+            BIBLION es una marca creada para impulsar herramientas que acompañen
+            el estudio de la Biblia en diferentes ámbitos, manteniendo siempre
+            las Escrituras en el centro.
           </p>
           <div className="stitch-hero-actions identity-hero-actions">
             <Link className="stitch-button stitch-button-primary" href="#origen">
               Nuestra historia <ArrowDown size={18} />
             </Link>
             <Link className="stitch-button stitch-button-ghost" href="/funciones">
-              Explorar funciones <ArrowRight size={18} />
+              Conocer BIBLION App <ArrowRight size={18} />
             </Link>
           </div>
         </div>
 
         <div className="identity-hero-visual" data-reveal>
           <div
-            aria-label="Ejemplo del flujo de estudio de BIBLION, desde un versículo hasta una conexión, una explicación y una nota"
+            aria-label="BIBLION App como primera experiencia del ecosistema BIBLION"
             className="identity-orbit identity-study-flow"
             role="img"
           >
@@ -173,15 +221,15 @@ export default function IdentidadPage() {
         <IdentitySectionHeading
           eyebrow="NUESTRO ORIGEN"
           number="01"
-          title="Un pergamino digital para conservar el hilo."
-          text="BIBLION nació para reducir la distancia entre leer un pasaje, comprenderlo y transformar lo aprendido en algo que puedas conservar."
+          title="Una visión que comienza en las Escrituras."
+          text="BIBLION nació de la convicción de que la tecnología puede acompañar diferentes formas de estudiar, comprender y comunicar la Biblia."
         />
         <div className="identity-story-grid">
           <div className="identity-story-copy">
             <p>
-              Estudiar la Biblia suele implicar saltar entre lectores, buscadores,
-              diccionarios y editores. Cada cambio de herramienta aumenta la
-              posibilidad de perder la pregunta que inició el estudio.
+              La visión no se limita a una sola aplicación. BIBLION busca construir
+              un ecosistema capaz de crecer alrededor de la lectura, la investigación,
+              la enseñanza y la creación de conocimiento bíblico.
             </p>
             <p>
               Biblion viene del griego y designa un libro, rollo o documento escrito.
@@ -202,18 +250,18 @@ export default function IdentidadPage() {
           <div className="identity-purpose-grid">
             <article>
               <span>Misión</span>
-              <h3>Acompañar cada hallazgo.</h3>
+              <h3>Crear herramientas con propósito.</h3>
               <p>
-                Ayudar a comprender, relacionar y construir enseñanzas fundamentadas
-                en la Biblia.
+                Desarrollar experiencias que acompañen el estudio, la comprensión y
+                la comunicación de la Biblia en diferentes contextos.
               </p>
             </article>
             <article>
               <span>Visión</span>
-              <h3>Conservar conocimiento vivo.</h3>
+              <h3>Construir un ecosistema de referencia.</h3>
               <p>
-                Ser un pergamino digital donde una nueva generación continúe
-                aprendiendo, escribiendo y compartiendo.
+                Conectar herramientas para quienes desean estudiar, enseñar y
+                conservar conocimiento fundamentado en las Escrituras.
               </p>
             </article>
           </div>
@@ -231,13 +279,14 @@ export default function IdentidadPage() {
           </header>
           <div className="identity-belief-grid">
             <div className="identity-belief-statement">
-              <h2>La tecnología acompaña el estudio.</h2>
+              <h2>La tecnología acompaña.</h2>
               <blockquote>La Palabra permanece en el centro.</blockquote>
             </div>
             <div className="identity-belief-aside">
               <p>
-                BIBLION no sustituye la lectura personal, la reflexión ni el criterio
-                de quien aprende. Organiza el camino y ayuda a conservar cada hallazgo.
+                Cada producto de BIBLION debe ayudar a comprender, relacionar,
+                organizar o comunicar las Escrituras sin reemplazar la lectura
+                personal, la reflexión ni el criterio responsable.
               </p>
               <div aria-label="Flujo de estudio de BIBLION" className="identity-belief-path">
                 <span>Leer</span>
@@ -252,54 +301,57 @@ export default function IdentidadPage() {
 
       <section className="stitch-section identity-brand-system" data-reveal>
         <IdentitySectionHeading
-          eyebrow="UN SISTEMA, TRES EXPRESIONES"
+          eyebrow="UNA MARCA, UN ECOSISTEMA"
           number="03"
-          title="Una identidad que acompaña todo el estudio."
-          text="La marca principal, el símbolo portátil y Bibi comparten una misma raíz visual, pero cumplen responsabilidades diferentes."
+          title="Una visión que puede convertirse en muchas herramientas."
+          text="BIBLION define el propósito común; BIBLION App es su primer producto y Bibi nace como asistente dentro de esa experiencia."
         />
 
         <div className="identity-brand-grid">
           <article className="identity-brand-card is-brand">
-            <div className="identity-brand-lockup">
-              <BiblionMark />
-              <strong>BIBLION</strong>
+            <div className="identity-brand-visual is-ecosystem">
+              <BiblionFullLogo />
             </div>
             <span>Marca principal</span>
-            <h3>La experiencia completa</h3>
+            <h3>El ecosistema completo</h3>
             <p>
-              Representa la plataforma de lectura y estudio. El azul comunica
-              profundidad; el dorado, luz y permanencia.
+              Representa la empresa, su visión y todos los productos creados para
+              acompañar diferentes ámbitos del estudio bíblico.
             </p>
             <div className="identity-brand-tags">
               <span>Palabra</span>
-              <span>Profundidad</span>
-              <span>Estudio</span>
+              <span>Ecosistema</span>
+              <span>Propósito</span>
             </div>
           </article>
 
           <article className="identity-brand-card is-app">
-            <BiblionMark />
-            <span>Símbolo portátil</span>
-            <h3>La “B” que viaja contigo</h3>
+            <div className="identity-brand-visual is-app">
+              <BiblionMark />
+            </div>
+            <span>Primer producto</span>
+            <h3>BIBLION App</h3>
             <p>
-              La pluma y la inicial condensan la identidad para iconos, navegación
-              y espacios compactos de la aplicación.
+              La primera experiencia del ecosistema: una aplicación móvil para leer,
+              descubrir conexiones y construir estudios sin perder el hilo.
             </p>
           </article>
 
           <article className="identity-brand-card is-bibi">
-            <Image
-              alt="Logo de Bibi"
-              className="identity-bibi-logo"
-              height={220}
-              src="/bibi-logo.png"
-              width={220}
-            />
-            <span>Asistente bíblica</span>
-            <h3>Una presencia cercana</h3>
+            <div className="identity-brand-visual is-bibi">
+              <Image
+                alt="Logo de Bibi"
+                className="identity-bibi-logo"
+                height={220}
+                src="/bibi-logo.png"
+                width={220}
+              />
+            </div>
+            <span>Asistente de BIBLION App</span>
+            <h3>Bibi acompaña el estudio</h3>
             <p>
-              Bibi hereda la pluma de BIBLION y añade conversación para acompañar
-              preguntas, contexto y conexiones bíblicas.
+              Bibi nace dentro de BIBLION App para acompañar preguntas, contexto y
+              conexiones bíblicas sin abandonar el pasaje estudiado.
             </p>
           </article>
         </div>
@@ -317,24 +369,47 @@ export default function IdentidadPage() {
         <IdentitySectionHeading
           eyebrow="QUIÉNES CONSTRUYEN BIBLION"
           number="04"
-          title="Un proyecto con responsables visibles."
-          text="BIBLION es desarrollado por un equipo colombiano que combina producto, tecnología y estrategia."
+          title="Una visión compartida, construida en equipo."
+          text="BIBLION crece con personas que aportan desde la tecnología, el diseño, la investigación bíblica, la comunicación y la estrategia."
         />
-        <div className="stitch-creators-grid identity-creators-grid">
-          {creators.map((creator, index) => (
-            <article key={creator.name}>
-              <div className="identity-creator-topline">
-                <span className="identity-creator-avatar">{creator.initials}</span>
-                <span className="identity-creator-index">0{index + 1}</span>
+        <div aria-label="Equipo de BIBLION" className="stitch-creators-grid identity-creators-grid">
+          {teamMembers.map((member) => (
+            <article key={member.name}>
+              <div className="identity-creator-photo">
+                {member.image ? (
+                  <Image
+                    alt={`Retrato de ${member.name}`}
+                    className="identity-creator-image"
+                    fill
+                    sizes="(max-width: 620px) 100vw, (max-width: 980px) 50vw, 25vw"
+                    src={member.image}
+                  />
+                ) : (
+                  <span className="identity-creator-initials" aria-hidden="true">
+                    {member.initials}
+                  </span>
+                )}
+                {member.isFounder && (
+                  <span className="identity-creator-badge">Equipo fundador</span>
+                )}
               </div>
-              <h3>{creator.name}</h3>
-              <p className="identity-creator-role">{creator.role}</p>
-              <div className="identity-creator-focus">
-                <span>En el proyecto</span>
-                <p>{creator.focus}</p>
+              <div className="identity-creator-content">
+                <p className="identity-creator-area">{member.area}</p>
+                <h3>{member.name}</h3>
+                <p className="identity-creator-role">{member.role}</p>
+                <div className="identity-creator-focus">
+                  <span>Su aporte</span>
+                  <p>{member.focus}</p>
+                </div>
               </div>
             </article>
           ))}
+        </div>
+        <div className="identity-team-growth">
+          <Sparkles aria-hidden="true" size={20} strokeWidth={1.8} />
+          <p>
+            <strong>Un equipo abierto a crecer.</strong> Este espacio reconocerá a cada persona que se sume a construir BIBLION.
+          </p>
         </div>
       </section>
 
@@ -343,23 +418,23 @@ export default function IdentidadPage() {
           eyebrow="DESARROLLO ABIERTO"
           number="05"
           title="Claridad sobre lo que estamos construyendo."
-          text="BIBLION está en desarrollo activo. Algunas funciones ya operan localmente y otras continúan en pruebas antes del acceso público."
+          text="El ecosistema se construirá por etapas. BIBLION App es el primer producto que estamos preparando para validación pública."
         />
         <div className="identity-status-grid">
           <article>
-            <StatusPill tone="local">Implementado</StatusPill>
-            <h3>Base local</h3>
-            <p>Lectura, búsqueda, diccionario y documentos de estudio en el dispositivo.</p>
+            <StatusPill tone="local">Visión definida</StatusPill>
+            <h3>Ecosistema BIBLION</h3>
+            <p>Una marca común para desarrollar herramientas enfocadas en el estudio de la Biblia.</p>
           </article>
           <article>
             <StatusPill tone="beta">En validación</StatusPill>
-            <h3>Experiencia conectada</h3>
-            <p>Bibi, sincronización y recorridos guiados continúan afinándose.</p>
+            <h3>BIBLION App</h3>
+            <p>La aplicación Android, Bibi y sus flujos de estudio continúan afinándose.</p>
           </article>
           <article>
             <StatusPill tone="future">Siguiente etapa</StatusPill>
-            <h3>Acceso anticipado</h3>
-            <p>Las primeras personas podrán probar BIBLION y compartir observaciones.</p>
+            <h3>Nuevas herramientas</h3>
+            <p>El ecosistema podrá crecer hacia otros ámbitos conforme validemos necesidades reales.</p>
           </article>
         </div>
         <div className="identity-transparency-note">
@@ -367,11 +442,11 @@ export default function IdentidadPage() {
             <Bot aria-hidden="true" size={25} />
             <p>
               Las funciones pueden evolucionar mientras realizamos pruebas,
-              corregimos errores y escuchamos a los primeros usuarios.
+              corregimos errores y escuchamos a quienes prueben BIBLION App.
             </p>
           </div>
           <Link href="/descargar">
-            Conocer el acceso anticipado <ArrowRight size={17} />
+            Probar BIBLION App <ArrowRight size={17} />
           </Link>
         </div>
       </section>

@@ -8,10 +8,10 @@ import { createPortal } from "react-dom";
 import {
   Bot,
   FilePenLine,
-  Fingerprint,
   House,
   LayoutGrid,
   Menu,
+  Network,
   Palette,
   X,
 } from "lucide-react";
@@ -27,7 +27,7 @@ type MobileNavProps = {
 
 const mobileItemDetails = {
   "/": { icon: House, label: "Inicio" },
-  "/identidad": { icon: Fingerprint, label: "Identidad" },
+  "/identidad": { icon: Network, label: "Ecosistema" },
   "/funciones": { icon: LayoutGrid, label: "Funciones" },
   "/modo-estudio": { icon: FilePenLine, label: "Estudio" },
   "/bibi": { icon: Bot, label: "Bibi" },

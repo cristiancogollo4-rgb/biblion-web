@@ -9,21 +9,24 @@ import {
   Highlighter,
   Home,
   MoreVertical,
+  Pause,
+  Play,
   Search,
   Send,
   Sparkles,
   UserRound,
+  X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { type KeyboardEvent, useEffect, useState } from "react";
 
-type TourPanel = "home" | "reader" | "search" | "study" | "bibi";
+type TourPanel = "home" | "reader" | "search" | "study" | "profile";
 
 const tourItems = [
   { id: "home" as const, label: "Home", icon: Home },
   { id: "reader" as const, label: "Biblia", icon: BookOpen },
   { id: "search" as const, label: "Buscar", icon: Search },
   { id: "study" as const, label: "Estudio", icon: FilePenLine },
-  { id: "bibi" as const, label: "Bibi", icon: Sparkles },
+  { id: "profile" as const, label: "Perfil", icon: UserRound },
 ];
 
 const appNavigation = [
@@ -34,6 +37,50 @@ const appNavigation = [
   { id: "profile" as const, label: "Perfil", icon: UserRound },
 ];
 
+const tourDetails: Record<TourPanel, {
+  eyebrow: string;
+  title: string;
+  text: string;
+  features: string[];
+  requirement: string;
+}> = {
+  home: {
+    eyebrow: "TU PUNTO DE PARTIDA",
+    title: "Retoma la lectura sin buscar dónde estabas.",
+    text: "El inicio reúne el versículo del día, la última lectura y novedades útiles sin convertir la pantalla en un panel saturado.",
+    features: ["Versículo diario", "Continuar lectura", "Novedades de BIBLION"],
+    requirement: "Disponible sin conexión",
+  },
+  reader: {
+    eyebrow: "LECTURA BÍBLICA",
+    title: "Lee, resalta y pregunta en el mismo lugar.",
+    text: "El lector mantiene visible el capítulo, permite ajustar la experiencia y abre a Bibi sobre el pasaje cuando necesitas contexto.",
+    features: ["Navegación por gestos", "Versiones y tamaño de texto", "Bibi contextual"],
+    requirement: "Lectura local · Bibi local + conexión",
+  },
+  search: {
+    eyebrow: "DESCUBRIMIENTO",
+    title: "Filtra resultados que sí corresponden a tu búsqueda.",
+    text: "Consulta palabras o frases en toda la Biblia, por testamento o por libro y abre el resultado directamente en su capítulo.",
+    features: ["Filtros combinables", "Historial reciente", "Acceso directo al pasaje"],
+    requirement: "Disponible sin conexión",
+  },
+  study: {
+    eyebrow: "MODO ESTUDIO",
+    title: "Construye una enseñanza sin perder el pasaje.",
+    text: "La Biblia y el documento comparten el espacio. Bibi puede acompañar la investigación sin modificar el contenido que estás creando.",
+    features: ["Editor paginado", "Seis tipos de bloque", "Bibi como ventana flotante"],
+    requirement: "Editor local · Bibi local + conexión",
+  },
+  profile: {
+    eyebrow: "TU EXPERIENCIA",
+    title: "Tus preferencias permanecen reunidas.",
+    text: "Desde Perfil puedes administrar tu identidad, versión bíblica, tamaño de lectura, tema y acceso a la cuenta.",
+    features: ["Tres temas", "Preferencias de lectura", "Cuenta y sincronización"],
+    requirement: "Preferencias locales · Sincronización con cuenta",
+  },
+};
+
 type ProductTourProps = {
   initialPanel?: TourPanel;
 };
@@ -41,13 +88,16 @@ type ProductTourProps = {
 export function ProductTour({ initialPanel = "home" }: ProductTourProps) {
   const [activePanel, setActivePanel] = useState<TourPanel>(initialPanel);
   const [manualSelection, setManualSelection] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [assistantOpen, setAssistantOpen] = useState(false);
 
   useEffect(() => {
-    if (manualSelection || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (manualSelection || isPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
     const timer = window.setInterval(() => {
+      setAssistantOpen(false);
       setActivePanel((current) => {
         const index = tourItems.findIndex((item) => item.id === current);
         return tourItems[(index + 1) % tourItems.length].id;
@@ -55,59 +105,127 @@ export function ProductTour({ initialPanel = "home" }: ProductTourProps) {
     }, 6200);
 
     return () => window.clearInterval(timer);
-  }, [manualSelection]);
+  }, [isPaused, manualSelection]);
 
   const selectPanel = (panel: TourPanel) => {
     setActivePanel(panel);
     setManualSelection(true);
+    setAssistantOpen(false);
   };
+
+  const openAssistant = () => {
+    setAssistantOpen(true);
+    setManualSelection(true);
+  };
+
+  const togglePlayback = () => {
+    if (manualSelection || isPaused) {
+      setManualSelection(false);
+      setIsPaused(false);
+      return;
+    }
+    setIsPaused(true);
+  };
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const offset = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (index + offset + tourItems.length) % tourItems.length;
+    const nextPanel = tourItems[nextIndex].id;
+    selectPanel(nextPanel);
+    document.getElementById(`tour-tab-${nextPanel}`)?.focus();
+  };
+
+  const currentDetails = tourDetails[activePanel];
+  const playbackPaused = manualSelection || isPaused;
 
   return (
     <div className="product-tour" data-reveal>
-      <div className="tour-tabs" role="tablist" aria-label="Recorrido por BIBLION">
-        {tourItems.map((item) => {
-          const Icon = item.icon;
-          const selected = activePanel === item.id;
-          return (
-            <button
-              aria-controls={`tour-panel-${item.id}`}
-              aria-label={item.label}
-              aria-selected={selected}
-              className={selected ? "tour-tab tour-tab-active" : "tour-tab"}
-              id={`tour-tab-${item.id}`}
-              key={item.id}
-              onClick={() => selectPanel(item.id)}
-              role="tab"
-              type="button"
-            >
-              <Icon aria-hidden="true" size={17} />
-              <span>{item.label}</span>
-            </button>
-          );
-        })}
-      </div>
+      <div className="tour-stage">
+        <div className="tour-tabs" role="tablist" aria-label="Recorrido por BIBLION">
+          {tourItems.map((item, index) => {
+            const Icon = item.icon;
+            const selected = activePanel === item.id;
+            return (
+              <button
+                aria-controls={`tour-panel-${item.id}`}
+                aria-label={item.label}
+                aria-selected={selected}
+                className={selected ? "tour-tab tour-tab-active" : "tour-tab"}
+                id={`tour-tab-${item.id}`}
+                key={item.id}
+                onClick={() => selectPanel(item.id)}
+                onKeyDown={(event) => handleTabKeyDown(event, index)}
+                role="tab"
+                tabIndex={selected ? 0 : -1}
+                type="button"
+              >
+                <Icon aria-hidden="true" size={17} />
+                <span>{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
-      <div
-        aria-labelledby={`tour-tab-${activePanel}`}
-        className="tour-device-shell"
-        id={`tour-panel-${activePanel}`}
-        key={activePanel}
-        role="tabpanel"
-      >
-        <div className="tour-device-speaker" />
-        <div className="tour-screen">
-          <TourScreen panel={activePanel} />
+        <div
+          aria-labelledby={`tour-tab-${activePanel}`}
+          className="tour-device-shell"
+          id={`tour-panel-${activePanel}`}
+          key={activePanel}
+          role="tabpanel"
+        >
+          <div className="tour-device-speaker" />
+          <div className="tour-screen">
+            <TourScreen
+              assistantOpen={assistantOpen}
+              onCloseAssistant={() => setAssistantOpen(false)}
+              onOpenAssistant={openAssistant}
+              panel={activePanel}
+            />
+          </div>
+        </div>
+        <div className="tour-caption" aria-live="polite">
+          <span>Explora la experiencia</span>
+          <button onClick={togglePlayback} type="button">
+            {playbackPaused ? <Play aria-hidden="true" size={13} /> : <Pause aria-hidden="true" size={13} />}
+            {playbackPaused ? "Reanudar" : "Pausar"}
+          </button>
         </div>
       </div>
-      <div className="tour-caption" aria-live="polite">
-        <span>Explora la experiencia</span>
-        <strong>{tourItems.find((item) => item.id === activePanel)?.label}</strong>
-      </div>
+
+      <aside className="tour-details" key={`details-${activePanel}`} aria-live="polite">
+        <span>{currentDetails.eyebrow}</span>
+        <h3>{currentDetails.title}</h3>
+        <p>{currentDetails.text}</p>
+        <ul>
+          {currentDetails.features.map((feature) => (
+            <li key={feature}><Sparkles aria-hidden="true" size={16} />{feature}</li>
+          ))}
+        </ul>
+        <strong>{currentDetails.requirement}</strong>
+        {(activePanel === "reader" || activePanel === "study") && !assistantOpen ? (
+          <button className="tour-assistant-trigger" onClick={openAssistant} type="button">
+            <Image alt="" height={24} src="/logos/bibi/logo-bibi-normal.png" width={24} />
+            Abrir a Bibi en esta pantalla
+          </button>
+        ) : null}
+      </aside>
     </div>
   );
 }
 
-function TourScreen({ panel }: { panel: TourPanel }) {
+function TourScreen({
+  assistantOpen,
+  onCloseAssistant,
+  onOpenAssistant,
+  panel,
+}: {
+  assistantOpen: boolean;
+  onCloseAssistant: () => void;
+  onOpenAssistant: () => void;
+  panel: TourPanel;
+}) {
   return (
     <>
       <div className="tour-appbar">
@@ -130,10 +248,11 @@ function TourScreen({ panel }: { panel: TourPanel }) {
 
       <div className="tour-screen-content">
         {panel === "home" ? <HomePanel /> : null}
-        {panel === "reader" ? <ReaderPanel /> : null}
+        {panel === "reader" ? <ReaderPanel onOpenAssistant={onOpenAssistant} /> : null}
         {panel === "search" ? <SearchPanel /> : null}
-        {panel === "study" ? <StudyPanel /> : null}
-        {panel === "bibi" ? <BibiPanel /> : null}
+        {panel === "study" ? <StudyPanel onOpenAssistant={onOpenAssistant} /> : null}
+        {panel === "profile" ? <ProfilePanel /> : null}
+        {assistantOpen ? <BibiOverlay onClose={onCloseAssistant} /> : null}
       </div>
       <TourBottomNavigation activePanel={panel} />
     </>
@@ -170,7 +289,7 @@ function HomePanel() {
   );
 }
 
-function ReaderPanel() {
+function ReaderPanel({ onOpenAssistant }: { onOpenAssistant: () => void }) {
   return (
     <div className="tour-reader-panel">
       <div className="tour-reader-heading">
@@ -190,7 +309,7 @@ function ReaderPanel() {
           {index === 2 ? <Bookmark aria-label="Versículo guardado" size={16} /> : null}
         </p>
       ))}
-      <button className="tour-bibi-fab" aria-label="Pregúntale a Bibi" type="button">
+      <button className="tour-bibi-fab" aria-label="Pregúntale a Bibi" onClick={onOpenAssistant} type="button">
         <Image alt="" height={28} src="/logos/bibi/logo-bibi-normal.png" width={28} />
       </button>
     </div>
@@ -227,7 +346,7 @@ function SearchPanel() {
   );
 }
 
-function StudyPanel() {
+function StudyPanel({ onOpenAssistant }: { onOpenAssistant: () => void }) {
   return (
     <div className="tour-study-panel">
       <div className="tour-study-toolbar">
@@ -250,13 +369,43 @@ function StudyPanel() {
           <blockquote>Juan 15:5 · RVR1960</blockquote>
         </article>
       </div>
+      <button className="tour-bibi-fab tour-study-bibi-fab" aria-label="Abrir a Bibi en el editor" onClick={onOpenAssistant} type="button">
+        <Image alt="" height={28} src="/logos/bibi/logo-bibi-normal.png" width={28} />
+      </button>
     </div>
   );
 }
 
-function BibiPanel() {
+function ProfilePanel() {
   return (
-    <div className="tour-bibi-panel">
+    <div className="tour-profile-panel">
+      <div className="tour-profile-person">
+        <span>CC</span>
+        <div>
+          <strong>Tu perfil</strong>
+          <p>Lectura, preferencias y cuenta</p>
+        </div>
+      </div>
+      <div className="tour-profile-stats">
+        <span><strong>Lector</strong>Rol</span>
+        <span><strong>FREE</strong>Plan</span>
+        <span><strong>Privado</strong>Perfil</span>
+      </div>
+      <div className="tour-profile-settings">
+        <span><BookOpen aria-hidden="true" size={17} /><span><strong>Versión bíblica</strong>RVR1960</span><ChevronRight size={15} /></span>
+        <span><FilePenLine aria-hidden="true" size={17} /><span><strong>Tamaño de texto</strong>Mediano</span><ChevronRight size={15} /></span>
+        <span><Sparkles aria-hidden="true" size={17} /><span><strong>Tema de la aplicación</strong>Azul</span><ChevronRight size={15} /></span>
+      </div>
+    </div>
+  );
+}
+
+function BibiOverlay({ onClose }: { onClose: () => void }) {
+  return (
+    <div aria-label="Demostración de Bibi" className="tour-bibi-panel tour-bibi-overlay" role="dialog">
+      <button aria-label="Cerrar Bibi" className="tour-bibi-close" onClick={onClose} type="button">
+        <X aria-hidden="true" size={17} />
+      </button>
       <div className="tour-bibi-heading">
         <Image alt="" height={42} src="/logos/bibi/logo-bibi-normal.png" width={42} />
         <div>
@@ -287,8 +436,7 @@ function TourBottomNavigation({ activePanel }: { activePanel: TourPanel }) {
     <nav className="tour-bottom-nav" aria-label="Navegación de demostración">
       {appNavigation.map((item) => {
         const Icon = item.icon;
-        const selected =
-          item.id === activePanel || (activePanel === "bibi" && item.id === "reader");
+        const selected = item.id === activePanel;
         return (
           <span className={selected ? "active" : ""} key={item.id}>
             <Icon aria-hidden="true" size={15} />

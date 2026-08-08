@@ -1,9 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   BookOpen,
   Bot,
   FilePenLine,
+  GraduationCap,
+  Network,
   Search,
   Minus,
   Star,
@@ -66,6 +69,19 @@ const audiences = [
   ["Comunidades", "Una visión futura para organizar y compartir recursos de estudio."],
 ];
 
+const ecosystemAreas = [
+  {
+    icon: Network,
+    title: "Investigación",
+    text: "Conexiones, contexto y herramientas para profundizar en las Escrituras.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Formación",
+    text: "Nuevas experiencias para enseñar, aprender y crecer alrededor de la Biblia.",
+  },
+];
+
 export default function Home() {
   return (
     <main className="stitch-page">
@@ -76,9 +92,9 @@ export default function Home() {
       <section className="stitch-section" data-reveal>
         <SectionHeading
           align="center"
-          eyebrow="DISEÑADO PARA LA PROFUNDIDAD"
+          eyebrow="DENTRO DE BIBLION APP"
           title="Cuatro acciones. Un solo hilo de estudio."
-          text="Cada herramienta lleva naturalmente a la siguiente sin alejarte del pasaje que inició la búsqueda."
+          text="Cada herramienta de la aplicación lleva naturalmente a la siguiente sin alejarte del pasaje que inició la búsqueda."
         />
         <div className="stitch-path-grid">
           {pathways.map((item) => {
@@ -104,7 +120,7 @@ export default function Home() {
           align="center"
           eyebrow="DEJA DE SALTAR ENTRE APLICACIONES"
           title="Empieza a conectar con la Palabra."
-          text="BIBLION elimina la fricción de tu estudio bíblico. Compara cómo estudias hoy vs. cómo podrías hacerlo."
+          text="BIBLION App reúne las herramientas esenciales para reducir interrupciones durante tu estudio bíblico."
         />
         <div className="stitch-comparison-grid">
           <div className="stitch-comparison-card stitch-comparison-today">
@@ -125,7 +141,7 @@ export default function Home() {
           <div className="stitch-comparison-card stitch-comparison-biblion">
             <div className="stitch-comparison-header">
               <Star size={20} />
-              <h3>Cómo estudias con BIBLION</h3>
+              <h3>Cómo estudias con BIBLION App</h3>
             </div>
             <p className="stitch-comparison-subtitle">El flujo continuo</p>
             <ul>
@@ -156,6 +172,76 @@ export default function Home() {
               <p>{text}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="stitch-section home-ecosystem" data-reveal id="ecosistema">
+        <div className="home-ecosystem-copy">
+          <span className="stitch-eyebrow">ESTO APENAS COMIENZA</span>
+          <h2>BIBLION App es el primer paso de un ecosistema mayor.</h2>
+          <p>
+            BIBLION busca desarrollar herramientas digitales para diferentes ámbitos
+            del estudio bíblico. La aplicación móvil es la primera experiencia de
+            una visión que podrá crecer hacia la investigación, la formación y nuevas
+            formas de construir conocimiento alrededor de las Escrituras.
+          </p>
+          <Link className="stitch-button stitch-button-ghost" href="/identidad">
+            Conocer la visión de BIBLION <ArrowRight size={18} />
+          </Link>
+        </div>
+
+        <div
+          aria-label="BIBLION como ecosistema y BIBLION App como su primer producto"
+          className="home-ecosystem-map"
+          role="img"
+        >
+          <div className="home-ecosystem-core">
+            <Image
+              alt=""
+              className="home-ecosystem-logo home-ecosystem-logo-color"
+              height={1254}
+              sizes="(max-width: 620px) 184px, 224px"
+              src="/logos/biblion/logo-biblion-normal.png"
+              width={1254}
+            />
+            <Image
+              alt=""
+              className="home-ecosystem-logo home-ecosystem-logo-blue"
+              height={1254}
+              sizes="(max-width: 620px) 184px, 224px"
+              src="/logos/biblion/logo-biblion-blue.jpeg"
+              width={1254}
+            />
+            <Image
+              alt=""
+              className="home-ecosystem-logo home-ecosystem-logo-dark"
+              height={1254}
+              sizes="(max-width: 620px) 184px, 224px"
+              src="/logos/biblion/logo-biblion-dark.jpeg"
+              width={1254}
+            />
+          </div>
+          <article className="home-ecosystem-product">
+            <BookOpen aria-hidden="true" size={20} />
+            <span>
+              <small>Primer producto</small>
+              <strong>BIBLION App</strong>
+              <em>Lectura y estudio portátil</em>
+            </span>
+          </article>
+          {ecosystemAreas.map((area) => {
+            const Icon = area.icon;
+            return (
+              <article className="home-ecosystem-area" key={area.title}>
+                <Icon aria-hidden="true" size={18} />
+                <span>
+                  <small>Ámbito de crecimiento</small>
+                  <strong>{area.title}</strong>
+                  <em>{area.text}</em>
+                </span>
+              </article>
+            );
+          })}
         </div>
       </section>
 

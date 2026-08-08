@@ -39,7 +39,7 @@ const statCards = [
     id: "versions",
     value: "4+",
     label: "Versiones bíblicas",
-    description: "Compara la lectura y conserva el contexto sin salir de BIBLION.",
+    description: "Compara la lectura y conserva el contexto sin salir de BIBLION App.",
     icon: Languages,
   },
   {
@@ -144,7 +144,7 @@ export function StatsCarousel() {
 
   return (
     <section
-      aria-label="BIBLION en cifras"
+      aria-label="BIBLION App en cifras"
       aria-roledescription="carrusel"
       className={[
         "stitch-stats-carousel",
@@ -170,7 +170,7 @@ export function StatsCarousel() {
     >
       <div className="stitch-stats-heading">
         <div>
-          <span className="stitch-stats-eyebrow">BIBLION EN CIFRAS</span>
+          <span className="stitch-stats-eyebrow">BIBLION APP EN CIFRAS</span>
           <h2>Una biblioteca que conecta cada hallazgo.</h2>
         </div>
         {isSpinning ? (

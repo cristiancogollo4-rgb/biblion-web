@@ -70,7 +70,7 @@ export function WaitlistForm({
 
       setState("success");
       setMessage(
-        "Tu registro quedó guardado. Te contactaremos cuando abramos una etapa de pruebas compatible."
+        "Tu registro quedó guardado. Te contactaremos cuando abramos una etapa de pruebas de BIBLION App compatible."
       );
       setForm(initialForm);
       onSuccess?.();
@@ -169,8 +169,9 @@ export function WaitlistForm({
           type="checkbox"
         />
         <span>
-          Acepto que BIBLION utilice mi correo para gestionar las pruebas y
-          enviarme novedades relacionadas. Puedo solicitar mi retiro cuando quiera.
+          Acepto que BIBLION utilice mi correo para gestionar las pruebas de
+          BIBLION App y enviarme novedades relacionadas. Puedo solicitar mi retiro
+          cuando quiera.
           {" "}
           <Link href="/privacidad">Ver política de privacidad.</Link>
         </span>
@@ -180,7 +181,7 @@ export function WaitlistForm({
         disabled={state === "sending"}
         type="submit"
       >
-        {state === "sending" ? "Registrando..." : "Quiero participar"}
+        {state === "sending" ? "Registrando..." : "Quiero probar BIBLION App"}
         <ArrowRight size={18} />
       </button>
       {message ? (
@@ -258,9 +259,9 @@ export function WaitlistTrigger({
                 </button>
                 <div className="waitlist-modal-copy">
                   <span>ACCESO ANTICIPADO</span>
-                  <h2 id={titleId}>Sé parte de las primeras pruebas.</h2>
+                  <h2 id={titleId}>Sé parte de las primeras pruebas de BIBLION App.</h2>
                   <p>
-                    El registro no instala la aplicación ni garantiza una invitación
+                    El registro no instala BIBLION App ni garantiza una invitación
                     inmediata. Abriremos el acceso progresivamente para Android.
                   </p>
                 </div>

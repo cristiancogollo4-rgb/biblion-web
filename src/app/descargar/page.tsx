@@ -57,8 +57,8 @@ export default function DescargarPage() {
     <main className="stitch-page">
       <PageHero
         eyebrow="ACCESO ANTICIPADO"
-        title={<>Sé parte de las primeras pruebas de <em>BIBLION.</em></>}
-        text="La aplicación está en desarrollo activo para Android. Regístrate para recibir información cuando abramos nuevas etapas de prueba."
+        title={<>Sé parte de las primeras pruebas de <em>BIBLION App.</em></>}
+        text="La primera aplicación del ecosistema BIBLION está en desarrollo activo para Android. Regístrate para recibir información cuando abramos nuevas etapas de prueba."
       >
         <a className="stitch-button stitch-button-primary" href="#registro">
           Unirme a la lista <ArrowRight size={18} />
@@ -140,7 +140,7 @@ export default function DescargarPage() {
 
       <section className="stitch-release-section" data-reveal>
         <div>
-          <span className="stitch-eyebrow">EL CAMINO A BIBLION</span>
+          <span className="stitch-eyebrow">EL CAMINO A BIBLION APP</span>
           <h2>Sin fechas inventadas. Con etapas verificables.</h2>
         </div>
         <div className="stitch-release-list">

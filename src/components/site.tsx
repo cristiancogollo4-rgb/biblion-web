@@ -21,7 +21,7 @@ import { WaitlistTrigger } from "@/components/waitlist-dialog";
 
 export const navItems = [
   { href: "/", label: "Inicio" },
-  { href: "/identidad", label: "Identidad" },
+  { href: "/identidad", label: "Ecosistema" },
   { href: "/funciones", label: "Funciones" },
   { href: "/modo-estudio", label: "Modo estudio" },
   { href: "/bibi", label: "Bibi" },
@@ -89,14 +89,14 @@ export function SiteFooter() {
           </Link>
           <p>
             <strong>Ve más allá de la lectura.</strong>
-            <span>Tu herramienta portátil de estudio.</span>
+            <span>Un ecosistema de herramientas para el estudio de la Biblia.</span>
           </p>
         </div>
 
         <div className="stitch-footer-links">
           <div>
             <strong>Explorar</strong>
-            <Link href="/identidad">Identidad</Link>
+            <Link href="/identidad">Ecosistema</Link>
             <Link href="/funciones">Funciones</Link>
             <Link href="/modo-estudio">Modo estudio</Link>
             <Link href="/bibi">Bibi</Link>
@@ -123,7 +123,7 @@ export function SiteFooter() {
       </div>
 
       <div className="stitch-footer-bottom">
-        <span>© {year} BIBLION. Proyecto en desarrollo para Android.</span>
+        <span>© {year} BIBLION. BIBLION App estará disponible inicialmente para Android.</span>
         <div>
           <a
             aria-label="Instagram de BIBLION"
@@ -190,25 +190,25 @@ export function HomeHero() {
         <div className="hero-grid">
           {/* Left Column: Copy & CTAs */}
           <div className="hero-copy" data-reveal>
-            <span className="stitch-eyebrow">VE MÁS ALLÁ DE LA LECTURA</span>
+            <span className="stitch-eyebrow">BIBLION APP · PRIMER PRODUCTO DEL ECOSISTEMA</span>
             <h1>
-              Estudia la Biblia
+              Ve más allá
               <br />
-              a <em>profundidad.</em>
+              de <em>la lectura.</em>
               <br />
-              <span className="hero-sub">Sin perder el hilo.</span>
+              <span className="hero-sub">Con BIBLION App.</span>
             </h1>
             <p>
-              Lee, busca, conecta pasajes y prepara enseñanzas con una experiencia
-              diseñada para profundizar tu estudio en la Biblia sin perder el hilo
-              de lo que estás estudiando.
+              Lee, busca, conecta pasajes y prepara enseñanzas sin perder el hilo.
+              BIBLION App es la primera herramienta de un ecosistema creado para
+              acompañar el estudio de la Biblia.
             </p>
             <div className="stitch-hero-actions">
               <WaitlistTrigger className="stitch-button stitch-button-primary" source="home-hero">
                 Solicitar acceso anticipado
               </WaitlistTrigger>
               <Link className="stitch-button stitch-button-ghost" href="/funciones">
-                Explorar BIBLION <ArrowRight size={18} />
+                Explorar la app <ArrowRight size={18} />
               </Link>
             </div>
           </div>
@@ -258,14 +258,14 @@ export function WaitlistCta() {
     <section className="stitch-final-cta" data-reveal>
       <div className="stitch-final-cta-copy">
         <span className="stitch-eyebrow">ÚNETE AL LANZAMIENTO</span>
-        <h2>Sé de los primeros en probar BIBLION.</h2>
+        <h2>Sé de los primeros en probar BIBLION App.</h2>
         <p>
-          Acceso anticipado para Android. Ayúdanos a afinar la lectura,
-          el estudio y Bibi, y recibe información antes que nadie sobre cada
-          nueva etapa de pruebas.
+          Regístrate para participar en las primeras pruebas para Android.
+          Ayúdanos a afinar la lectura, el estudio y Bibi, y recibe información
+          sobre cada nueva etapa.
         </p>
         <WaitlistTrigger className="stitch-button stitch-button-gold" source="footer-cta">
-          Quiero participar
+          Quiero probar BIBLION App
         </WaitlistTrigger>
       </div>
       <div className="stitch-final-cta-features" aria-hidden="true">
