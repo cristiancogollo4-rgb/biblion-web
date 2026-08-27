@@ -659,7 +659,8 @@ a {
 .hero-tablet-wrapper {
   position: relative;
   z-index: 10;
-  width: 100%;
+  width: calc(100% - 46px);
+  margin-top: 34px;
 }
 
 .tablet-chassis {
@@ -702,7 +703,7 @@ a {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 380px;
+  height: clamp(300px, 30vw, 340px);
   position: relative;
   transition: background-color 0.35s ease, color 0.35s ease;
 }
@@ -738,10 +739,10 @@ a {
 
 .hero-phone-wrapper {
   position: absolute;
-  top: 47px;
-  right: -20px;
+  top: 152px;
+  right: 0;
   z-index: 30;
-  width: 175px;
+  width: 168px;
 }
 
 .phone-chassis {
@@ -1339,6 +1340,16 @@ a {
     min-height: 460px;
     margin-top: 40px;
   }
+
+  .hero-tablet-wrapper {
+    width: calc(100% - 34px);
+    margin-top: 28px;
+  }
+
+  .hero-phone-wrapper {
+    top: 132px;
+    width: 158px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1562,7 +1573,7 @@ a {
  
   .hero-phone-wrapper {
     width: 140px;
-    top: 8px;
+    top: 118px;
     right: 0;
   }
 
@@ -1571,7 +1582,7 @@ a {
   }
 
   .tablet-screen {
-    height: 320px;
+    height: 270px;
   }
 }
 
