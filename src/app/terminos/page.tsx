@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, Scale, ShieldAlert } from "lucide-react";
 import { PageHero, SiteFooter } from "@/components/site";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata = createPageMetadata({
+  title: "Términos de uso",
+  description: "Consulta las condiciones de uso de la web, el acceso anticipado y las versiones de prueba de BIBLION App.",
+  path: "/terminos",
+});
 
 const terms = [
   {
@@ -39,7 +46,7 @@ const terms = [
 
 export default function TerminosPage() {
   return (
-    <main className="stitch-page">
+    <main className="stitch-page" id="main-content">
       <PageHero
         compact
         eyebrow="TÉRMINOS DE USO"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lora, Outfit } from "next/font/google";
 import { MotionLayer } from "@/components/motion-layer";
+import { siteConfig } from "@/lib/site";
 import "./a-redesign.css";
 import "./globals.css";
 import "./stitch-site.css";
@@ -18,17 +19,20 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.appName,
   title: {
     default: "BIBLION",
     template: "%s | BIBLION",
   },
-  description:
-    "BIBLION es una aplicación de lectura y estudio bíblico para Android. Lee, descubre conexiones, conversa con Bibi y prepara enseñanzas.",
+  description: siteConfig.description,
   icons: {
-    icon: "/logos/biblion/logo-biblion-normal.png",
-    shortcut: "/logos/biblion/logo-biblion-normal.png",
-    apple: "/logos/biblion/logo-biblion-normal.png",
+    icon: "/logos/biblion/logo-biblion-light-app.png",
+    shortcut: "/logos/biblion/logo-biblion-light-app.png",
+    apple: "/logos/biblion/logo-biblion-light-app.png",
   },
+  formatDetection: { email: false, address: false, telephone: false },
+  category: "education",
 };
 
 export default function RootLayout({
@@ -50,6 +54,9 @@ export default function RootLayout({
               "(function(){try{var t=localStorage.getItem('biblion-web-theme');if(t==='light'||t==='blue'||t==='dark'){document.documentElement.dataset.theme=t}}catch(e){}})();",
           }}
         />
+        <a className="skip-link" href="#main-content">
+          Saltar al contenido
+        </a>
         <MotionLayer />
         {children}
       </body>

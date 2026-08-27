@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import "./scriptorium.css";
+import { createPageMetadata } from "@/lib/site";
 
-export const metadata = {
-  title: "Scriptorium — propuesta de diseño para Biblion",
-  description:
-    "Una propuesta visual paralela al sitio actual de Biblion. Scriptorium contemporáneo: lectura, estudio y comunidad bíblica.",
-};
+export const metadata = createPageMetadata({
+  title: "Scriptorium: propuesta interna",
+  description: "Propuesta visual interna de BIBLION.",
+  path: "/scriptorium",
+  noIndex: true,
+});
 
 const pilares = [
   {
@@ -49,7 +51,7 @@ const bibiDetalle = [
 
 export default function ScriptoriumPage() {
   return (
-    <main className="scrip">
+    <main className="scrip" id="main-content">
       <header className="scrip-topbar">
         <Link href="/" className="scrip-topbar-brand" aria-label="Volver al sitio actual de Biblion">
           <Image
@@ -335,7 +337,7 @@ export default function ScriptoriumPage() {
             />
             <div>
               <strong>Bibi</strong>
-              <span>Asistente bíblico · Biblion</span>
+              <span>Asistente bíblica · Biblion</span>
             </div>
             <span className="scrip-bibi-stamp" aria-hidden>
               ✦

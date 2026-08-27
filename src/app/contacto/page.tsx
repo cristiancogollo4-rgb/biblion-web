@@ -8,6 +8,13 @@ import {
   Smartphone,
 } from "lucide-react";
 import { PageHero, SectionHeading, SiteFooter } from "@/components/site";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata = createPageMetadata({
+  title: "Contacto",
+  description: "Contacta al equipo de BIBLION para acceso anticipado, soporte, privacidad, errores y consultas generales.",
+  path: "/contacto",
+});
 
 const contactOptions = [
   {
@@ -35,7 +42,7 @@ const contactOptions = [
 
 export default function ContactoPage() {
   return (
-    <main className="stitch-page">
+    <main className="stitch-page" id="main-content">
       <PageHero
         compact
         eyebrow="CONTACTO"

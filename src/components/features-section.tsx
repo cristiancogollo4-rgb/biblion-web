@@ -47,7 +47,7 @@ const features = [
   },
   {
     icon: "wand",
-    title: "Bibi — Tu asistente bíblico",
+    title: "Bibi — Tu asistente bíblica",
     description:
       "Define, explica y sugiere pasajes sin salir de la app en tu teléfono o tablet.",
   },
@@ -347,7 +347,7 @@ export function FeaturesSection() {
                     </div>
                     <div className="feat-bibi-info">
                       <strong>Bibi</strong>
-                      <small>Asistente bíblico</small>
+                      <small>Asistente bíblica</small>
                     </div>
                     <div className="feat-bibi-header-actions">
                       <span aria-hidden="true"><Undo2 size={10} /></span>
@@ -358,7 +358,7 @@ export function FeaturesSection() {
 
                   <div className="feat-bibi-messages">
                     <div className="feat-bibi-greeting">
-                      ¡Hola! Soy Bibi, tu asistente bíblico. ¿En qué puedo
+                      ¡Hola! Soy Bibi, tu asistente bíblica. ¿En qué puedo
                       ayudarte hoy?
                     </div>
 

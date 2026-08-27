@@ -2,173 +2,163 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  BookOpen,
-  Bot,
+  BookOpenCheck,
   BrainCircuit,
   History,
-  Languages,
-  Link2,
-  MapPin,
-  MessageCircleQuestion,
+  LockKeyhole,
+  MessageSquareText,
   ShieldCheck,
   Wifi,
   WifiOff,
 } from "lucide-react";
 import { BibiInteractiveDemo } from "@/components/product-tour";
 import {
-  PageHero,
   SectionHeading,
   SiteFooter,
+  SiteHeader,
   StatusPill,
   WaitlistCta,
 } from "@/components/site";
+import { createPageMetadata } from "@/lib/site";
 
-const questions = [
-  [MessageCircleQuestion, "Personajes", "¿Quién fue Bernabé?"],
-  [MapPin, "Lugares", "¿Dónde quedaba Galilea?"],
-  [BookOpen, "Palabras", "¿Qué significa gracia?"],
-  [Bot, "Pasajes", "Explícame Juan 1:1"],
-  [Link2, "Conexiones", "¿Qué textos se relacionan?"],
-  [Languages, "Idioma original", "¿Qué expresa esta palabra?"],
-];
+export const metadata = createPageMetadata({
+  title: "Bibi, asistente bíblica",
+  description: "Conoce a Bibi, la asistente bíblica de BIBLION App que ayuda a comprender personajes, lugares, palabras y pasajes.",
+  path: "/bibi",
+});
 
-const guardrails = [
-  "Su dominio es exclusivamente bíblico y cristiano.",
-  "Puede cometer errores: las referencias deben verificarse.",
-  "No sustituye acompañamiento pastoral, académico ni la lectura directa.",
-  "No inventa mensajes personales de Dios ni debe actuar como un oráculo.",
-  "No edita ni añade contenido automáticamente al documento.",
-  "No funciona como una asistente general para temas ajenos a la Biblia.",
+const boundaries = [
+  [BookOpenCheck, "Dominio bíblico", "Bibi responde sobre la Biblia, el estudio cristiano y su contexto."],
+  [ShieldCheck, "Referencias verificables", "Las respuestas pueden contener errores y siempre deben contrastarse con el pasaje."],
+  [BrainCircuit, "No reemplaza acompañamiento", "No sustituye la lectura directa, la formación académica ni el cuidado pastoral."],
+  [LockKeyhole, "El documento sigue siendo tuyo", "Bibi no modifica ni añade contenido automáticamente a una enseñanza."],
 ];
 
 export default function BibiPage() {
   return (
-    <main className="stitch-page">
-      <PageHero
-        eyebrow="BIBI · ASISTENTE BÍBLICA DE BIBLION"
-        title={<>Pregunta, conecta y <em>profundiza.</em></>}
-        text="Bibi utiliza el contexto bíblico disponible para ayudarte a comprender personajes, lugares, palabras y pasajes con límites visibles."
-        image="/logos/bibi/logo-bibi-normal.png"
-        imageAlt="Logo de Bibi"
-      >
-        <a className="stitch-button stitch-button-primary" href="#demostracion">
-          Ver cómo funciona <ArrowRight size={18} />
-        </a>
-      </PageHero>
+    <main className="stitch-page bibi-page" id="main-content">
+      <SiteHeader />
+      <section className="stitch-page-hero bibi-page-hero">
+        <div className="stitch-page-hero-copy">
+          <span className="stitch-eyebrow">BIBI · ASISTENTE BÍBLICA DE BIBLION</span>
+          <h1>Pregunta, conecta y <em>profundiza.</em></h1>
+          <p>
+            Bibi vive dentro de BIBLION App para ayudarte a comprender personajes,
+            lugares, palabras y pasajes sin perder el contexto de tu lectura o estudio.
+          </p>
+          <div className="stitch-hero-actions">
+            <a className="stitch-button stitch-button-primary" href="#demostracion">
+              Conversar con Bibi <ArrowRight size={18} />
+            </a>
+          </div>
+        </div>
 
-      <section className="stitch-section" data-reveal>
-        <SectionHeading
-          align="center"
-          eyebrow="QUÉ PUEDES PREGUNTARLE"
-          title="Distintas puertas de entrada al mismo estudio."
-        />
-        <div className="stitch-question-grid">
-          {questions.map(([Icon, title, example]) => {
-            const QuestionIcon = Icon as typeof BookOpen;
-            return (
-              <article key={String(title)}>
-                <QuestionIcon size={22} />
-                <strong>{String(title)}</strong>
-                <span>{String(example)}</span>
-              </article>
-            );
-          })}
+        <div className="stitch-page-hero-art bibi-hero-art" aria-label="Ejemplo de una conversación con Bibi">
+          <div className="bibi-hero-orbit" aria-hidden="true" />
+          <div className="bibi-hero-mark">
+            <Image
+              alt="Logo de Bibi"
+              height={220}
+              priority
+              src="/logos/bibi/bibi-logo-blanco.png"
+              width={220}
+            />
+          </div>
+          <div className="bibi-hero-question">¿Qué significa permanecer en Cristo?</div>
+          <div className="bibi-hero-answer">
+            <MessageSquareText aria-hidden="true" />
+            <span>Bibi responde desde el pasaje y te ayuda a seguir profundizando.</span>
+          </div>
         </div>
       </section>
 
-      <section className="stitch-section" id="demostracion" data-reveal>
+      <section className="stitch-section bibi-demo-section" id="demostracion" data-reveal>
         <SectionHeading
-          eyebrow="DEMOSTRACIÓN INTERACTIVA"
-          title="Una conversación breve, estructurada y verificable."
-          text="Esta demostración es local en la web: no envía preguntas ni información personal a un servicio externo."
+          eyebrow="BIBI DENTRO DE LA APP"
+          title="El contexto cambia. La conversación continúa."
+          text="Alterna entre lectura y Modo estudio, prueba preguntas, abre el historial y crea una conversación nueva. Esta demostración funciona localmente en la web."
         />
         <BibiInteractiveDemo />
       </section>
 
-      <section className="stitch-bibi-engine" data-reveal>
-        <div>
-          <Image
-            alt="Bibi"
-            height={124}
-            src="/logos/bibi/logo-bibi-normal.png"
-            width={124}
-          />
-          <span className="stitch-eyebrow">CÓMO FUNCIONA</span>
-          <h2>Primero lo local. Después, la profundidad que necesita conexión.</h2>
+      <section className="stitch-section bibi-architecture" data-reveal>
+        <div className="bibi-architecture-copy">
+          <span className="stitch-eyebrow">CÓMO RESPONDE</span>
+          <h2>Primero consulta BIBLION. Después profundiza cuando hace falta.</h2>
+          <p>
+            Bibi no envía cada pregunta directamente a una IA. Primero utiliza los
+            recursos bíblicos disponibles en el dispositivo y conserva el hilo de la conversación.
+          </p>
         </div>
-        <div className="stitch-engine-steps">
+        <div className="bibi-response-flow">
           <article>
-            <WifiOff size={22} />
-            <StatusPill tone="local">RESPUESTA LOCAL</StatusPill>
-            <h3>Recursos de BIBLION</h3>
-            <p>Diccionario, temas, referencias cruzadas y contexto del pasaje.</p>
+            <span>01</span><WifiOff aria-hidden="true" />
+            <StatusPill tone="local">LOCAL</StatusPill>
+            <h3>Conocimiento de BIBLION</h3>
+            <p>Diccionario, temas, referencias cruzadas y contexto bíblico.</p>
           </article>
+          <i aria-hidden="true"><ArrowRight /></i>
           <article>
-            <Wifi size={22} />
-            <StatusPill tone="online">PROFUNDIZACIÓN EN LÍNEA</StatusPill>
-            <h3>Servicio de IA</h3>
-            <p>Se utiliza cuando la consulta necesita una explicación más amplia.</p>
+            <span>02</span><Wifi aria-hidden="true" />
+            <StatusPill tone="online">EN LÍNEA</StatusPill>
+            <h3>Profundización</h3>
+            <p>La conexión se utiliza cuando la consulta necesita una explicación más amplia.</p>
           </article>
+          <i aria-hidden="true"><ArrowRight /></i>
           <article>
-            <History size={22} />
+            <span>03</span><History aria-hidden="true" />
             <StatusPill tone="beta">CONTINUIDAD</StatusPill>
             <h3>Memoria conversacional</h3>
-            <p>Conserva el tema para comprender preguntas posteriores relacionadas.</p>
+            <p>Comprende preguntas posteriores relacionadas con el mismo tema.</p>
           </article>
         </div>
       </section>
 
-      <section className="stitch-section stitch-bibi-contexts" data-reveal>
-        <article>
-          <span>01 · DURANTE LA LECTURA</span>
-          <h2>Comprende el pasaje sin perder el capítulo.</h2>
-          <p>
-            Bibi puede utilizar el libro, capítulo, versión y versículo seleccionado
-            para responder preguntas relacionadas con la lectura.
-          </p>
-        </article>
-        <article>
-          <span>02 · EN MODO ESTUDIO</span>
-          <h2>Pregunta junto al documento.</h2>
-          <p>
-            La ventana flotante mantiene visible el editor y conserva la misma
-            conversación, pero no modifica el contenido en esta versión.
-          </p>
-        </article>
-      </section>
-
-      <section className="stitch-section stitch-history-privacy" data-reveal>
-        <div>
-          <History size={25} />
-          <h2>Cinco conversaciones recientes</h2>
-          <p>
-            Puedes crear, abrir o eliminar conversaciones. Al superar cinco, se
-            elimina automáticamente la más antigua.
-          </p>
+      <section className="stitch-section bibi-conversations" data-reveal>
+        <div className="bibi-conversation-stack" aria-hidden="true">
+          <article><span>Ahora</span><strong>Juan 15 y permanecer</strong><small>Lectura · 4 mensajes</small></article>
+          <article><span>Ayer</span><strong>¿Quién fue Melquisedec?</strong><small>Personajes · 6 mensajes</small></article>
+          <article><span>28 jul</span><strong>Esperanza en Romanos</strong><small>Conexiones · 3 mensajes</small></article>
         </div>
-        <div>
-          <ShieldCheck size={25} />
-          <h2>Contexto con transparencia</h2>
+        <div className="bibi-conversations-copy">
+          <span className="stitch-eyebrow">TUS CONVERSACIONES</span>
+          <h2>Hasta cinco chats, siempre bajo tu control.</h2>
           <p>
-            El historial permanece local. Una consulta profunda puede enviar la
-            pregunta y el contexto bíblico o del documento necesario. El nombre
-            del perfil no se agrega automáticamente.
+            Puedes crear, abrir o eliminar conversaciones. Cuando se supera el límite,
+            BIBLION elimina automáticamente la más antigua y conserva las cinco recientes.
           </p>
+          <div className="bibi-privacy-note">
+            <LockKeyhole aria-hidden="true" />
+            <p>
+              El historial permanece local. Una consulta profunda puede enviar la pregunta
+              y únicamente el contexto bíblico o del documento necesario. El nombre del
+              perfil no se agrega automáticamente.
+            </p>
+          </div>
           <Link className="stitch-text-link" href="/privacidad">
             Conocer cómo se utilizan los datos <ArrowRight size={17} />
           </Link>
         </div>
       </section>
 
-      <section className="stitch-guardrails" data-reveal>
-        <div>
-          <BrainCircuit size={30} />
-          <span className="stitch-eyebrow">USO RESPONSABLE</span>
-          <h2>Una asistente para formular mejores preguntas, no una autoridad espiritual.</h2>
+      <section className="stitch-section bibi-boundaries" data-reveal>
+        <SectionHeading
+          eyebrow="USO RESPONSABLE"
+          title="Una compañera de estudio, no una autoridad espiritual."
+          text="Bibi ayuda a formular mejores preguntas y a descubrir conexiones. Tú conservas la responsabilidad de leer, verificar y decidir."
+        />
+        <div className="bibi-boundary-grid">
+          {boundaries.map(([Icon, title, text]) => {
+            const BoundaryIcon = Icon as typeof BookOpenCheck;
+            return (
+              <article key={String(title)}>
+                <BoundaryIcon aria-hidden="true" />
+                <h3>{String(title)}</h3>
+                <p>{String(text)}</p>
+              </article>
+            );
+          })}
         </div>
-        <ul>
-          {guardrails.map((item) => <li key={item}>{item}</li>)}
-        </ul>
       </section>
 
       <WaitlistCta />

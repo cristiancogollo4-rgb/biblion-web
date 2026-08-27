@@ -14,9 +14,15 @@ import {
   PageHero,
   SectionHeading,
   SiteFooter,
-  StatusPill,
 } from "@/components/site";
 import { WaitlistForm } from "@/components/waitlist-dialog";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata = createPageMetadata({
+  title: "Acceso anticipado",
+  description: "Regístrate para participar en las primeras pruebas de BIBLION App para Android y recibir novedades del proyecto.",
+  path: "/descargar",
+});
 
 const testingFeatures = [
   {
@@ -54,7 +60,7 @@ const faqs = [
 
 export default function DescargarPage() {
   return (
-    <main className="stitch-page">
+    <main className="stitch-page" id="main-content">
       <PageHero
         eyebrow="ACCESO ANTICIPADO"
         title={<>Sé parte de las primeras pruebas de <em>BIBLION App.</em></>}

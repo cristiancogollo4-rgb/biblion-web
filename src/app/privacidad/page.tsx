@@ -13,6 +13,13 @@ import {
   SectionHeading,
   SiteFooter,
 } from "@/components/site";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata = createPageMetadata({
+  title: "Política de privacidad",
+  description: "Conoce qué información utiliza BIBLION App, dónde se almacena y cómo puedes ejercer control sobre tus datos.",
+  path: "/privacidad",
+});
 
 const dataAreas = [
   {
@@ -39,7 +46,7 @@ const dataAreas = [
 
 export default function PrivacidadPage() {
   return (
-    <main className="stitch-page">
+    <main className="stitch-page" id="main-content">
       <PageHero
         compact
         eyebrow="PRIVACIDAD"
@@ -135,6 +142,8 @@ export default function PrivacidadPage() {
               Recopilamos nombre o alias, correo, dispositivo Android y uso
               principal cuando decides proporcionarlos. También podemos registrar
               fecha, origen del formulario y navegador para administrar solicitudes.
+              La dirección IP puede procesarse temporalmente para prevenir envíos
+              automatizados, pero no se incorpora a la lista de acceso anticipado.
             </p>
             <p>
               Puedes retirar tu consentimiento o solicitar la eliminación escribiendo
@@ -159,7 +168,7 @@ export default function PrivacidadPage() {
       <section className="stitch-legal-update" data-reveal>
         <UserRoundCheck size={24} />
         <div>
-          <strong>Última actualización: 30 de julio de 2026</strong>
+          <strong>Última actualización: 9 de agosto de 2026</strong>
           <p>
             BIBLION continúa en desarrollo. Este documento debe revisarse y
             actualizarse cuando cambien los proveedores, los datos o las funciones.

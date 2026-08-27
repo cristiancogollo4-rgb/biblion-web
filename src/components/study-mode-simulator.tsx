@@ -9,7 +9,6 @@ import {
   Bold,
   BookOpen,
   BookOpenText,
-  FileText,
   Highlighter,
   Home,
   Italic,
@@ -22,7 +21,6 @@ import {
   Palette,
   PanelTop,
   Plus,
-  Quote,
   Redo2,
   Save,
   Search,
@@ -32,50 +30,147 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { startTransition, type ReactNode, useState } from "react";
+import {
+  startTransition,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 type TextStyle = "bold" | "italic" | "underline" | "highlight";
 type EmbeddedSection = "home" | "bible" | "search" | "study" | "profile";
 type Alignment = "left" | "center" | "justify";
 type ListMode = "none" | "bullet" | "ordered";
+type TextColor = "default" | "gold" | "blue";
+type SimulatorTheme = "blue" | "light" | "dark";
+
+type EditorState = {
+  styles: TextStyle[];
+  alignment: Alignment;
+  listMode: ListMode;
+  fontSize: number;
+  textColor: TextColor;
+};
 
 const fontSizes = [12, 14, 16, 18, 20, 24];
 const zoomPresets = [75, 100, 125, 150, 200];
+const textColors: TextColor[] = ["default", "gold", "blue"];
+const simulatorThemes: SimulatorTheme[] = ["blue", "light", "dark"];
+const initialEditorState: EditorState = {
+  styles: ["highlight"],
+  alignment: "left",
+  listMode: "none",
+  fontSize: 16,
+  textColor: "default",
+};
 
 export function StudyModeSimulator() {
-  const [styles, setStyles] = useState<TextStyle[]>(["highlight"]);
+  const [editorState, setEditorState] = useState(initialEditorState);
+  const [undoHistory, setUndoHistory] = useState<EditorState[]>([]);
+  const [redoHistory, setRedoHistory] = useState<EditorState[]>([]);
   const [embeddedSection, setEmbeddedSection] = useState<EmbeddedSection>("home");
-  const [alignment, setAlignment] = useState<Alignment>("left");
-  const [listMode, setListMode] = useState<ListMode>("none");
-  const [fontSize, setFontSize] = useState(16);
   const [zoom, setZoom] = useState(75);
   const [assistantOpen, setAssistantOpen] = useState(false);
+  const [assistantAnswer, setAssistantAnswer] = useState(
+    "Pregunta sobre el pasaje o el contexto bíblico sin cerrar tu documento.",
+  );
+  const [simulatorTheme, setSimulatorTheme] = useState<SimulatorTheme>("blue");
+  const [documentOnly, setDocumentOnly] = useState(false);
+  const [saveStatus, setSaveStatus] = useState("Cambios sin guardar");
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const deviceRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateFullscreenState = () => {
+      setIsFullscreen(document.fullscreenElement === deviceRef.current);
+    };
+    document.addEventListener("fullscreenchange", updateFullscreenState);
+    return () => document.removeEventListener("fullscreenchange", updateFullscreenState);
+  }, []);
+
+  const commitEditorState = (nextState: EditorState) => {
+    setUndoHistory((current) => [...current, editorState].slice(-20));
+    setRedoHistory([]);
+    setEditorState(nextState);
+    setSaveStatus("Cambios sin guardar");
+  };
 
   const toggleStyle = (style: TextStyle) => {
-    setStyles((current) =>
-      current.includes(style)
-        ? current.filter((item) => item !== style)
-        : [...current, style]
-    );
+    commitEditorState({
+      ...editorState,
+      styles: editorState.styles.includes(style)
+        ? editorState.styles.filter((item) => item !== style)
+        : [...editorState.styles, style],
+    });
   };
 
   const stepValue = (
     values: number[],
     current: number,
     direction: -1 | 1,
-    setter: (value: number) => void
   ) => {
     const currentIndex = values.indexOf(current);
-    setter(values[Math.min(values.length - 1, Math.max(0, currentIndex + direction))]);
+    return values[Math.min(values.length - 1, Math.max(0, currentIndex + direction))];
+  };
+
+  const undo = () => {
+    const previous = undoHistory.at(-1);
+    if (!previous) return;
+    setUndoHistory((current) => current.slice(0, -1));
+    setRedoHistory((current) => [editorState, ...current].slice(0, 20));
+    setEditorState(previous);
+    setSaveStatus("Cambios sin guardar");
+  };
+
+  const redo = () => {
+    const next = redoHistory[0];
+    if (!next) return;
+    setRedoHistory((current) => current.slice(1));
+    setUndoHistory((current) => [...current, editorState].slice(-20));
+    setEditorState(next);
+    setSaveStatus("Cambios sin guardar");
+  };
+
+  const resetDemo = () => {
+    setEditorState(initialEditorState);
+    setUndoHistory([]);
+    setRedoHistory([]);
+    setZoom(75);
+    setDocumentOnly(false);
+    setAssistantOpen(false);
+    setSaveStatus("Cambios sin guardar");
+  };
+
+  const toggleFullscreen = async () => {
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+    } else {
+      await deviceRef.current?.requestFullscreen();
+    }
+  };
+
+  const cycleTextColor = () => {
+    const currentIndex = textColors.indexOf(editorState.textColor);
+    commitEditorState({
+      ...editorState,
+      textColor: textColors[(currentIndex + 1) % textColors.length],
+    });
+  };
+
+  const cycleSimulatorTheme = () => {
+    const currentIndex = simulatorThemes.indexOf(simulatorTheme);
+    setSimulatorTheme(simulatorThemes[(currentIndex + 1) % simulatorThemes.length]);
   };
 
   const selectedTextClass = [
     "study-app-selected",
-    styles.includes("bold") ? "is-bold" : "",
-    styles.includes("italic") ? "is-italic" : "",
-    styles.includes("underline") ? "is-underlined" : "",
-    styles.includes("highlight") ? "is-highlighted" : "",
-    `align-${alignment}`,
+    editorState.styles.includes("bold") ? "is-bold" : "",
+    editorState.styles.includes("italic") ? "is-italic" : "",
+    editorState.styles.includes("underline") ? "is-underlined" : "",
+    editorState.styles.includes("highlight") ? "is-highlighted" : "",
+    `align-${editorState.alignment}`,
+    `text-${editorState.textColor}`,
   ]
     .filter(Boolean)
     .join(" ");
@@ -93,7 +188,10 @@ export function StudyModeSimulator() {
         </p>
       </div>
 
-      <div className="study-live-device">
+      <div
+        className={`study-live-device study-theme-${simulatorTheme}${documentOnly ? " is-document-only" : ""}${isFullscreen ? " is-fullscreen" : ""}`}
+        ref={deviceRef}
+      >
         <div className="study-live-status" aria-hidden="true">
           <span>2:57 p.m.</span><span>•••</span><span>Wi-Fi · 79%</span>
         </div>
@@ -112,39 +210,39 @@ export function StudyModeSimulator() {
 
           <section className="study-editor-app" aria-label="Editor de Modo estudio">
             <div className="study-editor-header">
-              <button aria-label="Salir del Modo Estudio" type="button"><X /></button>
+              <button aria-label="Restablecer demostración" onClick={resetDemo} type="button"><X /></button>
               <strong>Documento sin título</strong>
-              <span>Cambios sin guardar</span>
+              <span aria-live="polite">{saveStatus}</span>
               <div>
-                <button aria-label="Deshacer" type="button"><Undo2 /></button>
-                <button aria-label="Rehacer" type="button"><Redo2 /></button>
-                <button aria-label="Pantalla completa" type="button"><Maximize /></button>
-                <button aria-label="Cambiar vista del documento" type="button"><PanelTop /></button>
-                <button aria-label="Guardar enseñanza" type="button"><Save /></button>
+                <button aria-label="Deshacer" disabled={!undoHistory.length} onClick={undo} type="button"><Undo2 /></button>
+                <button aria-label="Rehacer" disabled={!redoHistory.length} onClick={redo} type="button"><Redo2 /></button>
+                <button aria-label={isFullscreen ? "Salir de pantalla completa" : "Pantalla completa"} onClick={toggleFullscreen} type="button"><Maximize /></button>
+                <button aria-label={documentOnly ? "Mostrar Biblia y documento" : "Mostrar solo el documento"} aria-pressed={documentOnly} onClick={() => setDocumentOnly((current) => !current)} type="button"><PanelTop /></button>
+                <button aria-label="Guardar enseñanza" onClick={() => setSaveStatus("Guardado localmente")} type="button"><Save /></button>
               </div>
             </div>
 
             <div className="study-editor-toolbar" aria-label="Herramientas reales del editor">
               <div className="study-editor-toolbar-scroll">
-                <ToolButton active={styles.includes("bold")} label="Negrita" onClick={() => toggleStyle("bold")}><Bold /></ToolButton>
-                <ToolButton active={styles.includes("italic")} label="Cursiva" onClick={() => toggleStyle("italic")}><Italic /></ToolButton>
-                <ToolButton active={styles.includes("underline")} label="Subrayado" onClick={() => toggleStyle("underline")}><Underline /></ToolButton>
-                <ToolButton active={false} label="Color de Texto" onClick={() => undefined}><span className="study-color-letter">A</span></ToolButton>
-                <ToolButton active={styles.includes("highlight")} label="Color de Resaltado" onClick={() => toggleStyle("highlight")}><Highlighter /></ToolButton>
+                <ToolButton active={editorState.styles.includes("bold")} label="Negrita" onClick={() => toggleStyle("bold")}><Bold /></ToolButton>
+                <ToolButton active={editorState.styles.includes("italic")} label="Cursiva" onClick={() => toggleStyle("italic")}><Italic /></ToolButton>
+                <ToolButton active={editorState.styles.includes("underline")} label="Subrayado" onClick={() => toggleStyle("underline")}><Underline /></ToolButton>
+                <ToolButton active={editorState.textColor !== "default"} label="Cambiar color de texto" onClick={cycleTextColor}><span className={`study-color-letter text-${editorState.textColor}`}>A</span></ToolButton>
+                <ToolButton active={editorState.styles.includes("highlight")} label="Color de Resaltado" onClick={() => toggleStyle("highlight")}><Highlighter /></ToolButton>
                 <span className="study-editor-divider" />
-                <ToolButton active={listMode === "bullet"} label="Lista viñetas" onClick={() => setListMode(listMode === "bullet" ? "none" : "bullet")}><List /></ToolButton>
-                <ToolButton active={listMode === "ordered"} label="Lista numerada" onClick={() => setListMode(listMode === "ordered" ? "none" : "ordered")}><ListOrdered /></ToolButton>
+                <ToolButton active={editorState.listMode === "bullet"} label="Lista viñetas" onClick={() => commitEditorState({ ...editorState, listMode: editorState.listMode === "bullet" ? "none" : "bullet" })}><List /></ToolButton>
+                <ToolButton active={editorState.listMode === "ordered"} label="Lista numerada" onClick={() => commitEditorState({ ...editorState, listMode: editorState.listMode === "ordered" ? "none" : "ordered" })}><ListOrdered /></ToolButton>
                 <span className="study-editor-divider" />
-                <ToolButton active={alignment === "left"} label="Alinear izquierda" onClick={() => setAlignment("left")}><AlignLeft /></ToolButton>
-                <ToolButton active={alignment === "center"} label="Alinear centro" onClick={() => setAlignment("center")}><AlignCenter /></ToolButton>
-                <ToolButton active={alignment === "justify"} label="Alinear justificado" onClick={() => setAlignment("justify")}><AlignJustify /></ToolButton>
+                <ToolButton active={editorState.alignment === "left"} label="Alinear izquierda" onClick={() => commitEditorState({ ...editorState, alignment: "left" })}><AlignLeft /></ToolButton>
+                <ToolButton active={editorState.alignment === "center"} label="Alinear centro" onClick={() => commitEditorState({ ...editorState, alignment: "center" })}><AlignCenter /></ToolButton>
+                <ToolButton active={editorState.alignment === "justify"} label="Alinear justificado" onClick={() => commitEditorState({ ...editorState, alignment: "justify" })}><AlignJustify /></ToolButton>
                 <span className="study-editor-divider" />
-                <button aria-label="Disminuir tamaño de fuente" disabled={fontSize === fontSizes[0]} onClick={() => stepValue(fontSizes, fontSize, -1, setFontSize)} type="button"><Minus /></button>
-                <strong className="study-editor-value" aria-live="polite">{fontSize}</strong>
-                <button aria-label="Aumentar tamaño de fuente" disabled={fontSize === fontSizes[fontSizes.length - 1]} onClick={() => stepValue(fontSizes, fontSize, 1, setFontSize)} type="button"><Plus /></button>
+                <button aria-label="Disminuir tamaño de fuente" disabled={editorState.fontSize === fontSizes[0]} onClick={() => commitEditorState({ ...editorState, fontSize: stepValue(fontSizes, editorState.fontSize, -1) })} type="button"><Minus /></button>
+                <strong className="study-editor-value" aria-live="polite">{editorState.fontSize}</strong>
+                <button aria-label="Aumentar tamaño de fuente" disabled={editorState.fontSize === fontSizes[fontSizes.length - 1]} onClick={() => commitEditorState({ ...editorState, fontSize: stepValue(fontSizes, editorState.fontSize, 1) })} type="button"><Plus /></button>
                 <span className="study-editor-divider" />
-                <button className="study-zoom-value" aria-label="Cambiar zoom" onClick={() => stepValue(zoomPresets, zoom, 1, setZoom)} type="button">{zoom}%</button>
-                <ToolButton active={false} label="Cambiar tema de la aplicación" onClick={() => undefined}><Palette /></ToolButton>
+                <button className="study-zoom-value" aria-label="Cambiar zoom" onClick={() => setZoom(stepValue(zoomPresets, zoom, 1))} type="button">{zoom}%</button>
+                <ToolButton active={simulatorTheme !== "blue"} label={`Cambiar tema de la aplicación. Tema actual: ${simulatorTheme}`} onClick={cycleSimulatorTheme}><Palette /></ToolButton>
               </div>
             </div>
 
@@ -154,8 +252,8 @@ export function StudyModeSimulator() {
                 <p>Jesús presenta el fruto como el resultado de permanecer unidos a Él.</p>
                 <EditableExample
                   className={selectedTextClass}
-                  fontSize={fontSize}
-                  listMode={listMode}
+                  fontSize={editorState.fontSize}
+                  listMode={editorState.listMode}
                 />
                 <blockquote>
                   <strong>Juan 15:5 · RVR1960</strong>
@@ -179,9 +277,9 @@ export function StudyModeSimulator() {
                     <div><strong>Bibi</strong><span>Asistente bíblica</span></div>
                     <button aria-label="Cerrar Bibi" onClick={() => setAssistantOpen(false)} type="button"><X /></button>
                   </header>
-                  <p>Pregunta sobre el pasaje o el contexto bíblico sin cerrar tu documento.</p>
-                  <button type="button">Explica Juan 15:5</button>
-                  <button type="button">Muéstrame pasajes relacionados</button>
+                  <p aria-live="polite">{assistantAnswer}</p>
+                  <button onClick={() => setAssistantAnswer("Juan 15:5 presenta a Jesús como la vid y a sus discípulos como ramas: el fruto nace de una relación continua con Él.")} type="button">Explica Juan 15:5</button>
+                  <button onClick={() => setAssistantAnswer("Puedes seguir la idea de permanecer en Juan 15:4-7 y relacionarla con Gálatas 5:22-23 sobre el fruto del Espíritu.")} type="button">Muéstrame pasajes relacionados</button>
                 </div>
               ) : null}
             </div>

@@ -47,7 +47,7 @@ const statCards = [
     value: "Bibi",
     label: "Asistente bíblica contextual",
     description: "Lee contigo y responde preguntas basándose en el pasaje estudiado.",
-    image: "/bibi-logo.png",
+    image: "/logos/bibi/bibi-logo-blanco.png",
   },
 ] as const;
 

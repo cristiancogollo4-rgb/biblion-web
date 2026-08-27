@@ -16,6 +16,13 @@ import {
   StatusPill,
   WaitlistCta,
 } from "@/components/site";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata = createPageMetadata({
+  title: "Ecosistema BIBLION",
+  description: "Conoce la identidad, el propósito y la visión de BIBLION como ecosistema de herramientas para el estudio de la Biblia.",
+  path: "/identidad",
+});
 
 const symbolMeanings = [
   ["Libro abierto", "La Palabra como punto de partida"],
@@ -137,7 +144,7 @@ function IdentitySectionHeading({
 
 export default function IdentidadPage() {
   return (
-    <main className="stitch-page identity-page">
+    <main className="stitch-page identity-page" id="main-content">
       <SiteHeader />
 
       <section className="identity-hero">
@@ -343,7 +350,7 @@ export default function IdentidadPage() {
                 alt="Logo de Bibi"
                 className="identity-bibi-logo"
                 height={220}
-                src="/bibi-logo.png"
+                src="/logos/bibi/bibi-logo-blanco.png"
                 width={220}
               />
             </div>

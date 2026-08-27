@@ -23,6 +23,13 @@ import {
   StatusPill,
   WaitlistCta,
 } from "@/components/site";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata = createPageMetadata({
+  title: "Funciones de BIBLION App",
+  description: "Explora las herramientas de lectura, búsqueda, descubrimiento, Bibi y creación de enseñanzas de BIBLION App.",
+  path: "/funciones",
+});
 
 const functionGroups = [
   {
@@ -171,7 +178,7 @@ const future = [
 
 export default function FuncionesPage() {
   return (
-    <main className="stitch-page">
+    <main className="stitch-page" id="main-content">
       <PageHero
         eyebrow="FUNCIONES"
         title={<>Todo lo necesario para ir <em>más allá de la lectura.</em></>}

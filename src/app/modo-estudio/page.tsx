@@ -16,6 +16,13 @@ import {
   StatusPill,
   WaitlistCta,
 } from "@/components/site";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata = createPageMetadata({
+  title: "Modo estudio",
+  description: "Organiza hallazgos bíblicos y conviértelos en estudios, devocionales, clases o predicaciones con BIBLION App.",
+  path: "/modo-estudio",
+});
 
 const outcomes = [
   {
@@ -74,7 +81,7 @@ const capabilityGroups = [
 
 export default function ModoEstudioPage() {
   return (
-    <main className="stitch-page">
+    <main className="stitch-page" id="main-content">
       <PageHero
         eyebrow="MODO ESTUDIO"
         title={<>Convierte tu estudio bíblico en una <em>enseñanza.</em></>}

@@ -19,6 +19,13 @@ import {
 } from "@/components/site";
 import { FeaturesSection } from "@/components/features-section";
 import { StatsCarousel } from "@/components/stats-carousel";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata = createPageMetadata({
+  title: "BIBLION App: lectura y estudio bíblico",
+  description: "Lee la Biblia, descubre conexiones, conversa con Bibi y prepara enseñanzas desde una sola aplicación para Android.",
+  path: "/",
+});
 
 const pathways = [
   {
@@ -84,7 +91,7 @@ const ecosystemAreas = [
 
 export default function Home() {
   return (
-    <main className="stitch-page">
+    <main className="stitch-page" id="main-content">
       <HomeHero />
 
       <StatsCarousel />

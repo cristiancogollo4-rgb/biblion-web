@@ -19,6 +19,7 @@ import {
   Maximize2,
   Menu,
   MessageCircleMore,
+  MessageSquarePlus,
   MoreVertical,
   Pause,
   Play,
@@ -26,9 +27,12 @@ import {
   Redo2,
   Save,
   Search,
+  Send,
   Settings,
+  ShieldCheck,
   Sparkles,
   Star,
+  Trash2,
   Undo2,
   UserRound,
   X,
@@ -477,18 +481,217 @@ function BibiTabletOverlay({ onClose }: { onClose: () => void }) {
 }
 
 const bibiPrompts = [
-  { question: "¿Qué significa gracia?", answer: "La gracia es el favor inmerecido de Dios. En el Nuevo Testamento señala especialmente su iniciativa salvadora manifestada en Cristo.", reference: "Efesios 2:8-9" },
-  { question: "Explícame Romanos 8:28", answer: "El pasaje no promete ausencia de dificultad. Afirma que Dios puede obrar incluso en medio de ella conforme a su propósito.", reference: "Romanos 8:28" },
-  { question: "Pasajes relacionados con esperanza", answer: "Puedes comenzar con Romanos 5:3-5, Romanos 15:13 y 1 Pedro 1:3. Cada texto presenta una dimensión distinta de la esperanza cristiana.", reference: "3 conexiones" },
+  {
+    question: "¿Qué significa permanecer en Cristo?",
+    answer: "En Juan 15, permanecer describe una relación continua con Jesús. El fruto no aparece como un logro aislado, sino como el resultado de conservar esa unión.",
+    reference: "Juan 15:4-5",
+    suggestions: ["Explícame el contexto", "Pasajes relacionados", "Profundiza esta idea"],
+  },
+  {
+    question: "¿Quién fue Melquisedec?",
+    answer: "Melquisedec fue rey de Salem y sacerdote del Dios Altísimo. Génesis lo presenta bendiciendo a Abraham; Hebreos retoma su figura para explicar el sacerdocio de Cristo.",
+    reference: "Génesis 14:18-20 · Hebreos 7",
+    suggestions: ["¿Qué significa su nombre?", "Comparar con Abraham", "Profundizar con IA"],
+  },
+  {
+    question: "Muéstrame pasajes relacionados",
+    answer: "La idea de permanecer se conecta con la comunión, la obediencia y el fruto. Puedes continuar con 1 Juan 2:6, Colosenses 2:6-7 y Gálatas 5:22-23.",
+    reference: "3 conexiones bíblicas",
+    suggestions: ["Abrir 1 Juan 2:6", "Comparar los pasajes", "Aplicación práctica"],
+  },
+  {
+    question: "¿Qué expresa esta palabra en griego?",
+    answer: "El verbo traducido como permanecer comunica la idea de quedarse, continuar o mantener una relación estable. El contexto define cómo debe entenderse en cada pasaje.",
+    reference: "Juan 15 · idioma original",
+    suggestions: ["Ver otros usos", "Explicar el contexto", "Profundizar con IA"],
+  },
+];
+
+type BibiDemoMode = "reader" | "study";
+type BibiDemoSession = { id: string; title: string; meta: string };
+
+const initialBibiSessions: BibiDemoSession[] = [
+  { id: "john-15", title: "Juan 15 y permanecer", meta: "Ahora · 4 mensajes" },
+  { id: "melchizedek", title: "¿Quién fue Melquisedec?", meta: "Ayer · 6 mensajes" },
+  { id: "hope", title: "Esperanza en Romanos", meta: "28 jul · 3 mensajes" },
 ];
 
 export function BibiInteractiveDemo() {
+  const [mode, setMode] = useState<BibiDemoMode>("reader");
   const [activePrompt, setActivePrompt] = useState(0);
+  const [sessions, setSessions] = useState(initialBibiSessions);
+  const [activeSessionId, setActiveSessionId] = useState(initialBibiSessions[0].id);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(true);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+  const [question, setQuestion] = useState("");
   const current = bibiPrompts[activePrompt];
+
+  const createConversation = () => {
+    const session = {
+      id: `new-${Date.now()}`,
+      title: "Conversación nueva",
+      meta: "Ahora · sin mensajes",
+    };
+    setSessions((existing) => [...existing, session].slice(-5));
+    setActiveSessionId(session.id);
+    setActivePrompt(0);
+    setHistoryOpen(false);
+  };
+
+  const deleteConversation = () => {
+    const remaining = sessions.filter((session) => session.id !== activeSessionId);
+    if (remaining.length === 0) {
+      const reset = { id: `reset-${Date.now()}`, title: "Conversación nueva", meta: "Ahora · sin mensajes" };
+      setSessions([reset]);
+      setActiveSessionId(reset.id);
+    } else {
+      setSessions(remaining);
+      setActiveSessionId(remaining[remaining.length - 1].id);
+    }
+    setActivePrompt(0);
+  };
+
+  const submitQuestion = () => {
+    const normalized = question.trim().toLocaleLowerCase("es");
+    if (!normalized) return;
+    const nextPrompt = normalized.includes("melquisedec")
+      ? 1
+      : normalized.includes("relacion") || normalized.includes("pasaje")
+        ? 2
+        : normalized.includes("griego") || normalized.includes("idioma")
+          ? 3
+          : 0;
+    setActivePrompt(nextPrompt);
+    setQuestion("");
+    setSessions((existing) => existing.map((session) =>
+      session.id === activeSessionId
+        ? { ...session, title: bibiPrompts[nextPrompt].question, meta: "Ahora · 2 mensajes" }
+        : session
+    ));
+  };
+
   return (
-    <div className="bibi-live-demo" data-reveal>
-      <div className="bibi-live-sidebar"><span>PRUEBA UNA PREGUNTA</span>{bibiPrompts.map((prompt, index) => <button className={index === activePrompt ? "active" : ""} key={prompt.question} onClick={() => setActivePrompt(index)} type="button">{prompt.question}<ChevronRight aria-hidden="true" size={16} /></button>)}</div>
-      <div className="bibi-live-conversation" key={current.question}><div className="bibi-live-brand"><Image alt="" height={44} src="/logos/bibi/logo-bibi-normal.png" width={44} /><div><strong>Bibi</strong><span>Contexto bíblico, no respuestas generales</span></div></div><div className="bibi-live-user">{current.question}</div><div className="bibi-live-answer"><Sparkles aria-hidden="true" size={17} /><p>{current.answer}</p><span>{current.reference}</span></div><p className="bibi-live-note">Bibi te acompaña y conserva el contexto, pero no modifica tu enseñanza.</p></div>
+    <div className="bibi-product-demo" data-context={mode} data-reveal>
+      <div className="bibi-demo-controlbar">
+        <span className="bibi-demo-context-label">Contexto de la conversación</span>
+        <div className="bibi-context-switch" role="tablist" aria-label="Contexto de Bibi">
+          <button aria-selected={mode === "reader"} className={mode === "reader" ? "active" : ""} onClick={() => setMode("reader")} role="tab" type="button"><BookOpen /> Lectura</button>
+          <button aria-selected={mode === "study"} className={mode === "study" ? "active" : ""} onClick={() => setMode("study")} role="tab" type="button"><FilePenLine /> Modo estudio</button>
+        </div>
+      </div>
+
+      <div className="bibi-demo-workspace">
+        <div className="bibi-demo-context-panel" aria-live="polite">
+          {mode === "reader" ? (
+            <div className="bibi-reader-context">
+              <header><span>←</span><strong>Juan 15</strong><small>RVR1960 · ⋮</small></header>
+              <h3>Jesús, la vid verdadera</h3>
+              <p><sup>4</sup> Permaneced en mí, y yo en vosotros.</p>
+              <p className="selected"><sup>5</sup> Yo soy la vid, vosotros los pámpanos; el que permanece en mí, y yo en él, éste lleva mucho fruto.</p>
+              <p><sup>6</sup> El que en mí no permanece, será echado fuera como pámpano.</p>
+              <span className="bibi-context-caption">Versículo seleccionado para Bibi</span>
+            </div>
+          ) : (
+            <div className="bibi-study-context">
+              <header><span>×</span><strong>Permanecer para dar fruto</strong><small>Cambios sin guardar · ↶ ↷ ▣</small></header>
+              <nav><b>B</b><i>I</i><u>U</u><span>A</span><span>☷</span><span>≡</span><small>16</small></nav>
+              <article><h3>Permanecer para dar fruto</h3><p>Jesús presenta el fruto como el resultado de permanecer unidos a Él.</p><blockquote>Juan 15:5 · RVR1960<br />El que permanece en mí, y yo en él, éste lleva mucho fruto.</blockquote></article>
+              <span className="bibi-context-caption">Bibi no modifica el documento</span>
+            </div>
+          )}
+        </div>
+
+        <nav className="bibi-demo-app-nav" aria-label="Navegación simulada de BIBLION App">
+          <span>Inicio</span><span>Biblia</span><span>Buscar</span><span>Estudio</span><span>Perfil</span>
+        </nav>
+
+        {chatOpen ? (
+        <section className="bibi-demo-chat" aria-label="Demostración del chat de Bibi">
+          <header>
+            <div className="bibi-demo-chat-brand">
+              <Image alt="" height={40} src="/logos/bibi/bibi-logo-blanco.png" width={40} />
+              <span><strong>Bibi</strong><small>Asistente bíblica · Solo consulta</small></span>
+            </div>
+            <div className="bibi-demo-chat-actions">
+              <button aria-label="Abrir historial" aria-pressed={historyOpen} onClick={() => setHistoryOpen((open) => !open)} type="button"><History /></button>
+              <button aria-label="Crear conversación" onClick={createConversation} type="button"><MessageSquarePlus /></button>
+              <button aria-label="Eliminar conversación" onClick={() => setDeleteConfirmationOpen(true)} type="button"><Trash2 /></button>
+              <button aria-label="Cerrar Bibi" onClick={() => setChatOpen(false)} type="button"><X /></button>
+            </div>
+          </header>
+
+          <div className="bibi-demo-context-strip">
+            <BookOpen aria-hidden="true" />
+            <span>{mode === "reader" ? "Juan 15:5 · RVR1960" : "Enseñanza · Permanecer para dar fruto"}</span>
+          </div>
+
+          <div className="bibi-demo-messages" key={`${mode}-${current.question}`}>
+            <div className="bibi-demo-assistant-greeting">
+              {mode === "reader"
+                ? "Estoy aquí para ayudarte a comprender el pasaje sin sacarte de tu lectura."
+                : "Soy Bibi. Puedo ayudarte a comprender, conectar y desarrollar ideas mientras trabajas en tu enseñanza."}
+            </div>
+            <div className="bibi-demo-user-message">{current.question}</div>
+            {mode === "reader" ? (
+              <button className="bibi-demo-passage-card" type="button">
+                <strong>Juan 15:5</strong>
+                <span>5 Yo soy la vid, vosotros los pámpanos; el que permanece en mí, y yo en él, éste lleva mucho fruto.</span>
+              </button>
+            ) : null}
+            <div className="bibi-demo-answer-message">
+              <Sparkles aria-hidden="true" />
+              <p>{current.answer}</p>
+              <button type="button">{current.reference} <ChevronRight aria-hidden="true" /></button>
+            </div>
+          </div>
+
+          <div className="bibi-demo-suggestions" aria-label="Sugerencias de Bibi">
+            {current.suggestions.slice(0, 2).map((suggestion, index) => (
+              <button key={suggestion} onClick={() => setActivePrompt((activePrompt + index + 1) % bibiPrompts.length)} type="button">{suggestion}</button>
+            ))}
+          </div>
+
+          <form className="bibi-demo-composer" onSubmit={(event) => { event.preventDefault(); submitQuestion(); }}>
+            <input aria-label="Pregunta para Bibi" onChange={(event) => setQuestion(event.target.value)} placeholder="Pregunta a Bibi..." value={question} />
+            <button aria-label="Enviar pregunta" disabled={!question.trim()} type="submit"><Send /></button>
+          </form>
+
+          {historyOpen ? (
+            <aside className="bibi-demo-history" aria-label="Historial de conversaciones">
+              <div className="bibi-demo-history-dialog">
+              <header><div><strong>Historial de conversaciones</strong><span>{sessions.length} de 5 chats guardados</span></div><button aria-label="Cerrar historial" onClick={() => setHistoryOpen(false)} type="button"><X /></button></header>
+              <div>
+                {sessions.slice().reverse().map((session) => (
+                  <button className={session.id === activeSessionId ? "active" : ""} key={session.id} onClick={() => { setActiveSessionId(session.id); setHistoryOpen(false); }} type="button"><strong>{session.title}</strong><span>{session.meta}</span></button>
+                ))}
+              </div>
+              <button className="bibi-history-new" onClick={createConversation} type="button"><Plus /> Nueva conversación</button>
+              </div>
+            </aside>
+          ) : null}
+
+          {deleteConfirmationOpen ? (
+            <div className="bibi-delete-confirmation" role="alertdialog" aria-label="Eliminar conversación">
+              <div>
+                <strong>Eliminar conversación</strong>
+                <p>Se eliminarán permanentemente los mensajes de este chat.</p>
+                <footer>
+                  <button onClick={() => setDeleteConfirmationOpen(false)} type="button">Cancelar</button>
+                  <button onClick={() => { deleteConversation(); setDeleteConfirmationOpen(false); }} type="button">Eliminar</button>
+                </footer>
+              </div>
+            </div>
+          ) : null}
+        </section>
+        ) : (
+          <button className="bibi-demo-launcher" aria-label="Abrir Bibi" onClick={() => setChatOpen(true)} type="button">
+            <Image alt="" height={42} src="/logos/bibi/bibi-logo-blanco.png" width={42} />
+          </button>
+        )}
+      </div>
+
+      <p className="bibi-demo-disclaimer"><ShieldCheck aria-hidden="true" /> Demostración local: no envía preguntas ni datos personales a un servicio externo.</p>
     </div>
   );
 }

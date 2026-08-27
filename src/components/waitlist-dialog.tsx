@@ -11,6 +11,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { ArrowRight, CheckCircle2, ChevronDown, X } from "lucide-react";
+import { WAITLIST_LIMITS } from "@/lib/waitlist";
 
 type WaitlistTriggerProps = {
   children: ReactNode;
@@ -32,6 +33,7 @@ const initialForm = {
   androidDevice: "",
   role: "",
   consent: false,
+  website: "",
 };
 
 export function WaitlistForm({
@@ -62,7 +64,9 @@ export function WaitlistForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, source }),
       });
-      const data = await response.json();
+      const data = (await response.json().catch(() => null)) as
+        | { message?: string }
+        | null;
 
       if (!response.ok) {
         throw new Error(data?.message ?? "No pudimos registrar tu solicitud.");
@@ -104,6 +108,7 @@ export function WaitlistForm({
         <input
           autoComplete="name"
           name="fullName"
+          maxLength={WAITLIST_LIMITS.fullName}
           onChange={(event) => updateField("fullName", event.target.value)}
           required
           value={form.fullName}
@@ -114,6 +119,7 @@ export function WaitlistForm({
         <input
           autoComplete="email"
           name="email"
+          maxLength={WAITLIST_LIMITS.email}
           onChange={(event) => updateField("email", event.target.value)}
           required
           type="email"
@@ -139,6 +145,7 @@ export function WaitlistForm({
         <label>
           Dispositivo o versión de Android
           <input
+            maxLength={WAITLIST_LIMITS.androidDevice}
             name="androidDevice"
             onChange={(event) => updateField("androidDevice", event.target.value)}
             placeholder="Opcional"
@@ -160,6 +167,16 @@ export function WaitlistForm({
           </select>
         </label>
       </div>
+      <label className="waitlist-honeypot" aria-hidden="true">
+        Sitio web
+        <input
+          autoComplete="off"
+          name="website"
+          onChange={(event) => updateField("website", event.target.value)}
+          tabIndex={-1}
+          value={form.website}
+        />
+      </label>
       <label className="waitlist-consent waitlist-field-wide">
         <input
           checked={form.consent}
@@ -199,7 +216,10 @@ export function WaitlistTrigger({
   source,
 }: WaitlistTriggerProps) {
   const titleId = useId();
+  const descriptionId = useId();
   const firstControlRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -208,14 +228,37 @@ export function WaitlistTrigger({
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+    const handleDialogKeys = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+      const focusable = Array.from(
+        dialogRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      );
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-    window.addEventListener("keydown", closeOnEscape);
+    window.addEventListener("keydown", handleDialogKeys);
 
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("keydown", handleDialogKeys);
+      previousFocusRef.current?.focus();
     };
   }, [open]);
 
@@ -223,7 +266,10 @@ export function WaitlistTrigger({
     <>
       <button
         className={className}
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          previousFocusRef.current = document.activeElement as HTMLElement;
+          setOpen(true);
+        }}
         ref={firstControlRef}
         type="button"
       >
@@ -240,19 +286,18 @@ export function WaitlistTrigger({
               role="presentation"
             >
               <section
+                aria-describedby={descriptionId}
                 aria-labelledby={titleId}
                 aria-modal="true"
                 className="waitlist-modal"
+                ref={dialogRef}
                 role="dialog"
               >
                 <button
                   aria-label="Cerrar formulario"
                   autoFocus
                   className="waitlist-modal-close"
-                  onClick={() => {
-                    setOpen(false);
-                    firstControlRef.current?.focus();
-                  }}
+                  onClick={() => setOpen(false)}
                   type="button"
                 >
                   <X size={21} />
@@ -260,7 +305,7 @@ export function WaitlistTrigger({
                 <div className="waitlist-modal-copy">
                   <span>ACCESO ANTICIPADO</span>
                   <h2 id={titleId}>Sé parte de las primeras pruebas de BIBLION App.</h2>
-                  <p>
+                  <p id={descriptionId}>
                     El registro no instala BIBLION App ni garantiza una invitación
                     inmediata. Abriremos el acceso progresivamente para Android.
                   </p>

@@ -1,7 +1,7 @@
 "use client";
 
 import { Moon, Palette, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 export type BiblionWebTheme = "light" | "blue" | "dark";
 
@@ -10,6 +10,30 @@ const themes = [
   { id: "blue" as const, label: "Azul Rey Oscuro", shortLabel: "Azul", icon: Palette },
   { id: "dark" as const, label: "Oscuro", shortLabel: "Oscuro", icon: Moon },
 ];
+
+const themeEvent = "biblion-web-theme-change";
+
+function getThemeSnapshot(): BiblionWebTheme {
+  const current = document.documentElement.dataset.theme;
+  return current === "light" || current === "blue" || current === "dark"
+    ? current
+    : "blue";
+}
+
+function subscribeToTheme(callback: () => void) {
+  window.addEventListener(themeEvent, callback);
+  window.addEventListener("storage", callback);
+  return () => {
+    window.removeEventListener(themeEvent, callback);
+    window.removeEventListener("storage", callback);
+  };
+}
+
+function setWebTheme(nextTheme: BiblionWebTheme) {
+  document.documentElement.setAttribute("data-theme", nextTheme);
+  localStorage.setItem("biblion-web-theme", nextTheme);
+  window.dispatchEvent(new Event(themeEvent));
+}
 
 type ThemeControlProps = {
   compactLabels?: boolean;
@@ -22,19 +46,14 @@ export function ThemeControl({
   expanded = false,
   onThemeChange,
 }: ThemeControlProps) {
-  const [theme, setTheme] = useState<BiblionWebTheme>("blue");
-
-  useEffect(() => {
-    const current = document.documentElement.dataset.theme;
-    if (current === "light" || current === "blue" || current === "dark") {
-      setTheme(current);
-    }
-  }, []);
+  const theme = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    () => "blue",
+  );
 
   const selectTheme = (nextTheme: BiblionWebTheme) => {
-    document.documentElement.dataset.theme = nextTheme;
-    localStorage.setItem("biblion-web-theme", nextTheme);
-    setTheme(nextTheme);
+    setWebTheme(nextTheme);
     onThemeChange?.(nextTheme);
   };
 

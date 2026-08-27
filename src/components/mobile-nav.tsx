@@ -38,6 +38,53 @@ export function MobileNav({ items }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const [themeOpen, setThemeOpen] = useState(false);
   const mobileNavRef = useRef<HTMLDivElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
+
+  const closeMenu = () => {
+    setOpen(false);
+    requestAnimationFrame(() => menuTriggerRef.current?.focus());
+  };
+
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const panel = menuPanelRef.current;
+    const focusable = panel?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    );
+
+    document.body.style.overflow = "hidden";
+    focusable?.[0]?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeMenu();
+        return;
+      }
+
+      if (event.key !== "Tab" || !focusable?.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
 
   useEffect(() => {
     if (!themeOpen) return;
@@ -66,6 +113,7 @@ export function MobileNav({ items }: MobileNavProps) {
   return (
     <div className="mobile-nav" ref={mobileNavRef}>
       <button
+        aria-controls="mobile-navigation-panel"
         aria-expanded={open}
         aria-label="Abrir menú"
         className="menu-button mobile-nav-tablet-trigger"
@@ -73,6 +121,7 @@ export function MobileNav({ items }: MobileNavProps) {
           setThemeOpen(false);
           setOpen(true);
         }}
+        ref={menuTriggerRef}
         type="button"
       >
         <Menu size={22} />
@@ -131,14 +180,21 @@ export function MobileNav({ items }: MobileNavProps) {
       ) : null}
 
       {open ? createPortal(
-        <div className="mobile-nav-panel" role="dialog" aria-label="Menú principal">
+        <div
+          aria-label="Menú principal"
+          aria-modal="true"
+          className="mobile-nav-panel"
+          id="mobile-navigation-panel"
+          ref={menuPanelRef}
+          role="dialog"
+        >
           <div className="mobile-nav-panel-inner">
             <div className="mobile-nav-top">
               <Link
                 aria-label="BIBLION, ir al inicio"
                 className="mobile-brand"
                 href="/"
-                onClick={() => setOpen(false)}
+                onClick={closeMenu}
               >
                 <Image
                   alt=""
@@ -159,7 +215,7 @@ export function MobileNav({ items }: MobileNavProps) {
               <button
                 aria-label="Cerrar menú"
                 className="mobile-nav-close"
-                onClick={() => setOpen(false)}
+                onClick={closeMenu}
                 type="button"
               >
                 <X size={22} />
@@ -176,7 +232,7 @@ export function MobileNav({ items }: MobileNavProps) {
                   }
                   href={item.href}
                   key={item.href}
-                  onClick={() => setOpen(false)}
+                  onClick={closeMenu}
                 >
                   {item.label}
                 </Link>

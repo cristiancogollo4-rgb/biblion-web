@@ -11,7 +11,6 @@ import {
   Instagram,
   Mail,
   Search,
-  Sparkles,
 } from "lucide-react";
 import { ActiveNavLink } from "@/components/active-nav-link";
 import { MobileNav } from "@/components/mobile-nav";

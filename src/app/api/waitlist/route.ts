@@ -1,69 +1,151 @@
 import { NextResponse } from "next/server";
+import {
+  createWaitlistSubmission,
+  type WaitlistPayload,
+  validateWaitlistPayload,
+} from "@/lib/waitlist";
 
-type WaitlistPayload = {
-  fullName?: string;
-  email?: string;
-  androidDevice?: string;
-  role?: string;
-  consent?: boolean;
-  source?: string;
-};
+export const runtime = "nodejs";
+
+const MAX_BODY_BYTES = 8_192;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1_000;
+const RATE_LIMIT_REQUESTS = 5;
+const localRateLimit = new Map<string, { count: number; expiresAt: number }>();
+
+const json = (body: object, status = 200, headers?: HeadersInit) =>
+  NextResponse.json(body, {
+    status,
+    headers: { "Cache-Control": "no-store", ...headers },
+  });
+
+function getClientIp(request: Request) {
+  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return forwarded || request.headers.get("x-real-ip") || "unknown";
+}
+
+async function checkDistributedRateLimit(key: string) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+
+  const redisKey = `biblion:waitlist:${key}`;
+  const response = await fetch(`${url}/pipeline`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify([
+      ["INCR", redisKey],
+      ["EXPIRE", redisKey, Math.ceil(RATE_LIMIT_WINDOW_MS / 1_000), "NX"],
+    ]),
+    signal: AbortSignal.timeout(3_000),
+    cache: "no-store",
+  });
+
+  if (!response.ok) return null;
+  const result = (await response.json()) as Array<{ result?: number }>;
+  return Number(result[0]?.result ?? 0) <= RATE_LIMIT_REQUESTS;
+}
+
+async function isRateLimitAllowed(key: string) {
+  try {
+    const distributedResult = await checkDistributedRateLimit(key);
+    if (distributedResult !== null) return distributedResult;
+  } catch {
+    // The local limiter remains available if the optional remote store is down.
+  }
+
+  const now = Date.now();
+  const current = localRateLimit.get(key);
+  if (!current || current.expiresAt <= now) {
+    localRateLimit.set(key, { count: 1, expiresAt: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+
+  current.count += 1;
+  return current.count <= RATE_LIMIT_REQUESTS;
+}
+
+function isAllowedOrigin(request: Request) {
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+  return origin === new URL(request.url).origin;
+}
 
 export async function POST(request: Request) {
+  if (!isAllowedOrigin(request)) {
+    return json({ message: "Origen de solicitud no permitido." }, 403);
+  }
+
+  if (!request.headers.get("content-type")?.includes("application/json")) {
+    return json({ message: "El contenido debe enviarse como JSON." }, 415);
+  }
+
+  const contentLength = Number(request.headers.get("content-length") ?? 0);
+  if (contentLength > MAX_BODY_BYTES) {
+    return json({ message: "La solicitud supera el tamaño permitido." }, 413);
+  }
+
+  let payload: WaitlistPayload;
   try {
-    const payload = (await request.json()) as WaitlistPayload;
-    const requiredFields = [payload.fullName, payload.email];
+    payload = (await request.json()) as WaitlistPayload;
+  } catch {
+    return json({ message: "La solicitud contiene datos inválidos." }, 400);
+  }
 
-    if (
-      requiredFields.some((value) => !value || !String(value).trim()) ||
-      payload.consent !== true
-    ) {
-      return NextResponse.json(
-        { message: "Completa los campos requeridos antes de enviar." },
-        { status: 400 }
-      );
-    }
+  const validation = validateWaitlistPayload(payload);
+  if (!validation.ok) {
+    return json({ message: validation.message }, 400);
+  }
 
-    const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  if (validation.data.website) {
+    return json({ ok: true });
+  }
 
-    if (!webhookUrl) {
-      return NextResponse.json(
-        {
-          message:
-            "El formulario está listo, pero todavía falta conectar Google Sheets.",
-        },
-        { status: 503 }
-      );
-    }
+  const clientIp = getClientIp(request);
+  if (!(await isRateLimitAllowed(clientIp))) {
+    return json(
+      { message: "Has enviado varias solicitudes. Intenta nuevamente más tarde." },
+      429,
+      { "Retry-After": String(Math.ceil(RATE_LIMIT_WINDOW_MS / 1_000)) },
+    );
+  }
 
-    const submission = {
-      submittedAt: new Date().toISOString(),
-      fullName: payload.fullName?.trim(),
-      email: payload.email?.trim().toLowerCase(),
-      androidDevice: payload.androidDevice?.trim() ?? "",
-      role: payload.role?.trim() ?? "",
-      source: payload.source?.trim() ?? "unknown",
-      userAgent: request.headers.get("user-agent") ?? "",
-    };
+  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  if (!webhookUrl) {
+    return json(
+      { message: "El registro está temporalmente fuera de servicio." },
+      503,
+    );
+  }
 
+  const submission = createWaitlistSubmission(
+    validation.data,
+    request.headers.get("user-agent") ?? "",
+  );
+
+  try {
     const response = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(submission),
+      signal: AbortSignal.timeout(8_000),
+      cache: "no-store",
     });
 
     if (!response.ok) {
-      return NextResponse.json(
-        { message: "No pudimos guardar tu solicitud en la lista de espera." },
-        { status: 502 }
+      return json(
+        { message: "No pudimos guardar tu solicitud en este momento." },
+        502,
       );
     }
 
-    return NextResponse.json({ ok: true });
+    return json({ ok: true });
   } catch {
-    return NextResponse.json(
-      { message: "No pudimos procesar tu solicitud." },
-      { status: 500 }
+    return json(
+      { message: "El registro tardó demasiado. Intenta nuevamente." },
+      504,
     );
   }
 }
