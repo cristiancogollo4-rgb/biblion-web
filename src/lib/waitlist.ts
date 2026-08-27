@@ -99,3 +99,22 @@ export function createWaitlistSubmission(
     userAgent: userAgent.slice(0, WAITLIST_LIMITS.userAgent),
   };
 }
+
+export function createGoogleChatMessage(
+  submission: ReturnType<typeof createWaitlistSubmission>,
+) {
+  const role = submission.role || "No especificado";
+  const device = submission.androidDevice || "No especificado";
+
+  return {
+    text: [
+      "🔔 Nuevo registro de acceso anticipado — BIBLION App",
+      `Nombre: ${submission.fullName}`,
+      `Correo: ${submission.email}`,
+      `Dispositivo/Android: ${device}`,
+      `Uso principal: ${role}`,
+      `Origen: ${submission.source}`,
+      `Fecha: ${submission.submittedAt}`,
+    ].join("\n"),
+  };
+}

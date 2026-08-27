@@ -28,6 +28,7 @@ const validPayload = {
 describe("POST /api/waitlist", () => {
   beforeEach(() => {
     process.env.GOOGLE_SHEETS_WEBHOOK_URL = "https://example.com/webhook";
+    delete process.env.GOOGLE_CHAT_WEBHOOK_URL;
     delete process.env.UPSTASH_REDIS_REST_URL;
     delete process.env.UPSTASH_REDIS_REST_TOKEN;
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(null, { status: 200 })));
@@ -65,6 +66,22 @@ describe("POST /api/waitlist", () => {
     const options = vi.mocked(fetch).mock.calls[0][1];
     const body = JSON.parse(String(options?.body)) as { email: string };
     expect(body.email).toBe("lector@example.com");
+  });
+
+  it("envía al webhook directo de Google Chat un mensaje de texto completo", async () => {
+    delete process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+    process.env.GOOGLE_CHAT_WEBHOOK_URL = "https://chat.googleapis.com/v1/spaces/test/messages";
+
+    const response = await POST(request(validPayload));
+    expect(response.status).toBe(200);
+    expect(fetch).toHaveBeenCalledOnce();
+
+    const [url, options] = vi.mocked(fetch).mock.calls[0];
+    expect(url).toBe(process.env.GOOGLE_CHAT_WEBHOOK_URL);
+    const body = JSON.parse(String(options?.body)) as { text: string };
+    expect(body.text).toContain("Nombre: Lector BIBLION");
+    expect(body.text).toContain("Correo: lector@example.com");
+    expect(body.text).toContain("Uso principal: lectura-devocional");
   });
 
   it("informa cuando el webhook no está disponible", async () => {

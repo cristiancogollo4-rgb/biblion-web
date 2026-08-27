@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import {
   createWaitlistSubmission,
+  createGoogleChatMessage,
   type WaitlistPayload,
   validateWaitlistPayload,
 } from "@/lib/waitlist";
@@ -112,8 +113,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  if (!webhookUrl) {
+  const sheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  const chatWebhookUrl = process.env.GOOGLE_CHAT_WEBHOOK_URL;
+  if (!sheetsWebhookUrl && !chatWebhookUrl) {
     return json(
       { message: "El registro está temporalmente fuera de servicio." },
       503,
@@ -126,15 +128,34 @@ export async function POST(request: Request) {
   );
 
   try {
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(submission),
-      signal: AbortSignal.timeout(8_000),
-      cache: "no-store",
-    });
+    const deliveries: Promise<Response>[] = [];
 
-    if (!response.ok) {
+    if (sheetsWebhookUrl) {
+      deliveries.push(
+        fetch(sheetsWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(submission),
+          signal: AbortSignal.timeout(8_000),
+          cache: "no-store",
+        }),
+      );
+    }
+
+    if (chatWebhookUrl) {
+      deliveries.push(
+        fetch(chatWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json; charset=UTF-8" },
+          body: JSON.stringify(createGoogleChatMessage(submission)),
+          signal: AbortSignal.timeout(8_000),
+          cache: "no-store",
+        }),
+      );
+    }
+
+    const responses = await Promise.all(deliveries);
+    if (responses.some((response) => !response.ok)) {
       return json(
         { message: "No pudimos guardar tu solicitud en este momento." },
         502,
