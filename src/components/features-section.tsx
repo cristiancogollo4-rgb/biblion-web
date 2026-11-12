@@ -26,9 +26,6 @@ import {
   Wifi,
   Signal,
   BatteryMedium,
-  Instagram,
-  MessageCircle,
- Facebook,
   MoreVertical,
   Ellipsis,
   PenSquare,
@@ -40,7 +37,7 @@ const features = [
     title: "Referencias cruzadas",
     description: (
       <>
-        <span className="feat-highlight">340,000+ conexiones</span> que muestran
+        <span className="feat-highlight">340.000+ conexiones</span> que muestran
         cómo se vinculan los versículos entre sí.
       </>
     ),
@@ -109,7 +106,7 @@ export function FeaturesSection() {
       setIsTyping(false);
       const answer =
         bibiResponses[query] ||
-        "He analizado tu pasaje bíblico para ayudarte en tu estudio.";
+        "Esta demostración responde las preguntas sugeridas. En la app, Bibi usa el diccionario, los temas y el contexto del pasaje que estás leyendo.";
       setChatMessages((prev) => [...prev, { role: "bibi", text: answer }]);
     }, 800);
   };
@@ -129,14 +126,16 @@ export function FeaturesSection() {
         {/* Left Column */}
         <div className="feat-copy">
           <div>
+            <span className="stitch-eyebrow">MODO ESTUDIO + BIBI</span>
             <h2 className="feat-title">
-              Estudia la Biblia
+              Escribe tu enseñanza
               <br />
-              <em className="feat-title-italic">como nunca antes.</em>
+              <em className="feat-title-italic">con la Biblia al lado.</em>
             </h2>
             <p className="feat-subtitle">
-              Herramientas avanzadas diseñadas para profundizar, comprender y
-              estructurar tu enseñanza desde un solo lugar.
+              El editor y la asistente trabajan juntos: pregunta a Bibi mientras
+              escribes y cita los versículos sin salir del documento. Prueba la
+              demostración.
             </p>
           </div>
 
@@ -166,9 +165,6 @@ export function FeaturesSection() {
               <div className="feat-tablet-bar">
                 <div className="feat-tablet-bar-left">
                   <span className="feat-tablet-time">3:09 a.m.</span>
-                  <span className="feat-tablet-app-icon"><Instagram size={9} /></span>
-                  <span className="feat-tablet-app-icon"><MessageCircle size={9} /></span>
-                  <span className="feat-tablet-app-icon"><Facebook size={9} /></span>
                 </div>
                 <div className="feat-tablet-camera" />
                 <div className="feat-tablet-bar-right">
@@ -291,9 +287,6 @@ export function FeaturesSection() {
               <div className="feat-phone-status">
                 <span>3:03</span>
                 <div className="feat-phone-status-icons">
-                  <span className="feat-phone-app-icon"><Instagram size={8} /></span>
-                  <span className="feat-phone-app-icon"><MessageCircle size={8} /></span>
-                  <span className="feat-phone-app-icon"><Facebook size={8} /></span>
                 </div>
                 <div className="feat-phone-battery">
                   <Wifi size={8} />

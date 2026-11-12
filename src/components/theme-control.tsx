@@ -7,7 +7,7 @@ export type BiblionWebTheme = "light" | "blue" | "dark";
 
 const themes = [
   { id: "light" as const, label: "Claro", shortLabel: "Claro", icon: Sun },
-  { id: "blue" as const, label: "Azul Rey Oscuro", shortLabel: "Azul", icon: Palette },
+  { id: "blue" as const, label: "Azul", shortLabel: "Azul", icon: Palette },
   { id: "dark" as const, label: "Oscuro", shortLabel: "Oscuro", icon: Moon },
 ];
 

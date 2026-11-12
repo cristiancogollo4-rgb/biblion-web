@@ -120,6 +120,7 @@ export function MotionLayer() {
         "--ambient-scroll",
         `${Math.min(window.scrollY * 0.035, 84)}px`
       );
+      root.classList.toggle("is-past-hero", window.scrollY > window.innerHeight * 0.9);
     };
 
     window.addEventListener("pointermove", trackPointer, { passive: true });
@@ -130,6 +131,7 @@ export function MotionLayer() {
       window.cancelAnimationFrame(frame);
       window.removeEventListener("pointermove", trackPointer);
       window.removeEventListener("scroll", trackScroll);
+      root.classList.remove("is-past-hero");
     };
   }, [pathname]);
 

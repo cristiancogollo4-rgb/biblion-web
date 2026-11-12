@@ -5,6 +5,7 @@ import { siteConfig } from "@/lib/site";
 import "./a-redesign.css";
 import "./globals.css";
 import "./stitch-site.css";
+import "./home.css";
 
 const outfit = Outfit({
   subsets: ["latin"],

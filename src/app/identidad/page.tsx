@@ -188,11 +188,11 @@ export default function IdentidadPage() {
                 </span>
               </header>
               <blockquote>
-                <sup>105</sup> Tu palabra es una lámpara que guía mis pies y una luz
-                para mi camino.
+                <sup>105</sup> Tu palabra es una lámpara a mis pies; es una luz en
+                mi sendero.
               </blockquote>
               <footer>
-                <span>PDT</span>
+                <span>NVI</span>
                 <span className="identity-flow-reading-state">Leyendo</span>
               </footer>
             </article>

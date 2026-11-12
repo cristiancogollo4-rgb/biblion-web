@@ -189,27 +189,30 @@ export function HomeHero() {
         <div className="hero-grid">
           {/* Left Column: Copy & CTAs */}
           <div className="hero-copy" data-reveal>
-            <span className="stitch-eyebrow">BIBLION APP · PRIMER PRODUCTO DEL ECOSISTEMA</span>
+            <span className="stitch-eyebrow">BIBLION APP · ANDROID · ACCESO ANTICIPADO</span>
             <h1>
               Ve más allá
               <br />
               de <em>la lectura.</em>
-              <br />
-              <span className="hero-sub">Con BIBLION App.</span>
             </h1>
             <p>
-              Lee, busca, conecta pasajes y prepara enseñanzas sin perder el hilo.
-              BIBLION App es la primera herramienta de un ecosistema creado para
-              acompañar el estudio de la Biblia.
+              Lee la Biblia sin conexión, entiende cada pasaje con Bibi y convierte
+              lo que descubres en estudios, devocionales o predicaciones. Todo en una
+              sola aplicación.
             </p>
             <div className="stitch-hero-actions">
               <WaitlistTrigger className="stitch-button stitch-button-primary" source="home-hero">
                 Solicitar acceso anticipado
               </WaitlistTrigger>
-              <Link className="stitch-button stitch-button-ghost" href="/funciones">
-                Explorar la app <ArrowRight size={18} />
+              <Link className="stitch-button stitch-button-ghost" href="#recorrido">
+                Ver cómo funciona <ArrowRight size={18} />
               </Link>
             </div>
+            <ul className="hero-trust" aria-label="Lo esencial de BIBLION App">
+              <li><CheckCircle2 aria-hidden="true" size={16} /> Lectura sin conexión</li>
+              <li><CheckCircle2 aria-hidden="true" size={16} /> Seis versiones bíblicas</li>
+              <li><CheckCircle2 aria-hidden="true" size={16} /> Pruebas gratuitas</li>
+            </ul>
           </div>
 
           {/* Right Column: Mockups */}
@@ -272,7 +275,7 @@ export function WaitlistCta() {
           <BookOpen size={22} />
           <span>
             <strong>Lectura</strong>
-            <small>Sin conexión, varias versiones.</small>
+            <small>Sin conexión, seis versiones.</small>
           </span>
         </div>
         <div className="stitch-cta-feature">

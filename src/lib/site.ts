@@ -8,7 +8,7 @@ export const siteConfig = {
   url: (process.env.NEXT_PUBLIC_SITE_URL || fallbackUrl).replace(/\/$/u, ""),
   description:
     "BIBLION App reúne lectura, búsqueda, conexiones bíblicas, Bibi y Modo estudio en una experiencia portátil para Android.",
-  socialImage: "/logos/biblion/logo-biblion-blue.jpeg",
+  socialImage: "/og/biblion-og.png",
 };
 
 type PageMetadataInput = {
@@ -40,9 +40,9 @@ export function createPageMetadata({
       images: [
         {
           url: siteConfig.socialImage,
-          width: 1254,
-          height: 1254,
-          alt: "Logo de BIBLION",
+          width: 1200,
+          height: 630,
+          alt: "BIBLION App: lectura y estudio bíblico para Android",
         },
       ],
     },

@@ -40,7 +40,7 @@ const dataAreas = [
   {
     icon: Mail,
     title: "Acceso anticipado",
-    text: "El formulario recopila nombre, correo y los datos opcionales que decidas proporcionar.",
+    text: "El formulario recopila nombre, correo, perfil de uso y la motivación que decidas compartir para participar en las pruebas.",
   },
 ];
 
@@ -139,8 +139,12 @@ export default function PrivacidadPage() {
           <div>
             <h2>Lista de acceso anticipado</h2>
             <p>
-              Recopilamos nombre o alias, correo, dispositivo Android y uso
-              principal cuando decides proporcionarlos. También podemos registrar
+              Recopilamos nombre o alias, correo, dispositivo Android, uso
+              principal y la descripción que escribas sobre tu perfil y motivación.
+              Esta información se utiliza para organizar y seleccionar participantes
+              de las pruebas. Los registros se envían a herramientas de Google
+              (Google Chat y Google Sheets) que el equipo usa para gestionar la
+              lista. También podemos registrar
               fecha, origen del formulario y navegador para administrar solicitudes.
               La dirección IP puede procesarse temporalmente para prevenir envíos
               automatizados, pero no se incorpora a la lista de acceso anticipado.
@@ -168,7 +172,7 @@ export default function PrivacidadPage() {
       <section className="stitch-legal-update" data-reveal>
         <UserRoundCheck size={24} />
         <div>
-          <strong>Última actualización: 9 de agosto de 2026</strong>
+          <strong>Última actualización: 12 de noviembre de 2026</strong>
           <p>
             BIBLION continúa en desarrollo. Este documento debe revisarse y
             actualizarse cuando cambien los proveedores, los datos o las funciones.

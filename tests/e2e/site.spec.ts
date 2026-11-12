@@ -31,7 +31,7 @@ test.describe("sitio público", () => {
     for (const [label, theme] of [
       ["Usar tema claro", "light"],
       ["Usar tema oscuro", "dark"],
-      ["Usar tema azul rey oscuro", "blue"],
+      ["Usar tema azul", "blue"],
     ] as const) {
       if (isMobile) {
         await page.getByRole("button", { name: /cambiar tema/i }).click();
@@ -79,6 +79,28 @@ test.describe("sitio público", () => {
     await expect(assistant).toBeVisible();
     await assistant.getByRole("button", { name: "Explica Juan 15:5" }).click();
     await expect(assistant).toContainText("Jesús como la vid");
+  });
+
+  test("la portada muestra cifras reales y el recorrido por pasos", async ({ page }) => {
+    await page.goto("/");
+    const stats = page.locator(".home-stats");
+    await stats.scrollIntoViewIfNeeded();
+    await expect(stats).toContainText("340.645");
+    await expect(stats).toContainText("6.346");
+
+    for (const step of ["descubrir", "preguntar", "construir"]) {
+      const item = page.locator(`[data-step="${step}"]`);
+      await item.evaluate((node) => node.scrollIntoView({ block: "center" }));
+      await expect(item).toHaveClass(/is-active/u);
+    }
+  });
+
+  test("la imagen para redes sociales está publicada", async ({ request, page }) => {
+    await page.goto("/");
+    const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
+    expect(ogImage).toContain("/og/biblion-og.png");
+    const response = await request.get("/og/biblion-og.png");
+    expect(response.ok()).toBeTruthy();
   });
 
   test("robots, sitemap y manifest están disponibles", async ({ request }) => {

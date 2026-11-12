@@ -33,10 +33,10 @@ const contactOptions = [
   },
   {
     icon: Smartphone,
-    title: "Página oficial",
-    text: "Información actualizada sobre BIBLION y sus funciones.",
-    href: "https://biblion-web-roan.vercel.app",
-    label: "biblion-web-roan.vercel.app",
+    title: "Acceso anticipado",
+    text: "Regístrate para participar en las pruebas de BIBLION App para Android.",
+    href: "/descargar",
+    label: "Unirme a la lista",
   },
 ];
 

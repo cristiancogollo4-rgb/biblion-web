@@ -42,7 +42,7 @@ const functionGroups = [
       {
         icon: BookOpen,
         title: "Lectura bíblica",
-        text: "Navega por testamento, libro y capítulo, cambia de versión y avanza con gestos.",
+        text: "Navega por testamento, libro y capítulo, alterna entre seis versiones y avanza con gestos.",
         requirement: "Sin conexión",
       },
       {
@@ -146,7 +146,7 @@ const experienceFoundations = [
   {
     icon: Palette,
     title: "Tres temas",
-    text: "Claro, Azul Rey Oscuro y Oscuro, con preferencias de lectura coherentes.",
+    text: "Claro, Azul y Oscuro, los mismos de la aplicación, con preferencias de lectura coherentes.",
     requirement: "En el dispositivo",
   },
   {
