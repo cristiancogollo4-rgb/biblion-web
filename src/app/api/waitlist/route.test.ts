@@ -20,6 +20,7 @@ const validPayload = {
   email: "lector@example.com",
   androidDevice: "Android 15",
   role: "lectura-devocional",
+  motivation: "Leo la Biblia a diario y quiero evaluar la experiencia sin conexión.",
   source: "api-tests",
   consent: true,
   website: "",
@@ -64,8 +65,9 @@ describe("POST /api/waitlist", () => {
     expect(fetch).toHaveBeenCalledOnce();
 
     const options = vi.mocked(fetch).mock.calls[0][1];
-    const body = JSON.parse(String(options?.body)) as { email: string };
+    const body = JSON.parse(String(options?.body)) as { email: string; motivation: string };
     expect(body.email).toBe("lector@example.com");
+    expect(body.motivation).toContain("experiencia sin conexión");
   });
 
   it("envía al webhook directo de Google Chat un mensaje de texto completo", async () => {
@@ -81,7 +83,8 @@ describe("POST /api/waitlist", () => {
     const body = JSON.parse(String(options?.body)) as { text: string };
     expect(body.text).toContain("Nombre: Lector BIBLION");
     expect(body.text).toContain("Correo: lector@example.com");
-    expect(body.text).toContain("Uso principal: lectura-devocional");
+    expect(body.text).toContain("Uso principal: Lectura devocional");
+    expect(body.text).toContain("Perfil y motivación:");
   });
 
   it("informa cuando el webhook no está disponible", async () => {

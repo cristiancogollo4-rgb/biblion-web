@@ -32,6 +32,7 @@ const initialForm = {
   email: "",
   androidDevice: "",
   role: "",
+  motivation: "",
   consent: false,
   website: "",
 };
@@ -167,6 +168,22 @@ export function WaitlistForm({
           </select>
         </label>
       </div>
+      <label className="waitlist-field-wide waitlist-motivation">
+        Cuéntanos sobre ti y por qué quieres probar BIBLION
+        <textarea
+          maxLength={WAITLIST_LIMITS.motivation}
+          minLength={20}
+          name="motivation"
+          onChange={(event) => updateField("motivation", event.target.value)}
+          placeholder="Ej.: Soy pastor y preparo enseñanzas cada semana; me interesa probar el modo estudio y compartir observaciones del proceso."
+          required
+          rows={4}
+          value={form.motivation}
+        />
+        <span className="waitlist-field-help">
+          Esta información nos ayuda a seleccionar perfiles que puedan aportar durante las pruebas.
+        </span>
+      </label>
       <label className="waitlist-honeypot" aria-hidden="true">
         Sitio web
         <input

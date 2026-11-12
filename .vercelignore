@@ -1,0 +1,12 @@
+.git
+.vercel
+node_modules
+.next
+.next.stale-*
+out
+coverage
+playwright-report
+test-results
+tsconfig.tsbuildinfo
+.env*
+*.log

@@ -17,3 +17,6 @@ pnpm-debug.log*
 *.log
 *.err.log
 *.out.log
+
+.vercel
+.env*

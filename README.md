@@ -47,9 +47,9 @@ npm run dev
 
 ## Formulario de acceso anticipado
 
-El formulario de la lista de espera se envía a `POST /api/waitlist`. El servidor valida el nombre, correo, consentimiento, uso principal y dispositivo antes de reenviar el registro.
+El formulario de la lista de espera se envía a `POST /api/waitlist`. El servidor valida el nombre, correo, consentimiento, uso principal, dispositivo y una descripción del perfil y motivación antes de reenviar el registro.
 
-- `GOOGLE_CHAT_WEBHOOK_URL`: webhook entrante directo de Google Chat. El mensaje se envía con el formato oficial `{ "text": "..." }` e incluye nombre, correo, dispositivo, uso principal, origen y fecha.
+- `GOOGLE_CHAT_WEBHOOK_URL`: webhook entrante directo de Google Chat. El mensaje se envía con el formato oficial `{ "text": "..." }` e incluye nombre, correo, dispositivo, uso principal, perfil y motivación, origen y fecha.
 - `GOOGLE_SHEETS_WEBHOOK_URL`: puente existente de Google Apps Script, compatible con la integración que también guarda registros en Sheets o los reenvía a Chat.
 
 Se puede configurar uno de los dos destinos o ambos. Las URLs permanecen únicamente en variables de entorno del servidor y nunca se exponen al navegador. El endpoint también incorpora validación de origen, límite de tamaño, honeypot antispam, limitación de frecuencia y protección contra fórmulas al usar hojas de cálculo.

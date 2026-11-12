@@ -10,6 +10,7 @@ const validPayload = {
   email: "lector@example.com",
   androidDevice: "Android 15",
   role: "estudio-profundo",
+  motivation: "Soy líder juvenil y quiero probar el modo estudio con mi grupo.",
   source: "tests",
   consent: true,
   website: "",
@@ -30,6 +31,7 @@ describe("validateWaitlistPayload", () => {
         email: "lector@example.com",
         androidDevice: "Android 15",
         role: "estudio-profundo",
+        motivation: "Soy líder juvenil y quiero probar el modo estudio con mi grupo.",
         source: "tests",
         website: "",
       },
@@ -54,6 +56,11 @@ describe("validateWaitlistPayload", () => {
   it("rechaza roles manipulados", () => {
     expect(validateWaitlistPayload({ ...validPayload, role: "admin" }).ok).toBe(false);
   });
+
+  it("exige una motivación útil para seleccionar participantes", () => {
+    const result = validateWaitlistPayload({ ...validPayload, motivation: "Quiero entrar" });
+    expect(result.ok).toBe(false);
+  });
 });
 
 describe("seguridad para Google Sheets", () => {
@@ -71,5 +78,6 @@ describe("seguridad para Google Sheets", () => {
 
     const submission = createWaitlistSubmission(validation.data, "a".repeat(400));
     expect(submission.userAgent).toHaveLength(240);
+    expect(submission.motivation).toContain("modo estudio");
   });
 });

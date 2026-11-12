@@ -3,6 +3,7 @@ export const WAITLIST_LIMITS = {
   email: 254,
   androidDevice: 80,
   role: 40,
+  motivation: 600,
   source: 80,
   userAgent: 240,
 } as const;
@@ -22,6 +23,7 @@ export type WaitlistPayload = {
   email?: unknown;
   androidDevice?: unknown;
   role?: unknown;
+  motivation?: unknown;
   consent?: unknown;
   source?: unknown;
   website?: unknown;
@@ -32,6 +34,7 @@ export type ValidWaitlistPayload = {
   email: string;
   androidDevice: string;
   role: string;
+  motivation: string;
   source: string;
   website: string;
 };
@@ -48,6 +51,7 @@ export function validateWaitlistPayload(payload: WaitlistPayload): WaitlistValid
   const email = toTrimmedString(payload.email).toLowerCase();
   const androidDevice = toTrimmedString(payload.androidDevice);
   const role = toTrimmedString(payload.role);
+  const motivation = toTrimmedString(payload.motivation);
   const source = toTrimmedString(payload.source) || "unknown";
   const website = toTrimmedString(payload.website);
 
@@ -75,9 +79,16 @@ export function validateWaitlistPayload(payload: WaitlistPayload): WaitlistValid
     return { ok: false, message: "Selecciona un uso principal válido." };
   }
 
+  if (motivation.length < 20 || motivation.length > WAITLIST_LIMITS.motivation) {
+    return {
+      ok: false,
+      message: "Cuéntanos en al menos 20 caracteres por qué quieres probar BIBLION.",
+    };
+  }
+
   return {
     ok: true,
-    data: { fullName, email, androidDevice, role, source, website },
+    data: { fullName, email, androidDevice, role, motivation, source, website },
   };
 }
 
@@ -95,6 +106,7 @@ export function createWaitlistSubmission(
     email: data.email,
     androidDevice: escapeSpreadsheetFormula(data.androidDevice),
     role: data.role,
+    motivation: escapeSpreadsheetFormula(data.motivation),
     source: escapeSpreadsheetFormula(data.source),
     userAgent: userAgent.slice(0, WAITLIST_LIMITS.userAgent),
   };
@@ -103,7 +115,13 @@ export function createWaitlistSubmission(
 export function createGoogleChatMessage(
   submission: ReturnType<typeof createWaitlistSubmission>,
 ) {
-  const role = submission.role || "No especificado";
+  const roleLabels: Record<string, string> = {
+    "lectura-devocional": "Lectura devocional",
+    "estudio-profundo": "Estudio profundo",
+    ensenanza: "Enseñanza o predicación",
+    otro: "Otro",
+  };
+  const role = roleLabels[submission.role] || "No especificado";
   const device = submission.androidDevice || "No especificado";
 
   return {
@@ -113,6 +131,7 @@ export function createGoogleChatMessage(
       `Correo: ${submission.email}`,
       `Dispositivo/Android: ${device}`,
       `Uso principal: ${role}`,
+      `Perfil y motivación: ${submission.motivation}`,
       `Origen: ${submission.source}`,
       `Fecha: ${submission.submittedAt}`,
     ].join("\n"),
